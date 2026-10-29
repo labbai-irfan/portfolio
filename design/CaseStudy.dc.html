@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>C2 — Continuous Control · Case study</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F6F8}
+a{color:#1D4ED8}a:hover{color:#1E3A8A}
+.mono{font-family:'Geist Mono',ui-monospace,monospace}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.grid{background-image:linear-gradient(#E3E7ED 1px,transparent 1px),linear-gradient(90deg,#E3E7ED 1px,transparent 1px);background-size:24px 24px}
+a:focus-visible,button:focus-visible{outline:2px solid #1D4ED8;outline-offset:3px}
+</style>
+</helmet>
+<div style="font-family: 'Geist', system-ui, sans-serif; color: #0A0F1C; background: #F5F6F8; width: 100%;">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #0A0F1C;">
+  <nav aria-label="Primary" style="max-width: 1240px; margin: 0 auto; padding: 0 40px; min-height: 68px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;">
+    <a href="Main.dc.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #0A0F1C; min-height: 44px;">
+      <span class="mono" style="position: relative; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; background: #0A0F1C; color: #FFFFFF; font-size: 13px; font-weight: 600;">IN<span aria-hidden="true" style="position: absolute; right: -4px; bottom: -4px; width: 10px; height: 10px; background: #1D4ED8;"></span></span>
+      <span style="font-size: 15px; font-weight: 600; letter-spacing: -0.01em;">Irfan Noor Mohammed</span>
+    </a>
+    <a href="Main.dc.html#work" class="mono" style="font-size: 13px; color: #2E3A4F; text-decoration: none; min-height: 44px; display: flex; align-items: center;">← All work</a>
+  </nav>
+</header>
+
+<!-- Title -->
+<section style="background: #FFFFFF; border-bottom: 1px solid #0A0F1C;">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 56px 40px 0; display: flex; flex-direction: column; gap: 24px;">
+    <div class="mono" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-size: 12px; letter-spacing: 0.08em; color: #556274;">
+      <span><a href="Main.dc.html#work" style="color: #556274;">WORK</a> / P-01 / CASE STUDY</span>
+      <span style="display: flex; gap: 10px; align-items: center;"><span style="font-weight: 600; color: #1E40AF; background: #EAF0FE; padding: 5px 10px;">IN DEVELOPMENT</span>UPDATED [date]</span>
+    </div>
+    <h1 style="margin: 0; font-size: 88px; line-height: 0.95; font-weight: 600; letter-spacing: -0.045em;">C2 — Continuous Control</h1>
+    <p style="margin: 0; font-size: 24px; line-height: 1.4; color: #2E3A4F; max-width: 780px;">A Bash CLI that turns repetitive Git workflows into single, predictable commands.</p>
+  </div>
+  <!-- Coverage strip -->
+  <div style="max-width: 1240px; margin: 40px auto 0; padding: 0 40px;">
+    <ol class="mono" aria-label="Delivery path coverage" style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; border: 1px solid #0A0F1C; border-bottom: 0; font-size: 12px;">
+      <li style="flex: 1 1 120px; padding: 16px 18px; background: #1D4ED8; color: #FFFFFF; display: flex; justify-content: space-between;"><span>01 COMMIT</span><span>●<span class="sr"> covered</span></span></li>
+      <li style="flex: 1 1 120px; padding: 16px 18px; border-left: 1px solid #DCE1E8; color: #556274; display: flex; justify-content: space-between;"><span>02 BUILD</span><span>—</span></li>
+      <li style="flex: 1 1 120px; padding: 16px 18px; border-left: 1px solid #DCE1E8; color: #556274; display: flex; justify-content: space-between;"><span>03 TEST</span><span>—</span></li>
+      <li style="flex: 1 1 120px; padding: 16px 18px; border-left: 1px solid #DCE1E8; color: #556274; display: flex; justify-content: space-between;"><span>04 SHIP</span><span>—</span></li>
+      <li style="flex: 1 1 120px; padding: 16px 18px; border-left: 1px solid #DCE1E8; color: #556274; display: flex; justify-content: space-between;"><span>05 RUN</span><span>—</span></li>
+      <li style="flex: 1 1 120px; padding: 16px 18px; border-left: 1px solid #DCE1E8; color: #556274; display: flex; justify-content: space-between;"><span>06 OBSERVE</span><span>—</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- Recruiter summary -->
+<section aria-labelledby="tldr-h" style="background: #0A0F1C; color: #FFFFFF;">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 0 40px; display: flex; flex-wrap: wrap;">
+    <h2 id="tldr-h" class="sr">Summary</h2>
+    <div style="flex: 1 1 280px; min-width: 0; padding: 32px 28px 32px 0; border-right: 1px solid #2A3548; display: flex; flex-direction: column; gap: 10px;">
+      <span class="mono" style="font-size: 11px; letter-spacing: 0.1em; color: #B9C8F6;">THE PROBLEM</span>
+      <p style="margin: 0; font-size: 17px; line-height: 1.55;">[One sentence: the Git friction C2 removes.]</p>
+    </div>
+    <div style="flex: 1 1 280px; min-width: 0; padding: 32px 28px; border-right: 1px solid #2A3548; display: flex; flex-direction: column; gap: 10px;">
+      <span class="mono" style="font-size: 11px; letter-spacing: 0.1em; color: #B9C8F6;">WHAT I BUILT</span>
+      <p style="margin: 0; font-size: 17px; line-height: 1.55;">[One sentence: the commands and how they're structured.]</p>
+    </div>
+    <div style="flex: 1 1 280px; min-width: 0; padding: 32px 0 32px 28px; display: flex; flex-direction: column; gap: 10px;">
+      <span class="mono" style="font-size: 11px; letter-spacing: 0.1em; color: #B9C8F6;">WHERE IT STANDS</span>
+      <p style="margin: 0; font-size: 17px; line-height: 1.55;">[One sentence: works today, and what's next.]</p>
+    </div>
+  </div>
+</section>
+
+<!-- Body -->
+<div style="max-width: 1240px; margin: 0 auto; padding: 64px 40px 96px; display: flex; flex-wrap: wrap; gap: 64px; align-items: flex-start;">
+
+  <article style="flex: 999 1 620px; min-width: 0; display: flex; flex-direction: column; gap: 72px;">
+
+    <section id="s1" style="display: flex; gap: 28px; flex-wrap: wrap;">
+      <span class="mono" style="flex: 0 0 48px; font-size: 13px; color: #1D4ED8; padding-top: 10px;">01</span>
+      <div style="flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+        <h2 style="margin: 0; font-size: 34px; font-weight: 600; letter-spacing: -0.02em;">Problem &amp; goals</h2>
+        <p style="margin: 0; font-size: 17px; line-height: 1.7; color: #2E3A4F;">[Which Git steps were repetitive or error-prone, who hit them, and why it mattered.]</p>
+        <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; border-top: 1px solid #0A0F1C;">
+          <li style="display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #DCE1E8; font-size: 16px;"><span class="mono" style="font-size: 12px; color: #556274; padding-top: 3px;">G1</span>[Goal you can check later]</li>
+          <li style="display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #DCE1E8; font-size: 16px;"><span class="mono" style="font-size: 12px; color: #556274; padding-top: 3px;">G2</span>[Goal]</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="s2" style="display: flex; gap: 28px; flex-wrap: wrap;">
+      <span class="mono" style="flex: 0 0 48px; font-size: 13px; color: #1D4ED8; padding-top: 10px;">02</span>
+      <div style="flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+        <h2 style="margin: 0; font-size: 34px; font-weight: 600; letter-spacing: -0.02em;">Requirements &amp; constraints</h2>
+        <div style="display: flex; flex-wrap: wrap; border: 1px solid #0A0F1C; background: #FFFFFF;">
+          <div style="flex: 1 1 180px; padding: 20px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 8px;"><span class="mono" style="font-size: 11px; letter-spacing: 0.1em; color: #556274;">MUST</span><span style="font-size: 15px; line-height: 1.55; color: #2E3A4F;">[requirement]</span></div>
+          <div style="flex: 1 1 180px; padding: 20px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 8px;"><span class="mono" style="font-size: 11px; letter-spacing: 0.1em; color: #556274;">MUST NOT</span><span style="font-size: 15px; line-height: 1.55; color: #2E3A4F;">[constraint]</span></div>
+          <div style="flex: 1 1 180px; padding: 20px; display: flex; flex-direction: column; gap: 8px;"><span class="mono" style="font-size: 11px; letter-spacing: 0.1em; color: #556274;">RUNS ON</span><span style="font-size: 15px; line-height: 1.55; color: #2E3A4F;">[shells / OS tested]</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s3" style="display: flex; gap: 28px; flex-wrap: wrap;">
+      <span class="mono" style="flex: 0 0 48px; font-size: 13px; color: #1D4ED8; padding-top: 10px;">03</span>
+      <div style="flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+        <h2 style="margin: 0; font-size: 34px; font-weight: 600; letter-spacing: -0.02em;">Architecture</h2>
+        <figure aria-labelledby="fig1" style="margin: 0; background: #FFFFFF; border: 1px solid #0A0F1C;">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 12px 20px; border-bottom: 1px solid #0A0F1C;">
+            <span class="mono" style="font-size: 12px; letter-spacing: 0.08em;">FIG. 1 — HOW A COMMAND TRAVELS</span>
+            <span class="mono" style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: #7A4307; background: #FDF1D8; padding: 3px 8px;">DRAFT · CONFIRM MODULES</span>
+          </div>
+          <div class="grid" style="padding: 40px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px;">
+            <div style="flex: 0 1 120px; background: #FFFFFF; border: 1px solid #0A0F1C; padding: 16px 12px; text-align: center; display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 14px; font-weight: 600;">Terminal</span><span class="mono" style="font-size: 11px; color: #556274;">c2 &lt;cmd&gt;</span></div>
+            <span aria-hidden="true" style="color: #1D4ED8; font-size: 18px;">→</span>
+            <div style="flex: 0 1 130px; background: #0A0F1C; color: #FFFFFF; padding: 16px 12px; text-align: center; display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 14px; font-weight: 600;">c2 entry</span><span class="mono" style="font-size: 11px; color: #B9C8F6;">parse · route</span></div>
+            <span aria-hidden="true" style="color: #1D4ED8; font-size: 18px;">→</span>
+            <div style="flex: 0 1 160px; background: #FFFFFF; border: 1px solid #0A0F1C; padding: 10px; display: flex; flex-direction: column; gap: 6px;">
+              <span class="mono" style="font-size: 10px; letter-spacing: 0.08em; color: #556274; text-align: center;">COMMAND MODULES</span>
+              <span class="mono" style="font-size: 12px; background: #EAF0FE; color: #1E40AF; padding: 7px; text-align: center;">git save</span>
+              <span class="mono" style="font-size: 12px; border: 1px dashed #6B778A; padding: 6px; text-align: center; color: #556274;">[module]</span>
+            </div>
+            <span aria-hidden="true" style="color: #1D4ED8; font-size: 18px;">→</span>
+            <div style="flex: 0 1 110px; background: #FFFFFF; border: 1px solid #0A0F1C; padding: 16px 12px; text-align: center; display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 14px; font-weight: 600;">Git</span><span class="mono" style="font-size: 11px; color: #556274;">local</span></div>
+            <span aria-hidden="true" style="color: #1D4ED8; font-size: 18px;">→</span>
+            <div style="flex: 0 1 110px; background: #FFFFFF; border: 1px solid #0A0F1C; padding: 16px 12px; text-align: center; display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 14px; font-weight: 600;">Remote</span><span class="mono" style="font-size: 11px; color: #556274;">origin</span></div>
+          </div>
+          <figcaption id="fig1" style="padding: 14px 20px; border-top: 1px solid #DCE1E8; font-size: 13px; line-height: 1.55; color: #556274;">In words: a c2 command is parsed by the entry script, routed to a command module, which runs Git locally and syncs with the remote where needed. Stacks vertically on phones.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="s4" style="display: flex; gap: 28px; flex-wrap: wrap;">
+      <span class="mono" style="flex: 0 0 48px; font-size: 13px; color: #1D4ED8; padding-top: 10px;">04</span>
+      <div style="flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+        <h2 style="margin: 0; font-size: 34px; font-weight: 600; letter-spacing: -0.02em;">Implementation</h2>
+        <div style="background: #0A0F1C; border: 1px solid #0A0F1C;">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 6px 6px 20px; border-bottom: 1px solid #1C2536;">
+            <span class="mono" style="font-size: 12px; color: #9AA6B8;">c2/[file path]</span>
+            <button type="button" class="mono" style="font-size: 12px; color: #E2E8F0; background: transparent; border: 1px solid #3A465C; padding: 0 16px; min-height: 44px; cursor: pointer;">Copy</button>
+          </div>
+          <pre class="mono" style="margin: 0; padding: 24px 20px; font-size: 14px; line-height: 1.75; color: #E2E8F0; white-space: pre-wrap;"><span style="color: #9AA6B8;"># [A short, real excerpt from C2 — e.g. how the entry
+#  script routes a subcommand. 10–25 lines.]</span></pre>
+        </div>
+        <p style="margin: 0; font-size: 16px; line-height: 1.7; color: #2E3A4F;">[Two sentences: what this excerpt shows and why it's written this way.]</p>
+      </div>
+    </section>
+
+    <section id="s5" style="display: flex; gap: 28px; flex-wrap: wrap;">
+      <span class="mono" style="flex: 0 0 48px; font-size: 13px; color: #1D4ED8; padding-top: 10px;">05</span>
+      <div style="flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+        <h2 style="margin: 0; font-size: 34px; font-weight: 600; letter-spacing: -0.02em;">Decisions &amp; trade-offs</h2>
+        <div style="overflow-x: auto; border: 1px solid #0A0F1C; background: #FFFFFF;">
+          <table style="width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px;">
+            <thead><tr style="border-bottom: 1px solid #0A0F1C;">
+              <th scope="col" class="mono" style="text-align: left; padding: 14px 18px; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: #556274;">DECISION</th>
+              <th scope="col" class="mono" style="text-align: left; padding: 14px 18px; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: #556274;">CHOSE</th>
+              <th scope="col" class="mono" style="text-align: left; padding: 14px 18px; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: #556274;">OVER</th>
+              <th scope="col" class="mono" style="text-align: left; padding: 14px 18px; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: #556274;">BECAUSE</th>
+            </tr></thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid #DCE1E8;"><th scope="row" style="text-align: left; padding: 16px 18px; font-weight: 600;">Language</th><td style="padding: 16px 18px;">Bash</td><td style="padding: 16px 18px; color: #556274;">[e.g. Python, Go]</td><td style="padding: 16px 18px; color: #556274;">[your reason]</td></tr>
+              <tr><th scope="row" style="text-align: left; padding: 16px 18px; font-weight: 600;">[decision]</th><td style="padding: 16px 18px; color: #556274;">[choice]</td><td style="padding: 16px 18px; color: #556274;">[alternative]</td><td style="padding: 16px 18px; color: #556274;">[reason]</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="s6" style="display: flex; gap: 28px; flex-wrap: wrap;">
+      <span class="mono" style="flex: 0 0 48px; font-size: 13px; color: #1D4ED8; padding-top: 10px;">06</span>
+      <div style="flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+        <h2 style="margin: 0; font-size: 34px; font-weight: 600; letter-spacing: -0.02em;">What broke, and the fix</h2>
+        <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; border: 1px solid #0A0F1C; background: #FFFFFF;">
+          <li style="flex: 1 1 150px; padding: 20px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 8px;"><span class="mono" style="font-size: 11px; letter-spacing: 0.1em; color: #556274;">SYMPTOM</span><span style="font-size: 15px; line-height: 1.55; color: #2E3A4F;">[what you saw]</span></li>
+          <li style="flex: 1 1 150px; padding: 20px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 8px;"><span class="mono" style="font-size: 11px; letter-spacing: 0.1em; color: #556274;">CHECKED</span><span style="font-size: 15px; line-height: 1.55; color: #2E3A4F;">[ruled out]</span></li>
+          <li style="flex: 1 1 150px; padding: 20px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 8px;"><span class="mono" style="font-size: 11px; letter-spacing: 0.1em; color: #556274;">CAUSE</span><span style="font-size: 15px; line-height: 1.55; color: #2E3A4F;">[root cause]</span></li>
+          <li style="flex: 1 1 150px; padding: 20px; background: #EAF0FE; display: flex; flex-direction: column; gap: 8px;"><span class="mono" style="font-size: 11px; letter-spacing: 0.1em; color: #1E40AF;">FIX</span><span style="font-size: 15px; line-height: 1.55;">[change made]</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="s7" style="display: flex; gap: 28px; flex-wrap: wrap;">
+      <span class="mono" style="flex: 0 0 48px; font-size: 13px; color: #1D4ED8; padding-top: 10px;">07</span>
+      <div style="flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+        <h2 style="margin: 0; font-size: 34px; font-weight: 600; letter-spacing: -0.02em;">Testing, safety &amp; results</h2>
+        <p style="margin: 0; font-size: 17px; line-height: 1.7; color: #2E3A4F;">[How you validated C2 — throwaway test repos, ShellCheck if used — and how it protects work: confirmations before force operations, clear exit codes, behaviour on a dirty working tree.]</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+          <div style="flex: 1 1 240px; aspect-ratio: 16 / 10; border: 1px dashed #6B778A; background: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 16px; text-align: center;"><span class="mono" style="font-size: 11px; letter-spacing: 0.1em; color: #556274;">BEFORE</span><span style="font-size: 14px; color: #2E3A4F;">[the manual Git steps — recording]</span></div>
+          <div style="flex: 1 1 240px; aspect-ratio: 16 / 10; border: 1px solid #1D4ED8; background: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 16px; text-align: center;"><span class="mono" style="font-size: 11px; letter-spacing: 0.1em; color: #1E40AF;">AFTER</span><span style="font-size: 14px; color: #2E3A4F;">[same task with C2 — recording]</span></div>
+        </div>
+        <p class="mono" style="margin: 0; font-size: 12px; color: #556274;">Evidence only. No numbers unless they were measured.</p>
+      </div>
+    </section>
+
+    <section id="s8" style="display: flex; gap: 28px; flex-wrap: wrap;">
+      <span class="mono" style="flex: 0 0 48px; font-size: 13px; color: #1D4ED8; padding-top: 10px;">08</span>
+      <div style="flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+        <h2 style="margin: 0; font-size: 34px; font-weight: 600; letter-spacing: -0.02em;">Lessons &amp; next</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+          <div style="flex: 1 1 240px; background: #FFFFFF; border: 1px solid #0A0F1C; padding: 22px; display: flex; flex-direction: column; gap: 8px;"><span class="mono" style="font-size: 11px; letter-spacing: 0.1em; color: #556274;">LEARNED</span><span style="font-size: 15px; line-height: 1.6; color: #2E3A4F;">[2–3 honest takeaways]</span></div>
+          <div style="flex: 1 1 240px; background: #FFFFFF; border: 1px dashed #6B778A; padding: 22px; display: flex; flex-direction: column; gap: 8px;"><span class="mono" style="font-size: 11px; letter-spacing: 0.1em; color: #556274;">NEXT · PLANNED</span><span style="font-size: 15px; line-height: 1.6; color: #2E3A4F;">[e.g. lint C2 with ShellCheck in CI — only if planned]</span></div>
+        </div>
+      </div>
+    </section>
+
+    <nav aria-label="More work" style="display: flex; flex-wrap: wrap; border: 1px solid #0A0F1C; background: #FFFFFF;">
+      <a href="Main.dc.html#work" style="flex: 1 1 260px; padding: 24px; border-right: 1px solid #0A0F1C; text-decoration: none; color: #0A0F1C; display: flex; flex-direction: column; gap: 4px;"><span class="mono" style="font-size: 12px; color: #556274;">← ALL WORK</span><span style="font-size: 18px; font-weight: 600;">Back to overview</span></a>
+      <a href="Main.dc.html#work" style="flex: 1 1 260px; padding: 24px; text-decoration: none; color: #0A0F1C; display: flex; flex-direction: column; gap: 4px; align-items: flex-end; text-align: right;"><span class="mono" style="font-size: 12px; color: #556274;">NEXT · P-02 →</span><span style="font-size: 18px; font-weight: 600;">Containerised app + MySQL</span></a>
+    </nav>
+  </article>
+
+  <!-- Sidebar -->
+  <aside aria-label="Project facts" style="flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 24px;">
+    <div style="background: #FFFFFF; border: 1px solid #0A0F1C;">
+      <p class="mono" style="margin: 0; padding: 14px 20px; border-bottom: 1px solid #0A0F1C; font-size: 11px; letter-spacing: 0.1em; color: #556274;">EVIDENCE</p>
+      <a href="#s1" style="display: flex; justify-content: space-between; align-items: center; min-height: 52px; padding: 0 20px; border-bottom: 1px solid #DCE1E8; text-decoration: none; color: #0A0F1C; font-size: 15px;">Repository<span class="mono" style="font-size: 12px; color: #556274;">[URL] ↗</span></a>
+      <a href="#s1" style="display: flex; justify-content: space-between; align-items: center; min-height: 52px; padding: 0 20px; border-bottom: 1px solid #DCE1E8; text-decoration: none; color: #0A0F1C; font-size: 15px;">README / docs<span class="mono" style="font-size: 12px; color: #556274;">[URL] ↗</span></a>
+      <a href="#s7" style="display: flex; justify-content: space-between; align-items: center; min-height: 52px; padding: 0 20px; text-decoration: none; color: #0A0F1C; font-size: 15px;">Recordings<span class="mono" style="font-size: 12px; color: #1D4ED8;">§07 ↓</span></a>
+    </div>
+    <dl class="mono" style="margin: 0; background: #FFFFFF; border: 1px solid #0A0F1C; font-size: 13px;">
+      <div style="display: flex; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid #DCE1E8;"><dt style="color: #556274;">ROLE</dt><dd style="margin: 0;">Solo</dd></div>
+      <div style="display: flex; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid #DCE1E8;"><dt style="color: #556274;">STACK</dt><dd style="margin: 0;">Bash · Git</dd></div>
+      <div style="display: flex; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid #DCE1E8;"><dt style="color: #556274;">STARTED</dt><dd style="margin: 0;">[date]</dd></div>
+      <div style="display: flex; justify-content: space-between; padding: 14px 20px;"><dt style="color: #556274;">STATUS</dt><dd style="margin: 0; color: #1E40AF;">In development</dd></div>
+    </dl>
+    <nav aria-label="On this page" style="border-top: 1px solid #0A0F1C; padding-top: 12px;">
+      <p class="mono" style="margin: 0 0 6px; font-size: 11px; letter-spacing: 0.1em; color: #556274;">ON THIS PAGE</p>
+      <ol class="mono" style="list-style: none; margin: 0; padding: 0; font-size: 13px;">
+        <li><a href="#s1" style="display: flex; gap: 12px; min-height: 36px; align-items: center; text-decoration: none; color: #1D4ED8; font-weight: 500;"><span>01</span>Problem &amp; goals</a></li>
+        <li><a href="#s2" style="display: flex; gap: 12px; min-height: 36px; align-items: center; text-decoration: none; color: #2E3A4F;"><span>02</span>Constraints</a></li>
+        <li><a href="#s3" style="display: flex; gap: 12px; min-height: 36px; align-items: center; text-decoration: none; color: #2E3A4F;"><span>03</span>Architecture</a></li>
+        <li><a href="#s4" style="display: flex; gap: 12px; min-height: 36px; align-items: center; text-decoration: none; color: #2E3A4F;"><span>04</span>Implementation</a></li>
+        <li><a href="#s5" style="display: flex; gap: 12px; min-height: 36px; align-items: center; text-decoration: none; color: #2E3A4F;"><span>05</span>Decisions</a></li>
+        <li><a href="#s6" style="display: flex; gap: 12px; min-height: 36px; align-items: center; text-decoration: none; color: #2E3A4F;"><span>06</span>What broke</a></li>
+        <li><a href="#s7" style="display: flex; gap: 12px; min-height: 36px; align-items: center; text-decoration: none; color: #2E3A4F;"><span>07</span>Testing &amp; results</a></li>
+        <li><a href="#s8" style="display: flex; gap: 12px; min-height: 36px; align-items: center; text-decoration: none; color: #2E3A4F;"><span>08</span>Lessons &amp; next</a></li>
+      </ol>
+    </nav>
+  </aside>
+</div>
+
+<footer style="background: #FFFFFF; border-top: 1px solid #0A0F1C;">
+  <div class="mono" style="max-width: 1240px; margin: 0 auto; padding: 0 40px; display: flex; flex-wrap: wrap; font-size: 12px;">
+    <div style="flex: 1 1 200px; padding: 22px 22px 22px 0; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 4px;"><span style="color: #556274; letter-spacing: 0.08em;">OWNER</span><span>Irfan Noor Mohammed</span></div>
+    <div style="flex: 1 1 140px; padding: 22px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 4px;"><span style="color: #556274; letter-spacing: 0.08em;">COMMIT</span><span>[sha]</span></div>
+    <div style="flex: 1 1 140px; padding: 22px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 4px;"><span style="color: #556274; letter-spacing: 0.08em;">BUILT</span><span>[build date]</span></div>
+    <nav aria-label="Footer" style="flex: 1 1 200px; padding: 10px 0 10px 22px; display: flex; flex-wrap: wrap; align-items: center; gap: 0 18px;">
+      <a href="Main.dc.html" style="color: #0A0F1C; text-decoration: none; min-height: 44px; display: flex; align-items: center;">Home</a>
+      <a href="Main.dc.html#contact" style="color: #0A0F1C; text-decoration: none; min-height: 44px; display: flex; align-items: center;">Contact</a>
+    </nav>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

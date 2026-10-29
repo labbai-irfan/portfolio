@@ -1,0 +1,10 @@
+design/
+MASTER_PROMPT.md
+node_modules/
+.next/
+dist/
+.sanity/
+web/src/sanity/types.ts
+**/schema.json
+package-lock.json
+**/next-env.d.ts

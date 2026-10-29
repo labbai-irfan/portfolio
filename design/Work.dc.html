@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Work — Irfan Noor Mohammed</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F6F8}
+a{color:#1D4ED8}a:hover{color:#1E3A8A}
+.mono{font-family:'Geist Mono',ui-monospace,monospace}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.nl{font-size:14px;color:#2E3A4F;text-decoration:none;padding:0 14px;min-height:68px;display:flex;align-items:center}
+.nl[aria-current=page]{color:#0A0F1C;font-weight:600;box-shadow:inset 0 -2px 0 #1D4ED8}
+a:focus-visible,button:focus-visible{outline:2px solid #1D4ED8;outline-offset:3px}
+</style>
+</helmet>
+<div style="font-family: 'Geist', system-ui, sans-serif; color: #0A0F1C; background: #F5F6F8; width: 100%;">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #0A0F1C;">
+  <nav aria-label="Primary" style="max-width: 1240px; margin: 0 auto; padding: 0 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 12px;">
+    <a href="Main.dc.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #0A0F1C; min-height: 68px;">
+      <span class="mono" style="position: relative; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; background: #0A0F1C; color: #FFFFFF; font-size: 13px; font-weight: 600;">IN<span aria-hidden="true" style="position: absolute; right: -4px; bottom: -4px; width: 10px; height: 10px; background: #1D4ED8;"></span></span>
+      <span style="font-size: 15px; font-weight: 600; letter-spacing: -0.01em;">Irfan Noor Mohammed</span>
+    </a>
+    <div style="display: flex; flex-wrap: wrap; align-items: center;">
+      <a href="Work.dc.html" class="nl" aria-current="page">Work</a>
+      <a href="Notes.dc.html" class="nl">How I debug</a>
+      <a href="Experience.dc.html" class="nl">Experience</a>
+      <a href="Skills.dc.html" class="nl">Skills</a>
+      <a href="Contact.dc.html" class="nl">Contact</a>
+      <a href="Resume.dc.html" style="margin-left: 10px; font-size: 14px; font-weight: 500; color: #FFFFFF; background: #0A0F1C; text-decoration: none; padding: 0 18px; min-height: 44px; display: flex; align-items: center;">Résumé</a>
+    </div>
+  </nav>
+</header>
+
+<section style="background: #FFFFFF; border-bottom: 1px solid #0A0F1C;">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 64px 40px 40px; display: flex; flex-direction: column; gap: 20px;">
+    <span class="mono" style="font-size: 12px; letter-spacing: 0.1em; color: #1D4ED8;">01 — WORK</span>
+    <h1 style="margin: 0; font-size: 72px; line-height: 0.98; font-weight: 600; letter-spacing: -0.04em; max-width: 980px;">Everything I've built, and how far each one goes.</h1>
+    <p style="margin: 0; font-size: 18px; line-height: 1.6; color: #2E3A4F; max-width: 680px;">Each project shows its honest status and which stages of the delivery path it covers. Learning labs are labelled as labs.</p>
+  </div>
+  <div style="max-width: 1240px; margin: 0 auto; padding: 0 40px 28px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+    <div role="group" aria-label="Filter by status" style="display: flex; flex-wrap: wrap; gap: 8px;">
+      <sc-for list="{{filters}}" as="f" hint-placeholder-count="5">
+        <button type="button" aria-pressed="{{f.pressed}}" onClick="{{f.pick}}" class="mono" style="{{f.style}}">{{f.label}} <span style="opacity: 0.7;">{{f.count}}</span></button>
+      </sc-for>
+    </div>
+    <p class="mono" role="status" style="margin: 0; font-size: 12px; color: #556274;">Showing {{shown}} of {{total}}</p>
+  </div>
+</section>
+
+<section aria-label="Projects" style="max-width: 1240px; margin: 0 auto; padding: 48px 40px 88px;">
+  <div style="display: flex; flex-wrap: wrap; gap: 24px;">
+    <sc-for list="{{projects}}" as="p" hint-placeholder-count="4">
+      <article style="{{p.cardStyle}}">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+          <span class="mono" style="font-size: 12px; color: #556274; letter-spacing: 0.08em;">{{p.id}}</span>
+          <span class="mono" style="{{p.chipStyle}}">{{p.statusLabel}}</span>
+        </div>
+        <h2 style="margin: 0; font-size: 28px; line-height: 1.1; font-weight: 600; letter-spacing: -0.02em;">{{p.title}}</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #2E3A4F;">{{p.summary}}</p>
+        <p class="mono" style="margin: 0; font-size: 12px; color: #2E3A4F;">{{p.tools}}</p>
+        <div style="display: flex; flex-direction: column; gap: 8px; padding-top: 16px; border-top: 1px solid #DCE1E8;">
+          <span class="mono" style="font-size: 10px; letter-spacing: 0.1em; color: #556274;">STAGE COVERAGE</span>
+          <ul style="list-style: none; margin: 0; padding: 0; display: flex; gap: 6px;">
+            <sc-for list="{{p.cells}}" as="c" hint-placeholder-count="6">
+              <li style="flex: 1; display: flex; flex-direction: column; gap: 6px; align-items: flex-start;">
+                <span aria-hidden="true" style="{{c.mark}}"></span>
+                <span class="mono" style="font-size: 10px; color: #556274;">{{c.short}}</span>
+                <span class="sr">{{c.label}}</span>
+              </li>
+            </sc-for>
+          </ul>
+        </div>
+        <div style="margin-top: auto; display: flex; flex-wrap: wrap; gap: 4px 18px; align-items: center;">
+          <sc-if value="{{p.hasLink}}" hint-placeholder-val="{{ true }}">
+            <a href="{{p.href}}" style="font-size: 15px; font-weight: 500; text-decoration: none; min-height: 44px; display: flex; align-items: center;">{{p.linkLabel}}</a>
+          </sc-if>
+          <sc-if value="{{p.noLink}}" hint-placeholder-val="{{ false }}">
+            <span class="mono" style="font-size: 12px; color: #556274; min-height: 44px; display: flex; align-items: center;">Detail page once real work exists</span>
+          </sc-if>
+        </div>
+      </article>
+    </sc-for>
+  </div>
+  <sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+    <p style="margin: 0; padding: 48px; border: 1px dashed #6B778A; text-align: center; font-size: 16px; color: #2E3A4F;">No projects with this status yet.</p>
+  </sc-if>
+
+  <div style="margin-top: 56px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px; padding: 32px; background: #0A0F1C; color: #FFFFFF;">
+    <p style="margin: 0; font-size: 24px; font-weight: 500; letter-spacing: -0.015em;">Want to see how I work through a real problem?</p>
+    <a href="Notes.dc.html" style="font-size: 15px; font-weight: 500; color: #0A0F1C; background: #FFFFFF; text-decoration: none; padding: 0 22px; min-height: 48px; display: flex; align-items: center;">Read the debugging notes →</a>
+  </div>
+</section>
+
+<footer style="background: #FFFFFF; border-top: 1px solid #0A0F1C;">
+  <div class="mono" style="max-width: 1240px; margin: 0 auto; padding: 0 40px; display: flex; flex-wrap: wrap; font-size: 12px;">
+    <div style="flex: 1 1 200px; padding: 22px 22px 22px 0; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 4px;"><span style="color: #556274; letter-spacing: 0.08em;">OWNER</span><span>Irfan Noor Mohammed</span></div>
+    <div style="flex: 1 1 140px; padding: 22px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 4px;"><span style="color: #556274; letter-spacing: 0.08em;">COMMIT</span><span>[sha]</span></div>
+    <div style="flex: 1 1 140px; padding: 22px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 4px;"><span style="color: #556274; letter-spacing: 0.08em;">BUILT</span><span>[build date]</span></div>
+    <nav aria-label="Footer" style="flex: 1 1 200px; padding: 10px 0 10px 22px; display: flex; flex-wrap: wrap; align-items: center; gap: 0 18px;">
+      <a href="Main.dc.html" style="color: #0A0F1C; text-decoration: none; min-height: 44px; display: flex; align-items: center;">Home</a>
+      <a href="Contact.dc.html" style="color: #0A0F1C; text-decoration: none; min-height: 44px; display: flex; align-items: center;">Contact</a>
+    </nav>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2600}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { filter: 'all' };
+  }
+  renderVals() {
+    const STAGES = ['Commit', 'Build', 'Test', 'Ship', 'Run', 'Observe'];
+    const SHORT = ['CM', 'BD', 'TS', 'SH', 'RN', 'OB'];
+    const COV = ['Not covered', 'Implemented', 'Learning lab', 'Planned'];
+    const base = 'display: inline-block; width: 100%; max-width: 40px; height: 14px; box-sizing: border-box;';
+    const MARK = [
+      base + ' background: #EEF1F5;',
+      base + ' background: #1D4ED8;',
+      base + ' border: 2px solid #1D4ED8;',
+      base + ' border: 1px dashed #6B778A;'
+    ];
+    const chip = 'font-size: 11px; font-weight: 600; letter-spacing: 0.06em; padding: 5px 10px; ';
+    const STATUS = {
+      dev: { label: 'IN DEVELOPMENT', chip: chip + 'color: #1E40AF; background: #EAF0FE;' },
+      site: { label: 'SHIPS WITH SITE', chip: chip + 'color: #1E40AF; background: #EAF0FE;' },
+      lab: { label: 'LEARNING LAB', chip: chip + 'color: #7A4307; background: #FDF1D8;' },
+      planned: { label: 'PLANNED', chip: chip + 'color: #2E3A4F; border: 1px dashed #6B778A; padding: 4px 10px;' }
+    };
+    const card = 'flex: 1 1 520px; min-width: 0; padding: 32px; display: flex; flex-direction: column; gap: 16px; ';
+    const P = [
+      { id: 'P-01', title: 'C2 — Continuous Control', summary: 'A Bash CLI that turns repetitive Git workflows into single, predictable commands.', status: 'dev', tools: 'bash · git', href: 'CaseStudy.dc.html', linkLabel: 'Read the case study →', cov: [1, 0, 0, 0, 0, 0] },
+      { id: 'P-00', title: 'This portfolio', summary: 'React + TypeScript, checked and audited by GitHub Actions on every push, deployed to Vercel.', status: 'site', tools: 'react · vite · github actions · vercel', href: 'SiteProject.dc.html', linkLabel: 'See the pipeline →', cov: [1, 1, 1, 1, 1, 3] },
+      { id: 'P-02', title: 'Containerised app + MySQL', summary: 'An app and its database as containers, with volumes, a user-defined network and a real connectivity bug.', status: 'lab', tools: 'docker · volumes · networks · mysql', href: 'ContainerLab.dc.html', linkLabel: 'Read the lab write-up →', cov: [0, 2, 0, 0, 2, 0] },
+      { id: 'P-03', title: 'CI/CD pipeline lab', summary: 'Build-and-test automation with Jenkins and GitHub Actions. [Trigger, stages, output.]', status: 'lab', tools: 'jenkins · github actions', href: 'ContainerLab.dc.html', linkLabel: 'Lab write-up (same template) →', cov: [0, 2, 2, 0, 0, 0] },
+      { id: 'P-04', title: 'Run it on AWS', summary: "Next: take P-02's containers to AWS, with logs I can actually read.", status: 'planned', tools: 'aws · containers · logging', href: null, cov: [0, 0, 0, 3, 3, 3] }
+    ];
+    const f = this.state.filter;
+    const list = P.filter((p) => f === 'all' || p.status === f).map((p) => ({
+      ...p,
+      statusLabel: STATUS[p.status].label,
+      chipStyle: STATUS[p.status].chip,
+      cardStyle: card + (p.status === 'planned' ? 'background: transparent; border: 1px dashed #6B778A;' : 'background: #FFFFFF; border: 1px solid #0A0F1C;'),
+      hasLink: !!p.href,
+      noLink: !p.href,
+      cells: p.cov.map((c, i) => ({ mark: MARK[c], short: SHORT[i], label: STAGES[i] + ': ' + COV[c] }))
+    }));
+    const F = [
+      { id: 'all', label: 'All' },
+      { id: 'dev', label: 'In development' },
+      { id: 'site', label: 'Ships with site' },
+      { id: 'lab', label: 'Learning lab' },
+      { id: 'planned', label: 'Planned' }
+    ];
+    const btn = 'font-size: 13px; padding: 0 16px; min-height: 44px; cursor: pointer; ';
+    const filters = F.map((x) => ({
+      ...x,
+      count: x.id === 'all' ? P.length : P.filter((p) => p.status === x.id).length,
+      pressed: f === x.id ? 'true' : 'false',
+      style: btn + (f === x.id ? 'background: #0A0F1C; color: #FFFFFF; border: 1px solid #0A0F1C;' : 'background: #FFFFFF; color: #0A0F1C; border: 1px solid #0A0F1C;'),
+      pick: () => this.setState({ filter: x.id })
+    }));
+    return { projects: list, filters, shown: list.length, total: P.length, empty: list.length === 0 };
+  }
+}
+</script>
+</body>
+</html>

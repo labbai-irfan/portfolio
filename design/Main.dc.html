@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Irfan Noor Mohammed — Software, shipped</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F6F8}
+a{color:#1D4ED8}a:hover{color:#1E3A8A}
+.mono{font-family:'Geist Mono',ui-monospace,monospace}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.grid{background-image:linear-gradient(#E3E7ED 1px,transparent 1px),linear-gradient(90deg,#E3E7ED 1px,transparent 1px);background-size:24px 24px}
+a:focus-visible,button:focus-visible{outline:2px solid #1D4ED8;outline-offset:3px}
+</style>
+</helmet>
+<div style="font-family: 'Geist', system-ui, sans-serif; color: #0A0F1C; background: #F5F6F8; width: 100%;">
+
+<!-- ============ NAV ============ -->
+<header style="background: #FFFFFF; border-bottom: 1px solid #0A0F1C;">
+  <nav aria-label="Primary" style="max-width: 1240px; margin: 0 auto; padding: 0 40px; min-height: 68px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;">
+    <a href="#top" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #0A0F1C; min-height: 44px;">
+      <span class="mono" style="position: relative; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; background: #0A0F1C; color: #FFFFFF; font-size: 13px; font-weight: 600;">IN<span aria-hidden="true" style="position: absolute; right: -4px; bottom: -4px; width: 10px; height: 10px; background: #1D4ED8;"></span></span>
+      <span style="font-size: 15px; font-weight: 600; letter-spacing: -0.01em;">Irfan Noor Mohammed</span>
+    </a>
+    <div style="display: flex; flex-wrap: wrap; align-items: center;">
+      <a href="#work" style="font-size: 14px; color: #2E3A4F; text-decoration: none; padding: 0 14px; min-height: 44px; display: flex; align-items: center;">Work</a>
+      <a href="#debugging" style="font-size: 14px; color: #2E3A4F; text-decoration: none; padding: 0 14px; min-height: 44px; display: flex; align-items: center;">How I debug</a>
+      <a href="#experience" style="font-size: 14px; color: #2E3A4F; text-decoration: none; padding: 0 14px; min-height: 44px; display: flex; align-items: center;">Experience</a>
+      <a href="#skills" style="font-size: 14px; color: #2E3A4F; text-decoration: none; padding: 0 14px; min-height: 44px; display: flex; align-items: center;">Skills</a>
+      <a href="#contact" style="font-size: 14px; color: #2E3A4F; text-decoration: none; padding: 0 14px; min-height: 44px; display: flex; align-items: center;">Contact</a>
+      <a href="#contact" style="margin-left: 10px; font-size: 14px; font-weight: 500; color: #FFFFFF; background: #0A0F1C; text-decoration: none; padding: 0 18px; min-height: 44px; display: flex; align-items: center; gap: 8px;">Résumé
+        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 2v7M4 6.5 7 9.5l3-3M2.5 12h9"></path></svg>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="top" style="border-bottom: 1px solid #0A0F1C; background: #F5F6F8;">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 56px 40px 0;">
+    <div class="mono" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-size: 12px; letter-spacing: 0.08em; color: #556274;">
+      <span>SOFTWARE ENGINEER <span style="color: #1D4ED8;">→</span> DEVOPS &amp; CLOUD</span>
+      <span style="display: flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="width: 7px; height: 7px; background: #1D4ED8;"></span>MUMBAI, INDIA · OPEN TO ROLES</span>
+    </div>
+    <h1 style="margin: 28px 0 0; font-size: 104px; line-height: 0.95; font-weight: 600; letter-spacing: -0.045em;">Irfan Noor Mohammed</h1>
+  </div>
+  <div style="max-width: 1240px; margin: 48px auto 0; padding: 0 40px 72px; display: flex; flex-wrap: wrap; gap: 48px; border-top: 0;">
+    <div style="flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 24px; padding-top: 32px; border-top: 1px solid #0A0F1C;">
+      <p style="margin: 0; font-size: 32px; line-height: 1.18; font-weight: 500; letter-spacing: -0.02em;">I build software, then automate the path it takes to production.</p>
+      <p style="margin: 0; font-size: 17px; line-height: 1.65; color: #2E3A4F;">Full-stack engineer working in React, Node.js and MySQL. Now going deep on Docker, CI/CD, AWS and Linux — and documenting every step, including what broke.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px;">
+        <a href="#work" style="font-size: 15px; font-weight: 500; color: #FFFFFF; background: #1D4ED8; text-decoration: none; padding: 0 24px; min-height: 52px; display: flex; align-items: center; gap: 10px;">See the work
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>
+        </a>
+        <a href="#contact" style="font-size: 15px; font-weight: 500; color: #0A0F1C; background: #FFFFFF; text-decoration: none; padding: 0 24px; min-height: 52px; display: flex; align-items: center; border: 1px solid #0A0F1C;">Get in touch</a>
+      </div>
+    </div>
+
+    <!-- Real pipeline of this site -->
+    <figure aria-labelledby="pipe-h" style="flex: 1.45 1 560px; min-width: 0; margin: 0; background: #FFFFFF; border: 1px solid #0A0F1C; display: flex; flex-direction: column;">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 14px 22px; background: #0A0F1C; color: #FFFFFF;">
+        <span id="pipe-h" class="mono" style="font-size: 12px; letter-spacing: 0.08em;">THIS PAGE WAS SHIPPED BY THIS PIPELINE</span>
+        <span class="mono" style="font-size: 12px; color: #B9C8F6;">github actions → vercel</span>
+      </div>
+      <div class="grid" style="padding: 32px 22px 28px; border-bottom: 1px solid #0A0F1C;">
+        <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0;">
+          <li style="flex: 1 1 100px; min-width: 0; display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; align-items: center;"><span class="mono" style="width: 34px; height: 34px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: #1D4ED8; color: #FFFFFF; font-size: 12px; font-weight: 600;">01</span><span aria-hidden="true" style="flex: 1; height: 2px; background: #1D4ED8;"></span></div>
+            <span style="font-size: 15px; font-weight: 600; padding-right: 8px;">Push</span>
+            <span class="mono" style="font-size: 12px; color: #2E3A4F; padding-right: 8px;">git push main</span>
+          </li>
+          <li style="flex: 1 1 100px; min-width: 0; display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; align-items: center;"><span class="mono" style="width: 34px; height: 34px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: #1D4ED8; color: #FFFFFF; font-size: 12px; font-weight: 600;">02</span><span aria-hidden="true" style="flex: 1; height: 2px; background: #1D4ED8;"></span></div>
+            <span style="font-size: 15px; font-weight: 600; padding-right: 8px;">Check</span>
+            <span class="mono" style="font-size: 12px; color: #2E3A4F; padding-right: 8px;">tsc · eslint</span>
+          </li>
+          <li style="flex: 1 1 100px; min-width: 0; display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; align-items: center;"><span class="mono" style="width: 34px; height: 34px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: #1D4ED8; color: #FFFFFF; font-size: 12px; font-weight: 600;">03</span><span aria-hidden="true" style="flex: 1; height: 2px; background: #1D4ED8;"></span></div>
+            <span style="font-size: 15px; font-weight: 600; padding-right: 8px;">Build</span>
+            <span class="mono" style="font-size: 12px; color: #2E3A4F; padding-right: 8px;">vite build</span>
+          </li>
+          <li style="flex: 1 1 100px; min-width: 0; display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; align-items: center;"><span class="mono" style="width: 34px; height: 34px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: #1D4ED8; color: #FFFFFF; font-size: 12px; font-weight: 600;">04</span><span aria-hidden="true" style="flex: 1; height: 2px; background: #1D4ED8;"></span></div>
+            <span style="font-size: 15px; font-weight: 600; padding-right: 8px;">Audit</span>
+            <span class="mono" style="font-size: 12px; color: #2E3A4F; padding-right: 8px;">axe · lighthouse</span>
+          </li>
+          <li style="flex: 1 1 100px; min-width: 0; display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; align-items: center;"><span class="mono" style="width: 34px; height: 34px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: #0A0F1C; color: #FFFFFF; font-size: 12px; font-weight: 600;">05</span></div>
+            <span style="font-size: 15px; font-weight: 600;">Deploy</span>
+            <span class="mono" style="font-size: 12px; color: #2E3A4F;">vercel · static</span>
+          </li>
+        </ol>
+      </div>
+      <dl class="mono" style="margin: 0; display: flex; flex-wrap: wrap; font-size: 12px;">
+        <div style="flex: 1 1 120px; padding: 14px 22px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 4px;"><dt style="color: #556274; letter-spacing: 0.06em;">COMMIT</dt><dd style="margin: 0; color: #0A0F1C; font-size: 13px;">[sha]</dd></div>
+        <div style="flex: 1 1 120px; padding: 14px 22px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 4px;"><dt style="color: #556274; letter-spacing: 0.06em;">BUILT</dt><dd style="margin: 0; color: #0A0F1C; font-size: 13px;">[build date]</dd></div>
+        <div style="flex: 1 1 120px; padding: 14px 22px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 4px;"><dt style="color: #556274; letter-spacing: 0.06em;">CHECKS</dt><dd style="margin: 0; color: #0A0F1C; font-size: 13px;">[run result]</dd></div>
+        <div style="flex: 1 1 160px; padding: 6px 22px; display: flex; align-items: center;"><a href="#work" style="font-size: 13px; font-weight: 500; text-decoration: none; min-height: 44px; display: flex; align-items: center; gap: 6px;">Open workflow run ↗</a></div>
+      </dl>
+      <figcaption style="padding: 12px 22px; border-top: 1px solid #DCE1E8; font-size: 12px; line-height: 1.5; color: #556274;">Values are written at build time from the real run. Nothing on this panel is simulated.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 60-SECOND READ ============ -->
+<section aria-label="Summary" style="background: #FFFFFF; border-bottom: 1px solid #0A0F1C;">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 0 40px; display: flex; flex-wrap: wrap;">
+    <div style="flex: 1 1 260px; min-width: 0; padding: 28px 28px 28px 0; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 8px;">
+      <span class="mono" style="font-size: 11px; letter-spacing: 0.1em; color: #1D4ED8;">TARGETING</span>
+      <span style="font-size: 16px; line-height: 1.5;">DevOps, Cloud, SRE, Platform and Backend engineering</span>
+    </div>
+    <div style="flex: 1 1 260px; min-width: 0; padding: 28px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 8px;">
+      <span class="mono" style="font-size: 11px; letter-spacing: 0.1em; color: #1D4ED8;">STRONGEST TODAY</span>
+      <span style="font-size: 16px; line-height: 1.5;">Full-stack product engineering — React, Node.js, MySQL</span>
+    </div>
+    <div style="flex: 1 1 260px; min-width: 0; padding: 28px 0 28px 28px; display: flex; flex-direction: column; gap: 8px;">
+      <span class="mono" style="font-size: 11px; letter-spacing: 0.1em; color: #1D4ED8;">PROOF ON THIS SITE</span>
+      <span style="font-size: 16px; line-height: 1.5;">A Git CLI, container labs, and this site's own pipeline</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 01 WORK ============ -->
+<section id="work" aria-labelledby="work-h">
+  <div style="background: #0A0F1C; color: #FFFFFF;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 18px 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px;">
+      <h2 id="work-h" class="mono" style="margin: 0; font-size: 13px; font-weight: 500; letter-spacing: 0.1em;">01 — WORK</h2>
+      <span class="mono" style="font-size: 12px; letter-spacing: 0.06em; color: #B9C8F6;">EVERY CLAIM LINKS TO ITS EVIDENCE</span>
+    </div>
+  </div>
+  <div style="max-width: 1240px; margin: 0 auto; padding: 56px 40px 88px; display: flex; flex-direction: column; gap: 32px;">
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px;">
+      <h3 style="margin: 0; font-size: 40px; line-height: 1.1; font-weight: 600; letter-spacing: -0.025em; max-width: 680px;">Which parts of the delivery path each project actually covers.</h3>
+      <ul class="mono" aria-label="Legend" style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 18px; font-size: 12px; color: #2E3A4F;">
+        <li style="display: flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="width: 14px; height: 14px; background: #1D4ED8;"></span>Implemented</li>
+        <li style="display: flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="width: 14px; height: 14px; border: 2px solid #1D4ED8; box-sizing: border-box;"></span>Learning lab</li>
+        <li style="display: flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="width: 14px; height: 14px; border: 1px dashed #6B778A; box-sizing: border-box;"></span>Planned</li>
+      </ul>
+    </div>
+
+    <!-- Coverage matrix -->
+    <div style="overflow-x: auto; background: #FFFFFF; border: 1px solid #0A0F1C;">
+      <table style="width: 100%; min-width: 820px; border-collapse: collapse;">
+        <caption class="sr">Stage coverage by project</caption>
+        <thead>
+          <tr style="border-bottom: 1px solid #0A0F1C;">
+            <th scope="col" class="mono" style="text-align: left; padding: 16px 22px; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: #556274; width: 34%;">PROJECT</th>
+            <th scope="col" class="mono" style="padding: 16px 8px; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: #556274;">COMMIT</th>
+            <th scope="col" class="mono" style="padding: 16px 8px; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: #556274;">BUILD</th>
+            <th scope="col" class="mono" style="padding: 16px 8px; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: #556274;">TEST</th>
+            <th scope="col" class="mono" style="padding: 16px 8px; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: #556274;">SHIP</th>
+            <th scope="col" class="mono" style="padding: 16px 8px; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: #556274;">RUN</th>
+            <th scope="col" class="mono" style="padding: 16px 8px; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: #556274;">OBSERVE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid #DCE1E8;">
+            <th scope="row" style="text-align: left; padding: 16px 22px; font-weight: 600; font-size: 15px;"><a href="CaseStudy.dc.html" style="color: #0A0F1C; text-decoration: none;"><span class="mono" style="font-size: 12px; color: #556274; font-weight: 400; margin-right: 10px;">P-01</span>C2 — Continuous Control</a></th>
+            <td style="text-align: center; padding: 16px 8px;"><span aria-hidden="true" style="display: inline-block; width: 18px; height: 18px; background: #1D4ED8;"></span><span class="sr">Implemented</span></td>
+            <td style="text-align: center; padding: 16px 8px; color: #8A96A8;" class="mono">—<span class="sr">Not covered</span></td>
+            <td style="text-align: center; padding: 16px 8px; color: #8A96A8;" class="mono">—<span class="sr">Not covered</span></td>
+            <td style="text-align: center; padding: 16px 8px; color: #8A96A8;" class="mono">—<span class="sr">Not covered</span></td>
+            <td style="text-align: center; padding: 16px 8px; color: #8A96A8;" class="mono">—<span class="sr">Not covered</span></td>
+            <td style="text-align: center; padding: 16px 8px; color: #8A96A8;" class="mono">—<span class="sr">Not covered</span></td>
+          </tr>
+          <tr style="border-bottom: 1px solid #DCE1E8;">
+            <th scope="row" style="text-align: left; padding: 16px 22px; font-weight: 600; font-size: 15px;"><span class="mono" style="font-size: 12px; color: #556274; font-weight: 400; margin-right: 10px;">P-00</span>This portfolio</th>
+            <td style="text-align: center; padding: 16px 8px;"><span aria-hidden="true" style="display: inline-block; width: 18px; height: 18px; background: #1D4ED8;"></span><span class="sr">Implemented</span></td>
+            <td style="text-align: center; padding: 16px 8px;"><span aria-hidden="true" style="display: inline-block; width: 18px; height: 18px; background: #1D4ED8;"></span><span class="sr">Implemented</span></td>
+            <td style="text-align: center; padding: 16px 8px;"><span aria-hidden="true" style="display: inline-block; width: 18px; height: 18px; background: #1D4ED8;"></span><span class="sr">Implemented</span></td>
+            <td style="text-align: center; padding: 16px 8px;"><span aria-hidden="true" style="display: inline-block; width: 18px; height: 18px; background: #1D4ED8;"></span><span class="sr">Implemented</span></td>
+            <td style="text-align: center; padding: 16px 8px;"><span aria-hidden="true" style="display: inline-block; width: 18px; height: 18px; background: #1D4ED8;"></span><span class="sr">Implemented</span></td>
+            <td style="text-align: center; padding: 16px 8px;"><span aria-hidden="true" style="display: inline-block; width: 18px; height: 18px; border: 1px dashed #6B778A; box-sizing: border-box;"></span><span class="sr">Planned</span></td>
+          </tr>
+          <tr style="border-bottom: 1px solid #DCE1E8;">
+            <th scope="row" style="text-align: left; padding: 16px 22px; font-weight: 600; font-size: 15px;"><span class="mono" style="font-size: 12px; color: #556274; font-weight: 400; margin-right: 10px;">P-02</span>Containerised app + MySQL</th>
+            <td style="text-align: center; padding: 16px 8px; color: #8A96A8;" class="mono">—<span class="sr">Not covered</span></td>
+            <td style="text-align: center; padding: 16px 8px;"><span aria-hidden="true" style="display: inline-block; width: 18px; height: 18px; border: 2px solid #1D4ED8; box-sizing: border-box;"></span><span class="sr">Learning lab</span></td>
+            <td style="text-align: center; padding: 16px 8px; color: #8A96A8;" class="mono">—<span class="sr">Not covered</span></td>
+            <td style="text-align: center; padding: 16px 8px; color: #8A96A8;" class="mono">—<span class="sr">Not covered</span></td>
+            <td style="text-align: center; padding: 16px 8px;"><span aria-hidden="true" style="display: inline-block; width: 18px; height: 18px; border: 2px solid #1D4ED8; box-sizing: border-box;"></span><span class="sr">Learning lab</span></td>
+            <td style="text-align: center; padding: 16px 8px; color: #8A96A8;" class="mono">—<span class="sr">Not covered</span></td>
+          </tr>
+          <tr style="border-bottom: 1px solid #DCE1E8;">
+            <th scope="row" style="text-align: left; padding: 16px 22px; font-weight: 600; font-size: 15px;"><span class="mono" style="font-size: 12px; color: #556274; font-weight: 400; margin-right: 10px;">P-03</span>CI/CD pipeline lab</th>
+            <td style="text-align: center; padding: 16px 8px; color: #8A96A8;" class="mono">—<span class="sr">Not covered</span></td>
+            <td style="text-align: center; padding: 16px 8px;"><span aria-hidden="true" style="display: inline-block; width: 18px; height: 18px; border: 2px solid #1D4ED8; box-sizing: border-box;"></span><span class="sr">Learning lab</span></td>
+            <td style="text-align: center; padding: 16px 8px;"><span aria-hidden="true" style="display: inline-block; width: 18px; height: 18px; border: 2px solid #1D4ED8; box-sizing: border-box;"></span><span class="sr">Learning lab</span></td>
+            <td style="text-align: center; padding: 16px 8px; color: #8A96A8;" class="mono">—<span class="sr">Not covered</span></td>
+            <td style="text-align: center; padding: 16px 8px; color: #8A96A8;" class="mono">—<span class="sr">Not covered</span></td>
+            <td style="text-align: center; padding: 16px 8px; color: #8A96A8;" class="mono">—<span class="sr">Not covered</span></td>
+          </tr>
+          <tr>
+            <th scope="row" style="text-align: left; padding: 16px 22px; font-weight: 600; font-size: 15px; color: #2E3A4F;"><span class="mono" style="font-size: 12px; color: #556274; font-weight: 400; margin-right: 10px;">P-04</span>Run it on AWS</th>
+            <td style="text-align: center; padding: 16px 8px; color: #8A96A8;" class="mono">—<span class="sr">Not covered</span></td>
+            <td style="text-align: center; padding: 16px 8px; color: #8A96A8;" class="mono">—<span class="sr">Not covered</span></td>
+            <td style="text-align: center; padding: 16px 8px; color: #8A96A8;" class="mono">—<span class="sr">Not covered</span></td>
+            <td style="text-align: center; padding: 16px 8px;"><span aria-hidden="true" style="display: inline-block; width: 18px; height: 18px; border: 1px dashed #6B778A; box-sizing: border-box;"></span><span class="sr">Planned</span></td>
+            <td style="text-align: center; padding: 16px 8px;"><span aria-hidden="true" style="display: inline-block; width: 18px; height: 18px; border: 1px dashed #6B778A; box-sizing: border-box;"></span><span class="sr">Planned</span></td>
+            <td style="text-align: center; padding: 16px 8px;"><span aria-hidden="true" style="display: inline-block; width: 18px; height: 18px; border: 1px dashed #6B778A; box-sizing: border-box;"></span><span class="sr">Planned</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- C2 flagship -->
+    <article style="background: #FFFFFF; border: 1px solid #0A0F1C; display: flex; flex-wrap: wrap;">
+      <div style="flex: 1.2 1 480px; min-width: 0; padding: 40px; display: flex; flex-direction: column; gap: 22px;">
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+          <span class="mono" style="font-size: 12px; color: #556274; letter-spacing: 0.08em;">P-01 · FLAGSHIP</span>
+          <span class="mono" style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: #1E40AF; background: #EAF0FE; padding: 5px 10px;">IN DEVELOPMENT</span>
+        </div>
+        <h3 style="margin: 0; font-size: 44px; line-height: 1.02; font-weight: 600; letter-spacing: -0.03em;">C2 — Continuous<br>Control</h3>
+        <p style="margin: 0; font-size: 18px; line-height: 1.6; color: #2E3A4F; max-width: 520px;">A Bash CLI that turns repetitive Git workflows into single, predictable commands — so every branch, commit and sync follows the same conventions.</p>
+        <div style="display: flex; flex-direction: column; border-top: 1px solid #0A0F1C;">
+          <p class="mono" style="margin: 14px 0 6px; font-size: 11px; letter-spacing: 0.1em; color: #556274;">EVIDENCE</p>
+          <a href="#work" style="display: flex; justify-content: space-between; align-items: center; min-height: 48px; border-bottom: 1px solid #DCE1E8; text-decoration: none; color: #0A0F1C; font-size: 15px;"><span style="display: flex; align-items: center; gap: 12px;"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#1D4ED8" stroke-width="1.5"><circle cx="4" cy="4" r="2"></circle><circle cx="4" cy="12" r="2"></circle><circle cx="12" cy="6" r="2"></circle><path d="M4 6v4M12 8c0 2-2 3-6 3"></path></svg>Source repository</span><span class="mono" style="font-size: 12px; color: #556274;">[repo URL] ↗</span></a>
+          <a href="#work" style="display: flex; justify-content: space-between; align-items: center; min-height: 48px; border-bottom: 1px solid #DCE1E8; text-decoration: none; color: #0A0F1C; font-size: 15px;"><span style="display: flex; align-items: center; gap: 12px;"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#1D4ED8" stroke-width="1.5"><rect x="1.5" y="2.5" width="13" height="11"></rect><path d="M4 6l2 2-2 2M8 10h4"></path></svg>Real terminal capture</span><span class="mono" style="font-size: 12px; color: #556274;">beside →</span></a>
+          <a href="CaseStudy.dc.html" style="display: flex; justify-content: space-between; align-items: center; min-height: 48px; text-decoration: none; color: #0A0F1C; font-size: 15px;"><span style="display: flex; align-items: center; gap: 12px;"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#1D4ED8" stroke-width="1.5"><path d="M3 1.5h7l3 3v10H3z"></path><path d="M6 8h5M6 11h5"></path></svg>Case study</span><span class="mono" style="font-size: 12px; color: #1D4ED8;">read →</span></a>
+        </div>
+      </div>
+      <div style="flex: 1 1 400px; min-width: 0; background: #0A0F1C; color: #E2E8F0; display: flex; flex-direction: column;">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 22px; border-bottom: 1px solid #1C2536;">
+          <span class="mono" style="font-size: 12px; color: #9AA6B8;">~/test-repo · zsh</span>
+          <span class="mono" style="font-size: 11px; color: #9AA6B8; letter-spacing: 0.06em;">CAPTURED, NOT MOCKED</span>
+        </div>
+        <pre class="mono" style="margin: 0; padding: 28px 22px; font-size: 15px; line-height: 1.75; white-space: pre-wrap; flex: 1;"><span style="color: #8FB0FF;">$</span> c2 git save
+<span style="color: #9AA6B8;">[paste the real output of this command
+ from a run on a test repository]</span>
+
+<span style="color: #8FB0FF;">$</span> <span style="display: inline-block; width: 9px; height: 18px; background: #8FB0FF; vertical-align: text-bottom;"></span></pre>
+        <div class="mono" style="display: flex; flex-wrap: wrap; border-top: 1px solid #1C2536; font-size: 12px;">
+          <div style="flex: 1 1 100px; padding: 14px 22px; border-right: 1px solid #1C2536;"><div style="color: #9AA6B8;">LANG</div><div style="margin-top: 4px;">Bash</div></div>
+          <div style="flex: 1 1 100px; padding: 14px 22px; border-right: 1px solid #1C2536;"><div style="color: #9AA6B8;">DOMAIN</div><div style="margin-top: 4px;">Git · DX</div></div>
+          <div style="flex: 1 1 100px; padding: 14px 22px;"><div style="color: #9AA6B8;">STAGE</div><div style="margin-top: 4px;">01 Commit</div></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Other projects -->
+    <div style="display: flex; flex-wrap: wrap; gap: 24px;">
+      <article style="flex: 1 1 280px; min-width: 0; background: #FFFFFF; border: 1px solid #0A0F1C; padding: 28px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="mono" style="font-size: 12px; color: #556274; letter-spacing: 0.08em;">P-00</span>
+          <span class="mono" style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: #1E40AF; background: #EAF0FE; padding: 5px 10px;">SHIPS WITH SITE</span>
+        </div>
+        <h3 style="margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.01em;">This portfolio</h3>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #2E3A4F;">React + TypeScript, built and audited by GitHub Actions on every push, deployed to Vercel. The pipeline at the top of this page is its real output.</p>
+        <p class="mono" style="margin: 0; font-size: 12px; color: #2E3A4F;">react · vite · actions · vercel</p>
+        <div style="margin-top: auto; padding-top: 14px; border-top: 1px solid #DCE1E8; display: flex; flex-wrap: wrap; gap: 4px 18px;">
+          <a href="#work" style="font-size: 14px; font-weight: 500; text-decoration: none; min-height: 44px; display: flex; align-items: center;">Workflow file ↗</a>
+          <a href="#work" style="font-size: 14px; font-weight: 500; text-decoration: none; min-height: 44px; display: flex; align-items: center;">Run history ↗</a>
+        </div>
+      </article>
+      <article style="flex: 1 1 280px; min-width: 0; background: #FFFFFF; border: 1px solid #0A0F1C; padding: 28px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="mono" style="font-size: 12px; color: #556274; letter-spacing: 0.08em;">P-02</span>
+          <span class="mono" style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: #7A4307; background: #FDF1D8; padding: 5px 10px;">LEARNING LAB</span>
+        </div>
+        <h3 style="margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.01em;">Containerised app + MySQL</h3>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #2E3A4F;">An app and its database as containers, with persistent volumes, a user-defined network — and a real connectivity bug, written up below.</p>
+        <p class="mono" style="margin: 0; font-size: 12px; color: #2E3A4F;">docker · volumes · networks · mysql</p>
+        <div style="margin-top: auto; padding-top: 14px; border-top: 1px solid #DCE1E8; display: flex; flex-wrap: wrap; gap: 4px 18px;">
+          <a href="#debugging" style="font-size: 14px; font-weight: 500; text-decoration: none; min-height: 44px; display: flex; align-items: center;">Debugging note ↓</a>
+          <span class="mono" style="font-size: 12px; color: #556274; min-height: 44px; display: flex; align-items: center;">[repo URL]</span>
+        </div>
+      </article>
+      <article style="flex: 1 1 280px; min-width: 0; background: #FFFFFF; border: 1px solid #0A0F1C; padding: 28px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="mono" style="font-size: 12px; color: #556274; letter-spacing: 0.08em;">P-03</span>
+          <span class="mono" style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: #7A4307; background: #FDF1D8; padding: 5px 10px;">LEARNING LAB</span>
+        </div>
+        <h3 style="margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.01em;">CI/CD pipeline lab</h3>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #2E3A4F;">Build-and-test automation with Jenkins and GitHub Actions. [What triggers it, which stages run, where the output goes.]</p>
+        <p class="mono" style="margin: 0; font-size: 12px; color: #2E3A4F;">jenkins · github actions</p>
+        <div style="margin-top: auto; padding-top: 14px; border-top: 1px solid #DCE1E8;">
+          <span class="mono" style="font-size: 12px; color: #556274; min-height: 44px; display: flex; align-items: center;">Write-up in progress</span>
+        </div>
+      </article>
+      <article style="flex: 1 1 280px; min-width: 0; background: transparent; border: 1px dashed #6B778A; padding: 28px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="mono" style="font-size: 12px; color: #556274; letter-spacing: 0.08em;">P-04</span>
+          <span class="mono" style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: #2E3A4F; border: 1px dashed #6B778A; padding: 4px 10px;">PLANNED</span>
+        </div>
+        <h3 style="margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.01em;">Run it on AWS</h3>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #2E3A4F;">Next: take P-02's containers to AWS with logs I can read. On the roadmap — not finished work.</p>
+        <p class="mono" style="margin: 0; font-size: 12px; color: #2E3A4F;">aws · containers · logging</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 HOW I DEBUG ============ -->
+<section id="debugging" aria-labelledby="dbg-h" style="border-top: 1px solid #0A0F1C;">
+  <div style="background: #0A0F1C; color: #FFFFFF;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 18px 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px;">
+      <h2 id="dbg-h" class="mono" style="margin: 0; font-size: 13px; font-weight: 500; letter-spacing: 0.1em;">02 — HOW I DEBUG</h2>
+      <span class="mono" style="font-size: 12px; letter-spacing: 0.06em; color: #B9C8F6;">REAL PROBLEMS ONLY</span>
+    </div>
+  </div>
+  <div style="max-width: 1240px; margin: 0 auto; padding: 56px 40px 88px; display: flex; flex-direction: column; gap: 28px;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px;">
+      <div style="display: flex; flex-direction: column; gap: 10px; max-width: 720px;">
+        <span class="mono" style="font-size: 12px; color: #556274; letter-spacing: 0.08em;">N-01 · FROM P-02</span>
+        <h3 style="margin: 0; font-size: 40px; line-height: 1.1; font-weight: 600; letter-spacing: -0.025em;">When my app container couldn't reach MySQL.</h3>
+      </div>
+      <a href="#debugging" style="font-size: 15px; font-weight: 500; color: #0A0F1C; background: #FFFFFF; border: 1px solid #0A0F1C; text-decoration: none; padding: 0 20px; min-height: 48px; display: flex; align-items: center;">Read the full note →</a>
+    </div>
+    <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; background: #FFFFFF; border: 1px solid #0A0F1C;">
+      <li style="flex: 1 1 240px; min-width: 0; padding: 28px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 12px;">
+        <span class="mono" style="font-size: 11px; letter-spacing: 0.1em; color: #556274;">1 · SYMPTOM</span>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #2E3A4F;">[The exact error you saw, as logged.]</p>
+      </li>
+      <li style="flex: 1 1 240px; min-width: 0; padding: 28px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 12px;">
+        <span class="mono" style="font-size: 11px; letter-spacing: 0.1em; color: #556274;">2 · CHECKED</span>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #2E3A4F;">[What you ruled out, in order — and the commands you used.]</p>
+      </li>
+      <li style="flex: 1 1 240px; min-width: 0; padding: 28px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 12px;">
+        <span class="mono" style="font-size: 11px; letter-spacing: 0.1em; color: #556274;">3 · ROOT CAUSE</span>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #2E3A4F;">[What was actually wrong.]</p>
+      </li>
+      <li style="flex: 1 1 240px; min-width: 0; padding: 28px; display: flex; flex-direction: column; gap: 12px; background: #EAF0FE;">
+        <span class="mono" style="font-size: 11px; letter-spacing: 0.1em; color: #1E40AF;">4 · FIX &amp; PREVENTION</span>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #0A0F1C;">[The change, and how you'd catch it sooner next time.]</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 03 EXPERIENCE ============ -->
+<section id="experience" aria-labelledby="exp-h" style="border-top: 1px solid #0A0F1C; background: #FFFFFF;">
+  <div style="background: #0A0F1C; color: #FFFFFF;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 18px 40px;">
+      <h2 id="exp-h" class="mono" style="margin: 0; font-size: 13px; font-weight: 500; letter-spacing: 0.1em;">03 — EXPERIENCE</h2>
+    </div>
+  </div>
+  <div style="max-width: 1240px; margin: 0 auto; padding: 64px 40px 88px; display: flex; flex-wrap: wrap; gap: 56px;">
+    <div style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+      <h3 style="margin: 0; font-size: 40px; line-height: 1.1; font-weight: 600; letter-spacing: -0.025em;">Product engineering first. Infrastructure next.</h3>
+      <p style="margin: 0; font-size: 16px; line-height: 1.65; color: #2E3A4F;">My day job is building and maintaining business software end to end — which is where the questions about databases, deployment and reliability started.</p>
+    </div>
+    <div style="flex: 1.6 1 560px; min-width: 0; display: flex; flex-direction: column;">
+      <article style="display: flex; flex-wrap: wrap; gap: 8px 32px; padding: 0 0 36px; border-bottom: 1px solid #DCE1E8;">
+        <p class="mono" style="flex: 0 0 170px; margin: 4px 0 0; font-size: 12px; letter-spacing: 0.06em; color: #1D4ED8;">APR 2026 — NOW</p>
+        <div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 12px;">
+          <div><h4 style="margin: 0; font-size: 22px; font-weight: 600;">Junior Software Engineer</h4><p style="margin: 4px 0 0; font-size: 16px; color: #2E3A4F;">WiseTech MEP Consultants Pvt. Ltd. · Mumbai</p></div>
+          <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; font-size: 15px; line-height: 1.6;">
+            <li>Develop modules of the company's internal HRMS / CRM platform — React + TypeScript front end, Node.js, Express and Prisma back end.</li>
+            <li>Built lead ↔ project synchronisation, bulk spreadsheet lead import and template-based document generation.</li>
+            <li>Migrated the database from MariaDB to MySQL, resolving schema incompatibilities.</li>
+          </ul>
+          <p class="mono" style="margin: 4px 0 0; font-size: 12px; color: #2E3A4F;">react · typescript · node.js · express · prisma · mysql</p>
+        </div>
+      </article>
+      <article style="display: flex; flex-wrap: wrap; gap: 8px 32px; padding: 36px 0; border-bottom: 1px solid #DCE1E8;">
+        <p class="mono" style="flex: 0 0 170px; margin: 4px 0 0; font-size: 12px; letter-spacing: 0.06em; color: #556274;">JUL 2025 — JAN 2026</p>
+        <div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 12px;">
+          <div><h4 style="margin: 0; font-size: 22px; font-weight: 600;">Full-Stack Developer Intern</h4><p style="margin: 4px 0 0; font-size: 16px; color: #2E3A4F;">Arba Accelerator Company</p></div>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #556274;">[2–3 verified responsibilities or contributions]</p>
+        </div>
+      </article>
+      <article style="display: flex; flex-wrap: wrap; gap: 8px 32px; padding: 36px 0 0;">
+        <p class="mono" style="flex: 0 0 170px; margin: 4px 0 0; font-size: 12px; letter-spacing: 0.06em; color: #556274;">EDUCATION</p>
+        <div style="flex: 1 1 320px; min-width: 0; display: flex; flex-wrap: wrap; gap: 20px 32px;">
+          <div style="flex: 1 1 220px;"><h4 style="margin: 0; font-size: 17px; font-weight: 600;">M.Sc. Information Technology</h4><p style="margin: 4px 0 0; font-size: 15px; line-height: 1.5; color: #2E3A4F;">Pillai College of Arts, Commerce &amp; Science, Navi Mumbai · in progress</p></div>
+          <div style="flex: 1 1 220px;"><h4 style="margin: 0; font-size: 17px; font-weight: 600;">B.Sc. Information Technology</h4><p style="margin: 4px 0 0; font-size: 15px; line-height: 1.5; color: #2E3A4F;">Anjuman-I-Islam's Kalsekar Technical Campus · 2023 — 2026</p></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 SKILLS ============ -->
+<section id="skills" aria-labelledby="skills-h" style="border-top: 1px solid #0A0F1C;">
+  <div style="background: #0A0F1C; color: #FFFFFF;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 18px 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px;">
+      <h2 id="skills-h" class="mono" style="margin: 0; font-size: 13px; font-weight: 500; letter-spacing: 0.1em;">04 — SKILLS, HONESTLY TIERED</h2>
+      <span class="mono" style="font-size: 12px; letter-spacing: 0.06em; color: #B9C8F6;">NO PERCENTAGES · NO BARS</span>
+    </div>
+  </div>
+  <div style="max-width: 1240px; margin: 0 auto; padding: 56px 40px 88px; display: flex; flex-wrap: wrap; gap: 24px;">
+    <div style="flex: 1 1 340px; min-width: 0; background: #FFFFFF; border: 1px solid #0A0F1C; display: flex; flex-direction: column;">
+      <div style="padding: 20px 24px; border-bottom: 1px solid #0A0F1C; display: flex; align-items: center; gap: 12px;"><span aria-hidden="true" style="width: 14px; height: 14px; background: #0A0F1C;"></span><h3 style="margin: 0; font-size: 17px; font-weight: 600;">Used at work, daily</h3></div>
+      <ul style="list-style: none; margin: 0; padding: 20px 24px; display: flex; flex-wrap: wrap; gap: 8px;">
+        <li class="mono" style="font-size: 13px; border: 1px solid #0A0F1C; padding: 8px 12px;">React</li>
+        <li class="mono" style="font-size: 13px; border: 1px solid #0A0F1C; padding: 8px 12px;">TypeScript</li>
+        <li class="mono" style="font-size: 13px; border: 1px solid #0A0F1C; padding: 8px 12px;">Node.js</li>
+        <li class="mono" style="font-size: 13px; border: 1px solid #0A0F1C; padding: 8px 12px;">Express</li>
+        <li class="mono" style="font-size: 13px; border: 1px solid #0A0F1C; padding: 8px 12px;">REST APIs</li>
+        <li class="mono" style="font-size: 13px; border: 1px solid #0A0F1C; padding: 8px 12px;">MySQL</li>
+        <li class="mono" style="font-size: 13px; border: 1px solid #0A0F1C; padding: 8px 12px;">Prisma</li>
+        <li class="mono" style="font-size: 13px; border: 1px solid #0A0F1C; padding: 8px 12px;">Git</li>
+      </ul>
+    </div>
+    <div style="flex: 1 1 340px; min-width: 0; background: #FFFFFF; border: 1px solid #0A0F1C; display: flex; flex-direction: column;">
+      <div style="padding: 20px 24px; border-bottom: 1px solid #0A0F1C; display: flex; align-items: center; gap: 12px;"><span aria-hidden="true" style="width: 14px; height: 14px; background: #1D4ED8;"></span><h3 style="margin: 0; font-size: 17px; font-weight: 600;">Built with in projects</h3></div>
+      <ul style="list-style: none; margin: 0; padding: 20px 24px; display: flex; flex-wrap: wrap; gap: 8px;">
+        <li class="mono" style="font-size: 13px; border: 1px solid #1D4ED8; color: #1E40AF; padding: 8px 12px;">Bash</li>
+        <li class="mono" style="font-size: 13px; border: 1px solid #1D4ED8; color: #1E40AF; padding: 8px 12px;">Linux</li>
+        <li class="mono" style="font-size: 13px; border: 1px solid #1D4ED8; color: #1E40AF; padding: 8px 12px;">Docker</li>
+        <li class="mono" style="font-size: 13px; border: 1px solid #1D4ED8; color: #1E40AF; padding: 8px 12px;">Volumes &amp; networks</li>
+        <li class="mono" style="font-size: 13px; border: 1px solid #1D4ED8; color: #1E40AF; padding: 8px 12px;">Tailwind CSS</li>
+        <li class="mono" style="font-size: 13px; border: 1px solid #1D4ED8; color: #1E40AF; padding: 8px 12px;">Vite</li>
+      </ul>
+    </div>
+    <div style="flex: 1 1 340px; min-width: 0; background: transparent; border: 1px dashed #6B778A; display: flex; flex-direction: column;">
+      <div style="padding: 20px 24px; border-bottom: 1px dashed #6B778A; display: flex; align-items: center; gap: 12px;"><span aria-hidden="true" style="width: 14px; height: 14px; border: 2px solid #1D4ED8; box-sizing: border-box;"></span><h3 style="margin: 0; font-size: 17px; font-weight: 600;">Learning now</h3></div>
+      <ul style="list-style: none; margin: 0; padding: 20px 24px; display: flex; flex-wrap: wrap; gap: 8px;">
+        <li class="mono" style="font-size: 13px; border: 1px dashed #6B778A; color: #2E3A4F; padding: 8px 12px;">GitHub Actions</li>
+        <li class="mono" style="font-size: 13px; border: 1px dashed #6B778A; color: #2E3A4F; padding: 8px 12px;">Jenkins</li>
+        <li class="mono" style="font-size: 13px; border: 1px dashed #6B778A; color: #2E3A4F; padding: 8px 12px;">AWS</li>
+        <li class="mono" style="font-size: 13px; border: 1px dashed #6B778A; color: #2E3A4F; padding: 8px 12px;">Monitoring</li>
+        <li class="mono" style="font-size: 13px; border: 1px dashed #6B778A; color: #2E3A4F; padding: 8px 12px;">Logging</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 CONTACT ============ -->
+<section id="contact" aria-labelledby="contact-h" style="border-top: 1px solid #0A0F1C; background: #0A0F1C; color: #FFFFFF;">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 96px 40px; display: flex; flex-wrap: wrap; gap: 56px; align-items: flex-end;">
+    <div style="flex: 1.4 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
+      <p class="mono" style="margin: 0; font-size: 12px; letter-spacing: 0.1em; color: #B9C8F6;">05 — CONTACT</p>
+      <h2 id="contact-h" style="margin: 0; font-size: 64px; line-height: 1; font-weight: 600; letter-spacing: -0.035em;">Let's build something that ships.</h2>
+      <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #C9D2E0; max-width: 520px;">Open to DevOps, Cloud, SRE and Backend roles — in Mumbai, across India, or remote with international teams.</p>
+    </div>
+    <ul style="flex: 1 1 360px; min-width: 0; list-style: none; margin: 0; padding: 0; border-top: 1px solid #3A465C;">
+      <li style="border-bottom: 1px solid #3A465C;"><a href="#contact" style="display: flex; justify-content: space-between; align-items: center; min-height: 64px; text-decoration: none; color: #FFFFFF; font-size: 17px; font-weight: 500;">Email<span class="mono" style="font-size: 13px; color: #B9C8F6; font-weight: 400;">[your email] →</span></a></li>
+      <li style="border-bottom: 1px solid #3A465C;"><a href="#contact" style="display: flex; justify-content: space-between; align-items: center; min-height: 64px; text-decoration: none; color: #FFFFFF; font-size: 17px; font-weight: 500;">LinkedIn<span class="mono" style="font-size: 13px; color: #B9C8F6; font-weight: 400;">[profile] ↗</span></a></li>
+      <li style="border-bottom: 1px solid #3A465C;"><a href="#contact" style="display: flex; justify-content: space-between; align-items: center; min-height: 64px; text-decoration: none; color: #FFFFFF; font-size: 17px; font-weight: 500;">GitHub<span class="mono" style="font-size: 13px; color: #B9C8F6; font-weight: 400;">[profile] ↗</span></a></li>
+      <li style="border-bottom: 1px solid #3A465C;"><a href="#contact" style="display: flex; justify-content: space-between; align-items: center; min-height: 64px; text-decoration: none; color: #FFFFFF; font-size: 17px; font-weight: 500;">Résumé<span class="mono" style="font-size: 13px; color: #B9C8F6; font-weight: 400;">[PDF] ↓</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ FOOTER: BUILD STAMP ============ -->
+<footer style="background: #FFFFFF; border-top: 1px solid #0A0F1C;">
+  <div class="mono" style="max-width: 1240px; margin: 0 auto; padding: 0 40px; display: flex; flex-wrap: wrap; font-size: 12px;">
+    <div style="flex: 1 1 200px; padding: 22px 22px 22px 0; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 4px;"><span style="color: #556274; letter-spacing: 0.08em;">OWNER</span><span>Irfan Noor Mohammed</span></div>
+    <div style="flex: 1 1 140px; padding: 22px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 4px;"><span style="color: #556274; letter-spacing: 0.08em;">COMMIT</span><span>[sha]</span></div>
+    <div style="flex: 1 1 140px; padding: 22px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 4px;"><span style="color: #556274; letter-spacing: 0.08em;">BUILT</span><span>[build date]</span></div>
+    <div style="flex: 1 1 160px; padding: 22px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 4px;"><span style="color: #556274; letter-spacing: 0.08em;">STACK</span><span>react · vite · vercel</span></div>
+    <nav aria-label="Footer" style="flex: 1 1 200px; padding: 10px 0 10px 22px; display: flex; flex-wrap: wrap; align-items: center; gap: 0 18px;">
+      <a href="#top" style="color: #0A0F1C; text-decoration: none; min-height: 44px; display: flex; align-items: center;">Top ↑</a>
+      <a href="#work" style="color: #0A0F1C; text-decoration: none; min-height: 44px; display: flex; align-items: center;">Work</a>
+      <a href="#contact" style="color: #0A0F1C; text-decoration: none; min-height: 44px; display: flex; align-items: center;">Contact</a>
+    </nav>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":5600}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

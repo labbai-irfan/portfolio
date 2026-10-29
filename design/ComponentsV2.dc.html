@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Components v2 and states</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+.mono{font-family:'Geist Mono',ui-monospace,monospace}
+.sh{margin:0;font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.1em;color:#556274}
+.lb{font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.08em;color:#556274}
+.card{border:1px solid #0A0F1C;padding:24px;display:flex;flex-direction:column;gap:16px}
+</style>
+</helmet>
+<div style="width: 1280px; height: 1800px; box-sizing: border-box; padding: 56px; background: #FFFFFF; font-family: 'Geist', system-ui, sans-serif; color: #0A0F1C; display: flex; flex-direction: column; gap: 32px;">
+
+  <div style="display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid #0A0F1C; padding-bottom: 20px;">
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span class="mono" style="font-size: 12px; letter-spacing: 0.1em; color: #1D4ED8;">SHIPPED BLUEPRINT · v2</span>
+      <h1 style="margin: 0; font-size: 44px; font-weight: 600; letter-spacing: -0.03em;">Components &amp; states</h1>
+    </div>
+    <span class="mono" style="font-size: 12px; color: #556274; text-align: right; line-height: 1.6;">Adds to the v1 visual system<br>Terminal · topology · journey · search · nav</span>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;">
+
+    <!-- Terminal -->
+    <div class="card">
+      <h2 class="sh">01 — TERMINAL LINE TYPES</h2>
+      <div style="background: #0A0F1C;">
+        <div class="mono" style="padding: 10px 16px; border-bottom: 1px solid #1C2536; font-size: 11px; color: #9AA6B8; display: flex; justify-content: space-between;"><span>irfan@portfolio: ~</span><span>header</span></div>
+        <div class="mono" style="padding: 14px 16px; font-size: 13px; line-height: 1.8;">
+          <div style="display: flex; justify-content: space-between;"><span style="color: #8FB0FF;">irfan@portfolio:~$ whoami</span><span style="color: #556274; font-size: 10px;">INPUT</span></div>
+          <div style="display: flex; justify-content: space-between;"><span style="color: #FFFFFF; font-weight: 600;">ID   STATUS   PROJECT</span><span style="color: #556274; font-size: 10px;">HEAD</span></div>
+          <div style="display: flex; justify-content: space-between;"><span style="color: #E2E8F0;">p-01 in development</span><span style="color: #556274; font-size: 10px;">OUTPUT</span></div>
+          <div style="display: flex; justify-content: space-between;"><span style="color: #9AA6B8;">Tab autocompletes.</span><span style="color: #556274; font-size: 10px;">HINT</span></div>
+          <div style="display: flex; justify-content: space-between;"><span style="color: #FCA5A5;">command not found: foo</span><span style="color: #556274; font-size: 10px;">ERROR</span></div>
+          <div style="display: flex; justify-content: space-between;"><span style="color: #8FB0FF; text-decoration: underline;">C2 case study →</span><span style="color: #556274; font-size: 10px;">LINK</span></div>
+        </div>
+      </div>
+      <span style="font-size: 13px; color: #2E3A4F;">Output region is a live log, so screen readers announce results.</span>
+    </div>
+
+    <!-- Topology -->
+    <div class="card">
+      <h2 class="sh">02 — TOPOLOGY NODE STATES</h2>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px;">
+        <div style="display: flex; flex-direction: column; gap: 8px;"><div style="background: #1D4ED8; color: #FFFFFF; padding: 12px; min-height: 76px; box-sizing: border-box; display: flex; flex-direction: column; gap: 3px;"><span class="mono" style="font-size: 9px; color: #DCE6FF;">CI</span><span style="font-size: 14px; font-weight: 600;">Actions</span></div><span class="lb">DEFAULT</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;"><div style="background: #1D4ED8; color: #FFFFFF; padding: 12px; min-height: 76px; box-sizing: border-box; display: flex; flex-direction: column; gap: 3px; box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 5px #1D4ED8;"><span class="mono" style="font-size: 9px; color: #DCE6FF;">CI</span><span style="font-size: 14px; font-weight: 600;">Actions</span></div><span class="lb">ACTIVE · FOCUS</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;"><div style="background: #0A0F1C; color: #FFFFFF; padding: 12px; min-height: 76px; box-sizing: border-box; display: flex; flex-direction: column; gap: 3px; opacity: 0.3;"><span class="mono" style="font-size: 9px; color: #B9C8F6;">HOST</span><span style="font-size: 14px; font-weight: 600;">Vercel</span></div><span class="lb">DIMMED</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;"><div style="background: #F5F6F8; border: 1px dashed #6B778A; padding: 12px; min-height: 76px; box-sizing: border-box; display: flex; flex-direction: column; gap: 3px;"><span class="mono" style="font-size: 9px; color: #556274;">MONITOR</span><span style="font-size: 14px; font-weight: 600;">Uptime</span></div><span class="lb">PLANNED</span></div>
+      </div>
+      <div class="mono" style="display: flex; gap: 24px; font-size: 12px; padding-top: 12px; border-top: 1px solid #DCE1E8;"><span style="color: #1E40AF;">→ build-time</span><span style="font-weight: 600;">⇒ request-time</span><span style="color: #556274;">⋯ planned</span></div>
+    </div>
+
+    <!-- Journey -->
+    <div class="card">
+      <h2 class="sh">03 — JOURNEY ENTRIES</h2>
+      <ol style="list-style: none; margin: 0; padding: 0 0 0 4px; border-left: 1px solid #0A0F1C;">
+        <li style="position: relative; padding: 0 0 18px 24px;"><span style="position: absolute; left: -7px; top: 3px; width: 13px; height: 13px; background: #FFFFFF; border: 2px solid #0A0F1C; box-sizing: border-box;"></span><div style="display: flex; gap: 8px; align-items: center;"><span class="mono" style="font-size: 10px; font-weight: 600; color: #1D4ED8; border: 1px solid #1D4ED8; padding: 2px 6px;">CAREER</span><span class="lb">DEFAULT</span></div><div style="font-size: 15px; font-weight: 600; margin-top: 6px;">Milestone title</div></li>
+        <li style="position: relative; padding: 0 0 18px 24px;"><span style="position: absolute; left: -7px; top: 3px; width: 13px; height: 13px; background: #1D4ED8;"></span><div style="display: flex; gap: 8px; align-items: center;"><span class="mono" style="font-size: 10px; font-weight: 600; color: #1D4ED8; border: 1px solid #1D4ED8; padding: 2px 6px;">SITE</span><span class="mono" style="font-size: 10px; font-weight: 600; color: #FFFFFF; background: #1D4ED8; padding: 3px 6px;">LATEST</span></div><div style="font-size: 15px; font-weight: 600; margin-top: 6px;">Most recent milestone</div></li>
+        <li style="position: relative; padding: 0 0 0 24px;"><span style="position: absolute; left: -7px; top: 3px; width: 13px; height: 13px; background: #F5F6F8; border: 1px dashed #6B778A; box-sizing: border-box;"></span><div style="display: flex; gap: 8px; align-items: center;"><span class="mono" style="font-size: 10px; font-weight: 600; color: #2E3A4F; border: 1px dashed #6B778A; padding: 2px 6px;">PROJECT</span><span class="lb">PLANNED</span></div><div style="font-size: 15px; font-weight: 600; margin-top: 6px; color: #2E3A4F;">Upcoming milestone</div></li>
+      </ol>
+    </div>
+
+    <!-- Search + filters -->
+    <div class="card">
+      <h2 class="sh">04 — SEARCH RESULTS &amp; FILTERS</h2>
+      <div style="border: 1px solid #0A0F1C;">
+        <div style="display: flex; align-items: center; gap: 14px; padding: 10px 16px; min-height: 52px; box-sizing: border-box;"><span class="mono" style="width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 10px; background: #F5F6F8; border: 1px solid #DCE1E8;">PG</span><span style="display: flex; flex-direction: column;"><span style="font-size: 14px; font-weight: 500;">Result</span><span style="font-size: 12px; color: #556274;">Default</span></span></div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 10px 16px; min-height: 52px; box-sizing: border-box; background: #1D4ED8; color: #FFFFFF;"><span style="display: flex; align-items: center; gap: 14px;"><span class="mono" style="width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 10px; background: #FFFFFF; color: #1D4ED8;">P1</span><span style="display: flex; flex-direction: column;"><span style="font-size: 14px; font-weight: 500;">Result</span><span style="font-size: 12px; color: #DCE6FF;">Selected · aria-selected</span></span></span><span class="mono" style="font-size: 12px;">↵</span></div>
+      </div>
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <span class="mono" style="font-size: 13px; padding: 0 16px; min-height: 44px; display: flex; align-items: center; background: #0A0F1C; color: #FFFFFF; border: 1px solid #0A0F1C;">All 5</span>
+        <span class="mono" style="font-size: 13px; padding: 0 16px; min-height: 44px; display: flex; align-items: center; background: #FFFFFF; border: 1px solid #0A0F1C;">Learning lab 2</span>
+        <span class="lb" style="margin-left: 8px;">PRESSED · DEFAULT</span>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <div class="card">
+      <h2 class="sh">05 — NAVIGATION</h2>
+      <div style="display: flex; align-items: center; gap: 4px; border-bottom: 1px solid #DCE1E8;">
+        <span style="font-size: 14px; color: #2E3A4F; padding: 0 14px; min-height: 56px; display: flex; align-items: center;">Default</span>
+        <span style="font-size: 14px; font-weight: 600; padding: 0 14px; min-height: 56px; display: flex; align-items: center; box-shadow: inset 0 -2px 0 #1D4ED8;">Current page</span>
+        <span style="font-size: 14px; padding: 0 14px; min-height: 56px; display: flex; align-items: center; gap: 6px;">About <span style="font-size: 10px;">▾</span></span>
+        <span class="mono" style="margin-left: auto; display: flex; align-items: center; gap: 8px; font-size: 11px; color: #1E40AF; background: #EAF0FE; padding: 6px 10px;"><span style="width: 7px; height: 7px; background: #1D4ED8;"></span>OPEN TO ROLES</span>
+      </div>
+      <div style="display: flex; gap: 12px;">
+        <div style="flex: 1; border: 1px solid #0A0F1C;"><div style="padding: 10px 14px; display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 14px; font-weight: 600;">Experience</span><span style="font-size: 12px; color: #556274;">Dropdown item</span></div><div style="padding: 10px 14px; background: #EAF0FE; display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 14px; font-weight: 600;">Skills</span><span style="font-size: 12px; color: #556274;">Hover</span></div></div>
+        <span class="mono" style="align-self: flex-start; font-size: 12px; border: 1px solid #C9D1DC; padding: 0 12px; min-height: 44px; display: flex; align-items: center; gap: 10px;">Search <span style="border: 1px solid #C9D1DC; padding: 1px 5px;">Ctrl K</span></span>
+      </div>
+    </div>
+
+    <!-- Empty & pending -->
+    <div class="card">
+      <h2 class="sh">06 — EMPTY &amp; PENDING STATES</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;">
+        <div style="border: 1px dashed #6B778A; padding: 14px; display: flex; flex-direction: column; gap: 4px;"><span class="lb">NO RESULTS</span><span style="font-size: 14px;">No results for “aws”</span><span style="font-size: 13px; color: #1D4ED8;">Try the terminal →</span></div>
+        <div style="border: 1px dashed #6B778A; padding: 14px; display: flex; flex-direction: column; gap: 4px;"><span class="lb">LINK PENDING</span><span class="mono" style="font-size: 13px; color: #556274;">Repo [add URL]</span><span style="font-size: 12px; color: #556274;">Hidden in production</span></div>
+        <div style="border: 1px dashed #6B778A; padding: 14px; display: flex; flex-direction: column; gap: 4px;"><span class="lb">NOT MEASURED</span><span class="mono" style="font-size: 13px;">Uptime · not measured yet</span><span style="font-size: 12px; color: #556274;">Never a fake number</span></div>
+        <div style="border: 1px dashed #6B778A; padding: 14px; display: flex; flex-direction: column; gap: 4px;"><span class="lb">NONE YET</span><span style="font-size: 14px;">No certifications listed</span><span style="font-size: 12px; color: #556274;">Until one is verifiable</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Focus & motion -->
+  <div class="card" style="flex-direction: row; flex-wrap: wrap; align-items: center; gap: 32px;">
+    <h2 class="sh" style="flex: 0 0 100%;">07 — FOCUS, CONTRAST &amp; MOTION</h2>
+    <span style="font-size: 15px; font-weight: 500; color: #FFFFFF; background: #1D4ED8; padding: 0 22px; min-height: 48px; display: flex; align-items: center; outline: 2px solid #1D4ED8; outline-offset: 3px;">Focused button</span>
+    <span style="font-size: 15px; font-weight: 500; color: #1D4ED8; outline: 2px solid #1D4ED8; outline-offset: 3px; padding: 4px 2px;">Focused link</span>
+    <span style="font-size: 14px; font-weight: 600; color: #FFFFFF; background: #1D4ED8; padding: 12px 16px;">Skip to content</span>
+    <span style="flex: 1 1 320px; font-size: 14px; line-height: 1.6; color: #2E3A4F;">2px Signal ring, 3px offset, everywhere. Hover highlights and dimming switch off under reduced motion. Every text pair meets WCAG AA; body text meets AAA.</span>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

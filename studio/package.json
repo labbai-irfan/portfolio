@@ -1,0 +1,38 @@
+{
+  "name": "studio",
+  "private": true,
+  "version": "1.0.0",
+  "main": "package.json",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "sanity dev --port 3333",
+    "build": "sanity build",
+    "start": "sanity start",
+    "deploy": "sanity deploy",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "typegen": "sanity schemas extract --force --enforce-required-fields --path schema.json && sanity typegen generate",
+    "schema:validate": "sanity schemas validate",
+    "schema:deploy": "sanity schemas deploy",
+    "seed": "sanity exec seed/seed.ts --with-user-token"
+  },
+  "keywords": [
+    "sanity"
+  ],
+  "dependencies": {
+    "@sanity/icons": "^5.2.3",
+    "@sanity/orderable-document-list": "^2.0.28",
+    "@sanity/vision": "^6.20.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "sanity": "^6.20.0",
+    "styled-components": "^6.1.18"
+  },
+  "devDependencies": {
+    "@sanity/eslint-config-studio": "^7",
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.2.14",
+    "eslint": "^10.8.1",
+    "typescript": "~6.0"
+  }
+}

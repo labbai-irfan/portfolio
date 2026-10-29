@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Journey — Irfan Noor Mohammed</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F6F8}
+a{color:#1D4ED8}a:hover{color:#1E3A8A}
+.mono{font-family:'Geist Mono',ui-monospace,monospace}
+.nl{font-size:14px;color:#2E3A4F;text-decoration:none;padding:0 13px;min-height:68px;display:flex;align-items:center}
+.nl[aria-current=page]{color:#0A0F1C;font-weight:600;box-shadow:inset 0 -2px 0 #1D4ED8}
+a:focus-visible,button:focus-visible{outline:2px solid #1D4ED8;outline-offset:3px}
+</style>
+</helmet>
+<div style="font-family: 'Geist', system-ui, sans-serif; color: #0A0F1C; background: #F5F6F8; width: 100%;">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #0A0F1C;">
+  <nav aria-label="Primary" style="max-width: 1240px; margin: 0 auto; padding: 0 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 12px;">
+    <a href="Main.dc.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #0A0F1C; min-height: 68px;">
+      <span class="mono" style="position: relative; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; background: #0A0F1C; color: #FFFFFF; font-size: 13px; font-weight: 600;">IN<span aria-hidden="true" style="position: absolute; right: -4px; bottom: -4px; width: 10px; height: 10px; background: #1D4ED8;"></span></span>
+      <span style="font-size: 15px; font-weight: 600; letter-spacing: -0.01em;">Irfan Noor Mohammed</span>
+    </a>
+    <div style="display: flex; flex-wrap: wrap; align-items: center;">
+      <a href="Work.dc.html" class="nl">Work</a>
+      <a href="Journey.dc.html" class="nl" aria-current="page">About</a>
+      <a href="Notes.dc.html" class="nl">Notes</a>
+      <a href="Infrastructure.dc.html" class="nl">Infra</a>
+      <a href="Terminal.dc.html" class="nl">Terminal</a>
+      <a href="Contact.dc.html" class="nl">Contact</a>
+      <a href="Search.dc.html" class="mono" style="margin-left: 8px; font-size: 12px; color: #2E3A4F; text-decoration: none; border: 1px solid #C9D1DC; padding: 0 12px; min-height: 44px; display: flex; align-items: center; gap: 10px;">Search <span style="border: 1px solid #C9D1DC; padding: 1px 5px;">Ctrl K</span></a>
+      <a href="Resume.dc.html" style="margin-left: 8px; font-size: 14px; font-weight: 500; color: #FFFFFF; background: #0A0F1C; text-decoration: none; padding: 0 18px; min-height: 44px; display: flex; align-items: center;">Résumé</a>
+    </div>
+  </nav>
+</header>
+
+<section style="background: #FFFFFF; border-bottom: 1px solid #0A0F1C;">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 64px 40px 36px; display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-end; justify-content: space-between;">
+    <div style="flex: 1.4 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
+      <span class="mono" style="font-size: 12px; letter-spacing: 0.1em; color: #1D4ED8;">JOURNEY</span>
+      <h1 style="margin: 0; font-size: 72px; line-height: 0.98; font-weight: 600; letter-spacing: -0.04em;">How I got here, one milestone at a time.</h1>
+    </div>
+    <dl class="mono" style="flex: 0 1 360px; margin: 0; display: flex; border: 1px solid #0A0F1C;">
+      <div style="flex: 1; padding: 16px 18px; border-right: 1px solid #DCE1E8;"><dt style="font-size: 11px; letter-spacing: 0.1em; color: #556274;">MILESTONES</dt><dd style="margin: 6px 0 0; font-size: 28px; font-weight: 500;">{{total}}</dd></div>
+      <div style="flex: 1; padding: 16px 18px; border-right: 1px solid #DCE1E8;"><dt style="font-size: 11px; letter-spacing: 0.1em; color: #556274;">SPAN</dt><dd style="margin: 6px 0 0; font-size: 28px; font-weight: 500;">2023–26</dd></div>
+      <div style="flex: 1; padding: 16px 18px;"><dt style="font-size: 11px; letter-spacing: 0.1em; color: #556274;">UPCOMING</dt><dd style="margin: 6px 0 0; font-size: 28px; font-weight: 500;">{{upcoming}}</dd></div>
+    </dl>
+  </div>
+  <div style="max-width: 1240px; margin: 0 auto; padding: 0 40px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+    <div role="group" aria-label="Filter milestones by type" style="display: flex; flex-wrap: wrap; gap: 8px;">
+      <sc-for list="{{filters}}" as="f" hint-placeholder-count="6">
+        <button type="button" aria-pressed="{{f.pressed}}" onClick="{{f.pick}}" class="mono" style="{{f.style}}">{{f.label}} <span style="opacity: 0.7;">{{f.count}}</span></button>
+      </sc-for>
+    </div>
+    <nav aria-label="Jump to year" class="mono" style="display: flex; gap: 4px; font-size: 13px;">
+      <a href="#y-next" style="padding: 0 10px; min-height: 44px; display: flex; align-items: center; text-decoration: none; color: #2E3A4F;">Next</a>
+      <a href="#y-2026" style="padding: 0 10px; min-height: 44px; display: flex; align-items: center; text-decoration: none; color: #2E3A4F;">2026</a>
+      <a href="#y-2025" style="padding: 0 10px; min-height: 44px; display: flex; align-items: center; text-decoration: none; color: #2E3A4F;">2025</a>
+      <a href="#y-2023" style="padding: 0 10px; min-height: 44px; display: flex; align-items: center; text-decoration: none; color: #2E3A4F;">2023</a>
+    </nav>
+  </div>
+</section>
+
+<section aria-label="Timeline" style="max-width: 1240px; margin: 0 auto; padding: 56px 40px 40px; display: flex; flex-direction: column; gap: 56px;">
+  <sc-for list="{{groups}}" as="g" hint-placeholder-count="3">
+    <div id="{{g.anchor}}" style="display: flex; flex-wrap: wrap; gap: 24px 48px;">
+      <div style="flex: 0 0 200px; display: flex; flex-direction: column; gap: 6px;">
+        <h2 style="{{g.headStyle}}">{{g.label}}</h2>
+        <span class="mono" style="font-size: 12px; color: #556274;">{{g.countLabel}}</span>
+      </div>
+      <ol style="flex: 1 1 560px; min-width: 0; list-style: none; margin: 0; padding: 0; border-left: 1px solid #0A0F1C;">
+        <sc-for list="{{g.items}}" as="e" hint-placeholder-count="3">
+          <li style="position: relative; padding: 0 0 28px 32px; display: flex; flex-wrap: wrap; gap: 6px 20px;">
+            <span aria-hidden="true" style="{{e.dot}}"></span>
+            <span class="mono" style="flex: 0 0 110px; font-size: 13px; color: #2E3A4F; padding-top: 3px;">{{e.date}}</span>
+            <div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 8px; padding: 0 0 22px; border-bottom: 1px solid #DCE1E8;">
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+                <span class="mono" style="{{e.chip}}">{{e.cat}}</span>
+                <sc-if value="{{e.latest}}" hint-placeholder-val="{{ false }}"><span class="mono" style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: #FFFFFF; background: #1D4ED8; padding: 3px 8px;">LATEST</span></sc-if>
+              </div>
+              <h3 style="margin: 0; font-size: 19px; line-height: 1.35; font-weight: 600;">{{e.title}}</h3>
+              <sc-if value="{{e.hasLink}}" hint-placeholder-val="{{ false }}"><a href="{{e.href}}" style="align-self: flex-start; font-size: 14px; font-weight: 500; text-decoration: none; min-height: 32px; display: flex; align-items: center;">{{e.linkLabel}}</a></sc-if>
+            </div>
+          </li>
+        </sc-for>
+      </ol>
+    </div>
+  </sc-for>
+  <sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+    <p style="margin: 0; padding: 40px; border: 1px dashed #6B778A; text-align: center; color: #2E3A4F;">No milestones of this type yet.</p>
+  </sc-if>
+</section>
+
+<!-- Credentials -->
+<section aria-labelledby="cred-h" style="border-top: 1px solid #0A0F1C; background: #FFFFFF;">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 64px 40px 88px; display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px;">
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <span class="mono" style="font-size: 12px; letter-spacing: 0.1em; color: #1D4ED8;">CREDENTIALS</span>
+        <h2 id="cred-h" style="margin: 0; font-size: 40px; line-height: 1.1; font-weight: 600; letter-spacing: -0.025em;">Certifications — verifiable only.</h2>
+      </div>
+      <span class="mono" style="font-size: 12px; color: #556274;">Every entry links to the issuer's verification page.</span>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 24px;">
+      <article style="flex: 1 1 420px; min-width: 0; border: 1px dashed #6B778A; padding: 28px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;"><span class="mono" style="font-size: 11px; letter-spacing: 0.1em; color: #556274;">CARD FORMAT</span><span class="mono" style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: #2E3A4F; border: 1px dashed #6B778A; padding: 3px 8px;">TEMPLATE</span></div>
+        <h3 style="margin: 0; font-size: 22px; font-weight: 600;">[Certification name]</h3>
+        <dl class="mono" style="margin: 0; display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 13px;">
+          <div><dt style="color: #556274; font-size: 11px;">ISSUER</dt><dd style="margin: 4px 0 0;">[issuer]</dd></div>
+          <div><dt style="color: #556274; font-size: 11px;">ISSUED</dt><dd style="margin: 4px 0 0;">[month year]</dd></div>
+          <div><dt style="color: #556274; font-size: 11px;">CREDENTIAL ID</dt><dd style="margin: 4px 0 0;">[id]</dd></div>
+        </dl>
+        <span style="font-size: 14px; font-weight: 500; color: #1D4ED8;">Verify with issuer ↗</span>
+      </article>
+      <div style="flex: 1 1 420px; min-width: 0; background: #F5F6F8; border: 1px solid #0A0F1C; padding: 28px; display: flex; flex-direction: column; justify-content: center; gap: 10px;">
+        <p style="margin: 0; font-size: 18px; line-height: 1.5; font-weight: 500;">None listed yet.</p>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #2E3A4F;">This section stays empty until there is a certificate a reviewer can verify. Projects above are the evidence for now.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="background: #FFFFFF; border-top: 1px solid #0A0F1C;">
+  <div class="mono" style="max-width: 1240px; margin: 0 auto; padding: 0 40px; display: flex; flex-wrap: wrap; font-size: 12px;">
+    <div style="flex: 1 1 200px; padding: 22px 22px 22px 0; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 4px;"><span style="color: #556274; letter-spacing: 0.08em;">OWNER</span><span>Irfan Noor Mohammed</span></div>
+    <div style="flex: 1 1 140px; padding: 22px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 4px;"><span style="color: #556274; letter-spacing: 0.08em;">COMMIT</span><span>[sha]</span></div>
+    <div style="flex: 1 1 140px; padding: 22px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 4px;"><span style="color: #556274; letter-spacing: 0.08em;">BUILT</span><span>[build date]</span></div>
+    <nav aria-label="Footer" style="flex: 1 1 200px; padding: 10px 0 10px 22px; display: flex; flex-wrap: wrap; align-items: center; gap: 0 18px;">
+      <a href="Main.dc.html" style="color: #0A0F1C; text-decoration: none; min-height: 44px; display: flex; align-items: center;">Home</a>
+      <a href="Experience.dc.html" style="color: #0A0F1C; text-decoration: none; min-height: 44px; display: flex; align-items: center;">Experience</a>
+    </nav>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3400}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { filter: 'all' };
+  }
+  renderVals() {
+    const CAT = {
+      career: { label: 'CAREER', color: '#1D4ED8' },
+      education: { label: 'EDUCATION', color: '#0A0F1C' },
+      project: { label: 'PROJECT', color: '#1D4ED8' },
+      learning: { label: 'LEARNING', color: '#7A4307' },
+      site: { label: 'SITE', color: '#1D4ED8' }
+    };
+    const E = [
+      { y: 'next', date: 'Next', cat: 'project', title: 'Run the containerised app on AWS, with readable logs', planned: true, href: 'Work.dc.html', linkLabel: 'See P-04 →' },
+      { y: 'next', date: 'After', cat: 'learning', title: 'Logs and metrics — see what is running, not just that it deployed', planned: true },
+      { y: '2026', date: '[date]', cat: 'site', title: 'Launched this portfolio with its own CI/CD pipeline', latest: true, href: 'SiteProject.dc.html', linkLabel: 'How it ships →' },
+      { y: '2026', date: '[month]', cat: 'learning', title: 'CI/CD pipeline lab with Jenkins and GitHub Actions' },
+      { y: '2026', date: '[month]', cat: 'learning', title: 'Container lab — debugged an app that could not reach its MySQL container', href: 'NoteDetail.dc.html', linkLabel: 'Read the debugging note →' },
+      { y: '2026', date: '[month]', cat: 'project', title: 'Started C2 — Continuous Control, a Bash CLI for Git workflows', href: 'CaseStudy.dc.html', linkLabel: 'Case study →' },
+      { y: '2026', date: '[month]', cat: 'career', title: 'Migrated the internal platform database from MariaDB to MySQL' },
+      { y: '2026', date: 'Apr 2026', cat: 'career', title: 'Joined WiseTech MEP Consultants as Junior Software Engineer', href: 'Experience.dc.html', linkLabel: 'Role details →' },
+      { y: '2026', date: '2026', cat: 'education', title: 'Started M.Sc. Information Technology — Pillai College, Navi Mumbai' },
+      { y: '2026', date: '2026', cat: 'education', title: 'Completed B.Sc. Information Technology — AIKTC' },
+      { y: '2026', date: 'Jan 2026', cat: 'career', title: 'Completed the full-stack internship at Arba Accelerator' },
+      { y: '2025', date: 'Jul 2025', cat: 'career', title: 'Joined Arba Accelerator as a Full-Stack Developer Intern' },
+      { y: '2023', date: '2023', cat: 'education', title: 'Started B.Sc. Information Technology — AIKTC' }
+    ];
+    const f = this.state.filter;
+    const chipBase = 'font-size: 11px; font-weight: 600; letter-spacing: 0.06em; padding: 3px 8px; ';
+    const shown = E.filter((e) => f === 'all' || e.cat === f);
+    const order = ['next', '2026', '2025', '2023'];
+    const groups = order.map((y) => {
+      const items = shown.filter((e) => e.y === y).map((e) => ({
+        date: e.date,
+        cat: CAT[e.cat].label,
+        title: e.title,
+        latest: !!e.latest,
+        hasLink: !!e.href,
+        href: e.href,
+        linkLabel: e.linkLabel,
+        chip: chipBase + (e.planned ? 'color: #2E3A4F; border: 1px dashed #6B778A;' : 'color: ' + CAT[e.cat].color + '; border: 1px solid ' + CAT[e.cat].color + ';'),
+        dot: 'position: absolute; left: -7px; top: 4px; width: 13px; height: 13px; box-sizing: border-box; ' + (e.planned ? 'background: #F5F6F8; border: 1px dashed #6B778A;' : e.latest ? 'background: #1D4ED8;' : 'background: #FFFFFF; border: 2px solid #0A0F1C;')
+      }));
+      const isNext = y === 'next';
+      return {
+        anchor: 'y-' + y,
+        label: isNext ? 'Next' : y,
+        countLabel: items.length + (isNext ? ' planned' : items.length === 1 ? ' milestone' : ' milestones'),
+        headStyle: 'margin: 0; font-size: 56px; line-height: 1; font-weight: 600; letter-spacing: -0.04em; color: ' + (isNext ? '#556274' : '#0A0F1C') + ';',
+        items
+      };
+    }).filter((g) => g.items.length > 0);
+    const F = [['all', 'All'], ['career', 'Career'], ['education', 'Education'], ['project', 'Projects'], ['learning', 'Learning'], ['site', 'Site']];
+    const btn = 'font-size: 13px; padding: 0 16px; min-height: 44px; cursor: pointer; border: 1px solid #0A0F1C; ';
+    const filters = F.map((x) => ({
+      label: x[1],
+      count: x[0] === 'all' ? E.length : E.filter((e) => e.cat === x[0]).length,
+      pressed: f === x[0] ? 'true' : 'false',
+      style: btn + (f === x[0] ? 'background: #0A0F1C; color: #FFFFFF;' : 'background: #FFFFFF; color: #0A0F1C;'),
+      pick: () => this.setState({ filter: x[0] })
+    }));
+    return {
+      groups,
+      filters,
+      empty: groups.length === 0,
+      total: E.filter((e) => !e.planned).length,
+      upcoming: E.filter((e) => e.planned).length
+    };
+  }
+}
+</script>
+</body>
+</html>

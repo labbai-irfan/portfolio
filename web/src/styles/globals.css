@@ -1,0 +1,226 @@
+@import 'tailwindcss';
+
+/*
+ * Labbai Irfan Portfolio tokens. Source: design/System, ComponentsV2, Dark, HomeV2.
+ * Tailwind defaults are reset so components can only use these tokens.
+ * Light values live in @theme; [data-theme='dark'] overrides them on <html>
+ * or any subtree. The no-flash script (Phase 6) sets data-theme from the stored
+ * choice or the OS preference. Chip dark values are derived, not from an artboard.
+ */
+@theme {
+  --color-*: initial;
+  --text-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+
+  /* Core */
+  --color-ink: #0a0f1c;
+  --color-body: #2e3a4f;
+  --color-muted: #556274;
+  --color-signal: #1d4ed8;
+  --color-signal-hover: #1e3a8a;
+  --color-on-signal: #ffffff;
+  --color-on-signal-muted: #dce6ff;
+  --color-ground: #f5f6f8;
+  --color-surface: #ffffff;
+  --color-transparent: transparent;
+
+  /* Rules: strong = 1px frame, soft = inner divider, control = input border */
+  --color-rule-strong: #0a0f1c;
+  --color-rule: #dce1e8;
+  --color-rule-control: #c9d1dc;
+  --color-rule-dashed: #6b778a;
+  --color-grid-line: #e3e7ed;
+  --color-arrow: #8a96a8;
+
+  /* Contrast button (Résumé) */
+  --color-contrast: #0a0f1c;
+  --color-on-contrast: #ffffff;
+
+  /* Dark bands: section bar, terminal teaser (dark in both themes) */
+  --color-bar: #0a0f1c;
+  --color-on-bar: #ffffff;
+  --color-on-bar-body: #c9d2e0;
+  --color-on-bar-meta: #b9c8f6;
+
+  /* Terminal and code (dark in both themes) */
+  --color-term: #0a0f1c;
+  --color-term-deep: #070b15;
+  --color-term-border: #2a3548;
+  --color-term-rule: #1c2536;
+  --color-term-control: #3a465c;
+  --color-term-prompt: #8fb0ff;
+  --color-term-head: #ffffff;
+  --color-term-out: #e2e8f0;
+  --color-term-hint: #9aa6b8;
+  --color-term-error: #fca5a5;
+  --color-term-label: #8b97ab;
+
+  /* Status chips */
+  --color-live: #166534;
+  --color-live-bg: #dcfce7;
+  --color-progress: #1e40af;
+  --color-progress-bg: #eaf0fe;
+  --color-lab: #7a4307;
+  --color-lab-bg: #fdf1d8;
+  --color-planned: #2e3a4f;
+
+  /* Type */
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --text-9: 9px;
+  --text-10: 10px;
+  --text-11: 11px;
+  --text-12: 12px;
+  --text-13: 13px;
+  --text-14: 14px;
+  --text-15: 15px;
+  --text-16: 16px;
+  --text-17: 17px;
+  --text-17--line-height: 1.65;
+  --text-18: 18px;
+  --text-19: 19px;
+  --text-20: 20px;
+  --text-22: 22px;
+  --text-24: 24px;
+  --text-26: 26px;
+  --text-28: 28px;
+  --text-32: 32px;
+  --text-32--line-height: 1.18;
+  --text-34: 34px;
+  --text-36: 36px;
+  --text-40: 40px;
+  --text-40--line-height: 1.1;
+  --text-44: 44px;
+  --text-48: 48px;
+  --text-52: 52px;
+  --text-56: 56px;
+  --text-64: 64px;
+  --text-72: 72px;
+  --text-72--line-height: 0.98;
+  --text-104: 104px;
+  --text-104--line-height: 0.95;
+  --text-112: 112px;
+  --text-112--line-height: 0.92;
+
+  --tracking-display: -0.045em;
+  --tracking-title: -0.03em;
+  --tracking-heading: -0.025em;
+  --tracking-lead: -0.02em;
+  --tracking-chip: 0.06em;
+  --tracking-data: 0.08em;
+  --tracking-label: 0.1em;
+
+  --container-page: 1240px;
+  --container-prose: 70ch;
+}
+
+@layer base {
+  :root,
+  [data-theme='light'] {
+    color-scheme: light;
+  }
+  [data-theme='dark'] {
+    color-scheme: dark;
+    --color-ink: #f3f6fb;
+    --color-body: #b4bfd0;
+    --color-muted: #8b97ab;
+    --color-signal: #7fa2ff;
+    --color-signal-hover: #b3c7ff;
+    --color-on-signal: #0b1120;
+    --color-on-signal-muted: #1a2a52;
+    --color-ground: #0b1120;
+    --color-surface: #111a2e;
+    --color-rule-strong: #2a3756;
+    --color-rule: #1c2740;
+    --color-rule-control: #2a3756;
+    --color-rule-dashed: #8b97ab;
+    --color-grid-line: #18223a;
+    --color-arrow: #8b97ab;
+    --color-contrast: #e6ebf3;
+    --color-on-contrast: #0b1120;
+    --color-bar: #18223a;
+    --color-term: #070b15;
+    --color-live: #86efac;
+    --color-live-bg: #0f2e1d;
+    --color-progress: #b3c7ff;
+    --color-progress-bg: #1a2a52;
+    --color-lab: #fcd9a0;
+    --color-lab-bg: #3a2608;
+    --color-planned: #b4bfd0;
+  }
+
+  /* No explicit choice (no [data-theme]) → follow the OS preference. Pure CSS, so this
+     applies before any JS runs; the no-flash script in the root layout only needs to
+     handle the case where a *stored* choice disagrees with the OS preference. */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) {
+      color-scheme: dark;
+      --color-ink: #f3f6fb;
+      --color-body: #b4bfd0;
+      --color-muted: #8b97ab;
+      --color-signal: #7fa2ff;
+      --color-signal-hover: #b3c7ff;
+      --color-on-signal: #0b1120;
+      --color-on-signal-muted: #1a2a52;
+      --color-ground: #0b1120;
+      --color-surface: #111a2e;
+      --color-rule-strong: #2a3756;
+      --color-rule: #1c2740;
+      --color-rule-control: #2a3756;
+      --color-rule-dashed: #8b97ab;
+      --color-grid-line: #18223a;
+      --color-arrow: #8b97ab;
+      --color-contrast: #e6ebf3;
+      --color-on-contrast: #0b1120;
+      --color-bar: #18223a;
+      --color-term: #070b15;
+      --color-live: #86efac;
+      --color-live-bg: #0f2e1d;
+      --color-progress: #b3c7ff;
+      --color-progress-bg: #1a2a52;
+      --color-lab: #fcd9a0;
+      --color-lab-bg: #3a2608;
+      --color-planned: #b4bfd0;
+    }
+  }
+
+  body {
+    background: var(--color-ground);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  a {
+    color: var(--color-signal);
+  }
+  a:hover {
+    color: var(--color-signal-hover);
+  }
+
+  /* 2px Signal ring, 3px offset, everywhere */
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* 24px blueprint grid behind diagrams */
+@utility bg-grid {
+  background-image:
+    linear-gradient(var(--color-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px);
+  background-size: 24px 24px;
+}

@@ -1,0 +1,110 @@
+# The pipeline the home page shows: push → check → build → audit → deploy.
+# Every push and pull request runs the first four stages; only a passing push to main deploys.
+name: ship
+
+on:
+  push:
+  pull_request:
+
+concurrency:
+  group: ship-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  # Public identifiers (they ship in the browser bundle). Override with repository variables.
+  NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ vars.NEXT_PUBLIC_SANITY_PROJECT_ID || 'hl13utpc' }}
+  NEXT_PUBLIC_SANITY_DATASET: ${{ vars.NEXT_PUBLIC_SANITY_DATASET || 'production' }}
+  NEXT_PUBLIC_SANITY_API_VERSION: ${{ vars.NEXT_PUBLIC_SANITY_API_VERSION || '2026-10-01' }}
+  NEXT_TELEMETRY_DISABLED: '1'
+
+jobs:
+  verify:
+    name: check · build · audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      # ── check ──
+      - name: Format
+        run: npm run format:check
+
+      - name: Type-check
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit tests
+        run: npm --prefix web test
+
+      - name: Colour contrast
+        run: npm --prefix web run contrast
+
+      # ── build ──
+      # The audit reads /sitemap.xml to find every page, so the build needs an origin to list.
+      - name: Build
+        run: npm --prefix web run build
+        env:
+          NEXT_PUBLIC_SITE_URL: http://localhost:3000
+
+      # ── audit ──
+      - name: Accessibility audit (axe, fails on serious or critical)
+        working-directory: web
+        run: |
+          npx next start -p 3000 &
+          npx --yes wait-on@9 http-get://localhost:3000 --timeout 60000
+          node scripts/a11y-audit.mjs http://localhost:3000
+        env:
+          NEXT_PUBLIC_SITE_URL: http://localhost:3000
+
+  # ── deploy ──
+  # Vercel's own Git deploys are off for main (web/vercel.json), so this job is the only way to
+  # production. It rebuilds with Vercel's environment, passing the commit and run link into the build.
+  deploy:
+    name: deploy
+    needs: verify
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: production
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install the Vercel CLI
+        run: npm install --global vercel@65.7.0
+
+      # Run from the repo root: the project's Root Directory setting points Vercel at web/.
+      - name: Pull Vercel environment
+        run: vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
+
+      - name: Build
+        run: vercel build --prod --token="$VERCEL_TOKEN"
+        env:
+          # next.config.ts bakes these into the footer, hero panel and status panel.
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_SERVER_URL: ${{ github.server_url }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+
+      - name: Deploy
+        run: vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN"

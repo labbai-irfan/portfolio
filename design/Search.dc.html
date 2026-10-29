@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Search — command palette</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+.mono{font-family:'Geist Mono',ui-monospace,monospace}
+#q:focus{outline:none}
+.k{font-family:'Geist Mono',monospace;font-size:11px;border:1px solid #C9D1DC;padding:2px 6px;color:#2E3A4F;background:#FFFFFF}
+a:focus-visible,button:focus-visible{outline:2px solid #1D4ED8;outline-offset:-2px}
+</style>
+</helmet>
+<div style="position: relative; width: 1440px; height: 900px; overflow: hidden; font-family: 'Geist', system-ui, sans-serif; color: #0A0F1C; background: #F5F6F8;">
+
+  <!-- Page behind (dimmed) -->
+  <div aria-hidden="true" style="position: absolute; inset: 0;">
+    <div style="height: 68px; background: #FFFFFF; border-bottom: 1px solid #0A0F1C;"></div>
+    <div style="max-width: 1240px; margin: 0 auto; padding: 56px 40px; display: flex; flex-direction: column; gap: 28px;">
+      <div style="width: 360px; height: 14px; background: #DCE1E8;"></div>
+      <div style="font-size: 104px; line-height: 0.95; font-weight: 600; letter-spacing: -0.045em; color: #0A0F1C;">Irfan Noor Mohammed</div>
+      <div style="display: flex; gap: 48px;"><div style="flex: 1; height: 300px; border-top: 1px solid #0A0F1C;"></div><div style="flex: 1.45; height: 300px; background: #FFFFFF; border: 1px solid #0A0F1C;"></div></div>
+    </div>
+  </div>
+  <div aria-hidden="true" style="position: absolute; inset: 0; background: rgba(10, 15, 28, 0.6);"></div>
+
+  <!-- Palette -->
+  <div role="dialog" aria-modal="true" aria-label="Search the site" style="position: absolute; left: 50%; top: 96px; transform: translateX(-50%); width: 680px; background: #FFFFFF; border: 1px solid #0A0F1C; box-shadow: 0 24px 64px rgba(10, 15, 28, 0.35); display: flex; flex-direction: column;">
+    <div style="display: flex; align-items: center; gap: 14px; padding: 0 20px; border-bottom: 1px solid #0A0F1C;">
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#0A0F1C" stroke-width="1.6"><circle cx="8" cy="8" r="5.5"></circle><path d="M12.2 12.2 16 16"></path></svg>
+      <label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);">Search pages, projects, notes and actions</label>
+      <input id="q" type="text" autocomplete="off" value="{{q}}" onChange="{{onChange}}" onKeyDown="{{onKeyDown}}" placeholder="Search pages, projects, notes…" aria-controls="results" aria-activedescendant="{{activeId}}" style="flex: 1; min-width: 0; border: 0; font-family: inherit; font-size: 18px; min-height: 64px; color: #0A0F1C; background: transparent;">
+      <a href="Main.dc.html" class="k" style="text-decoration: none; min-height: 28px; display: flex; align-items: center;" aria-label="Close search">Esc</a>
+    </div>
+
+    <div id="results" role="listbox" aria-label="Results" style="max-height: 520px; overflow-y: auto; padding: 8px 0;">
+      <sc-for list="{{groups}}" as="g" hint-placeholder-count="3">
+        <div role="group" aria-label="{{g.label}}" style="padding: 4px 0;">
+          <p class="mono" style="margin: 0; padding: 10px 20px 6px; font-size: 11px; letter-spacing: 0.1em; color: #556274;">{{g.label}}</p>
+          <sc-for list="{{g.items}}" as="it" hint-placeholder-count="3">
+            <a id="{{it.id}}" role="option" aria-selected="{{it.selected}}" href="{{it.href}}" onMouseEnter="{{it.hover}}" style="{{it.style}}">
+              <span style="display: flex; align-items: center; gap: 14px; min-width: 0;">
+                <span class="mono" style="{{it.badgeStyle}}">{{it.badge}}</span>
+                <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+                  <span style="font-size: 15px; font-weight: 500;">{{it.title}}</span>
+                  <span style="{{it.subStyle}}">{{it.sub}}</span>
+                </span>
+              </span>
+              <span class="mono" style="{{it.hintStyle}}">↵</span>
+            </a>
+          </sc-for>
+        </div>
+      </sc-for>
+      <sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+        <div style="padding: 40px 20px; text-align: center; display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-size: 16px; font-weight: 500;">No results for “{{q}}”</span>
+          <a href="Terminal.dc.html" style="font-size: 14px; color: #1D4ED8;">Try the terminal instead →</a>
+        </div>
+      </sc-if>
+    </div>
+
+    <div class="mono" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; border-top: 1px solid #DCE1E8; background: #F5F6F8; font-size: 12px; color: #2E3A4F;">
+      <span style="display: flex; gap: 16px; align-items: center;"><span><span class="k">↑</span> <span class="k">↓</span> move</span><span><span class="k">↵</span> open</span><span><span class="k">Esc</span> close</span></span>
+      <span role="status">{{count}} results</span>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { q: '', sel: 0 };
+  }
+  renderVals() {
+    const ALL = [
+      { g: 'Pages', badge: 'PG', title: 'Home', sub: 'Overview and the live pipeline', href: 'Main.dc.html', kw: 'start index' },
+      { g: 'Pages', badge: 'PG', title: 'Work', sub: 'All projects, filterable by status', href: 'Work.dc.html', kw: 'projects portfolio' },
+      { g: 'Pages', badge: 'PG', title: 'Journey', sub: 'Milestones, 2023 → now', href: 'Journey.dc.html', kw: 'timeline history about' },
+      { g: 'Pages', badge: 'PG', title: 'Experience', sub: 'WiseTech MEP · Arba Accelerator', href: 'Experience.dc.html', kw: 'jobs career about work history' },
+      { g: 'Pages', badge: 'PG', title: 'Skills', sub: 'Honestly tiered, every one traceable', href: 'Skills.dc.html', kw: 'stack tech about' },
+      { g: 'Pages', badge: 'PG', title: 'Infrastructure', sub: 'Topology of this site', href: 'Infrastructure.dc.html', kw: 'infra vercel hosting devops' },
+      { g: 'Pages', badge: 'PG', title: 'Contact', sub: 'Email, LinkedIn, GitHub', href: 'Contact.dc.html', kw: 'hire email reach' },
+      { g: 'Projects', badge: 'P1', title: 'C2 — Continuous Control', sub: 'Bash CLI for Git workflows · in development', href: 'CaseStudy.dc.html', kw: 'bash git cli c2' },
+      { g: 'Projects', badge: 'P0', title: 'This portfolio', sub: 'GitHub Actions → Vercel', href: 'SiteProject.dc.html', kw: 'ci cd pipeline actions vercel' },
+      { g: 'Projects', badge: 'P2', title: 'Containerised app + MySQL', sub: 'Learning lab · Docker networking', href: 'ContainerLab.dc.html', kw: 'docker mysql container lab' },
+      { g: 'Notes', badge: 'N1', title: 'When my app container couldn’t reach MySQL', sub: 'Debugging note · docker · networking', href: 'NoteDetail.dc.html', kw: 'debug bug network' },
+      { g: 'Actions', badge: '>_', title: 'Open the terminal', sub: 'Explore the site from a shell', href: 'Terminal.dc.html', kw: 'shell cli command' },
+      { g: 'Actions', badge: '↓', title: 'View résumé', sub: 'One page, ATS-friendly', href: 'Resume.dc.html', kw: 'cv resume pdf download' },
+      { g: 'Actions', badge: '◐', title: 'Switch to dark theme', sub: 'Same layout, dark tokens', href: 'Dark.dc.html', kw: 'theme dark mode' }
+    ];
+    const q = this.state.q.trim().toLowerCase();
+    const hits = ALL.filter((x) => !q || (x.title + ' ' + x.sub + ' ' + x.kw).toLowerCase().indexOf(q) !== -1);
+    const sel = Math.min(this.state.sel, Math.max(hits.length - 1, 0));
+    const order = ['Pages', 'Projects', 'Notes', 'Actions'];
+    let idx = 0;
+    const groups = order.map((gname) => {
+      const items = hits.filter((x) => x.g === gname).map((x) => {
+        const my = idx++;
+        const on = my === sel;
+        return {
+          id: 'opt-' + my, title: x.title, sub: x.sub, href: x.href, badge: x.badge,
+          selected: on ? 'true' : 'false',
+          style: 'display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 10px 20px; min-height: 56px; box-sizing: border-box; text-decoration: none; color: ' + (on ? '#FFFFFF' : '#0A0F1C') + '; background: ' + (on ? '#1D4ED8' : 'transparent') + ';',
+          badgeStyle: 'width: 32px; height: 32px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; ' + (on ? 'background: #FFFFFF; color: #1D4ED8;' : 'background: #F5F6F8; color: #0A0F1C; border: 1px solid #DCE1E8;'),
+          subStyle: 'font-size: 13px; color: ' + (on ? '#DCE6FF' : '#556274') + '; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;',
+          hintStyle: 'font-size: 13px; color: ' + (on ? '#FFFFFF' : 'transparent') + ';',
+          hover: () => this.setState({ sel: my })
+        };
+      });
+      return { label: gname.toUpperCase(), items };
+    }).filter((g) => g.items.length > 0);
+    const onChange = (e) => this.setState({ q: e.target.value, sel: 0 });
+    const onKeyDown = (e) => {
+      if (e.key === 'ArrowDown') { e.preventDefault(); this.setState({ sel: Math.min(sel + 1, hits.length - 1) }); }
+      if (e.key === 'ArrowUp') { e.preventDefault(); this.setState({ sel: Math.max(sel - 1, 0) }); }
+    };
+    return { q: this.state.q, groups, empty: hits.length === 0, count: hits.length, onChange, onKeyDown, activeId: hits.length ? 'opt-' + sel : '' };
+  }
+}
+</script>
+</body>
+</html>

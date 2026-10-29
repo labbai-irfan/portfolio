@@ -1,0 +1,21 @@
+{
+  "name": "portfolio",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm --prefix web install && npm --prefix studio install",
+    "dev": "concurrently -n web,studio -c blue,magenta \"npm --prefix web run dev\" \"npm --prefix studio run dev\"",
+    "dev:web": "npm --prefix web run dev",
+    "dev:studio": "npm --prefix studio run dev",
+    "build": "npm --prefix web run build",
+    "lint": "npm --prefix web run lint && npm --prefix studio run lint",
+    "typecheck": "npm --prefix web run typecheck && npm --prefix studio run typecheck",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "seed": "npm --prefix studio run seed"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.6",
+    "prettier": "^3.9.10",
+    "prettier-plugin-tailwindcss": "^0.8.1"
+  }
+}

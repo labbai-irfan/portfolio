@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .bg { fill: #0a0f1c }
+    .notch { fill: #1d4ed8 }
+    .letters { fill: #ffffff; font: 600 13px ui-monospace, 'Geist Mono', monospace }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #f3f6fb }
+      .notch { fill: #7fa2ff }
+      .letters { fill: #0b1120 }
+    }
+  </style>
+  <rect class="bg" width="32" height="32" />
+  <text class="letters" x="16" y="19.5" text-anchor="middle">IN</text>
+  <rect class="notch" x="24" y="24" width="6" height="6" />
+</svg>

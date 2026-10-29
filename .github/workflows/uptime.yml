@@ -1,0 +1,43 @@
+# Hourly probe of the live site. Writes the result to the `siteStatus` document in Sanity, which the
+# site reads live: no commit and no redeploy. The write token exists only in GitHub Secrets.
+# A down site fails the run; uptime is computed from this workflow's own run history (see
+# web/scripts/uptime.mjs).
+name: uptime
+
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: uptime
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # Only the one script is needed, so skip installing anything.
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: web/scripts/uptime.mjs
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Probe and record
+        run: node web/scripts/uptime.mjs
+        env:
+          # Repository variable: the production URL, e.g. https://example.com
+          SITE_URL: ${{ vars.SITE_URL }}
+          NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ vars.NEXT_PUBLIC_SANITY_PROJECT_ID || 'hl13utpc' }}
+          NEXT_PUBLIC_SANITY_DATASET: ${{ vars.NEXT_PUBLIC_SANITY_DATASET || 'production' }}
+          # Repository secret: a Sanity token with the Editor role. Used nowhere else.
+          SANITY_WRITE_TOKEN: ${{ secrets.SANITY_WRITE_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}

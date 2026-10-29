@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Shipped Blueprint — visual system</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+.mono{font-family:'Geist Mono',ui-monospace,monospace}
+</style>
+</helmet>
+<div style="width: 1280px; height: 1560px; box-sizing: border-box; padding: 56px; background: #FFFFFF; font-family: 'Geist', system-ui, sans-serif; color: #0A0F1C; display: flex; flex-direction: column; gap: 44px;">
+
+  <div style="display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid #0A0F1C; padding-bottom: 22px;">
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span class="mono" style="font-size: 12px; letter-spacing: 0.1em; color: #1D4ED8;">SHIPPED BLUEPRINT · v1</span>
+      <h1 style="margin: 0; font-size: 48px; font-weight: 600; letter-spacing: -0.03em;">Visual system</h1>
+    </div>
+    <span class="mono" style="font-size: 12px; color: #556274; text-align: right; line-height: 1.6;">One accent · square edges · 1px rules<br>Mono for data, never for prose</span>
+  </div>
+
+  <!-- Colour -->
+  <div style="display: flex; gap: 32px;">
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 14px;">
+      <h2 class="mono" style="margin: 0; font-size: 12px; letter-spacing: 0.1em; color: #556274;">01 — LIGHT</h2>
+      <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border: 1px solid #0A0F1C;">
+        <div style="border-right: 1px solid #0A0F1C;"><div style="height: 80px; background: #0A0F1C;"></div><div class="mono" style="padding: 10px; font-size: 11px; line-height: 1.6;"><div style="font-weight: 600;">Ink</div><div style="color: #556274;">#0A0F1C</div></div></div>
+        <div style="border-right: 1px solid #0A0F1C;"><div style="height: 80px; background: #2E3A4F;"></div><div class="mono" style="padding: 10px; font-size: 11px; line-height: 1.6;"><div style="font-weight: 600;">Body</div><div style="color: #556274;">#2E3A4F</div></div></div>
+        <div style="border-right: 1px solid #0A0F1C;"><div style="height: 80px; background: #556274;"></div><div class="mono" style="padding: 10px; font-size: 11px; line-height: 1.6;"><div style="font-weight: 600;">Muted</div><div style="color: #556274;">#556274</div></div></div>
+        <div style="border-right: 1px solid #0A0F1C;"><div style="height: 80px; background: #1D4ED8;"></div><div class="mono" style="padding: 10px; font-size: 11px; line-height: 1.6;"><div style="font-weight: 600;">Signal</div><div style="color: #556274;">#1D4ED8</div></div></div>
+        <div style="border-right: 1px solid #0A0F1C;"><div style="height: 80px; background: #F5F6F8;"></div><div class="mono" style="padding: 10px; font-size: 11px; line-height: 1.6;"><div style="font-weight: 600;">Ground</div><div style="color: #556274;">#F5F6F8</div></div></div>
+        <div><div style="height: 80px; background: #FFFFFF; border-bottom: 1px solid #DCE1E8;"></div><div class="mono" style="padding: 10px; font-size: 11px; line-height: 1.6;"><div style="font-weight: 600;">Surface</div><div style="color: #556274;">#FFFFFF</div></div></div>
+      </div>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 14px;">
+      <h2 class="mono" style="margin: 0; font-size: 12px; letter-spacing: 0.1em; color: #556274;">02 — DARK</h2>
+      <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border: 1px solid #0A0F1C;">
+        <div style="border-right: 1px solid #0A0F1C;"><div style="height: 80px; background: #F3F6FB; border-bottom: 1px solid #DCE1E8;"></div><div class="mono" style="padding: 10px; font-size: 11px; line-height: 1.6;"><div style="font-weight: 600;">Ink</div><div style="color: #556274;">#F3F6FB</div></div></div>
+        <div style="border-right: 1px solid #0A0F1C;"><div style="height: 80px; background: #B4BFD0;"></div><div class="mono" style="padding: 10px; font-size: 11px; line-height: 1.6;"><div style="font-weight: 600;">Body</div><div style="color: #556274;">#B4BFD0</div></div></div>
+        <div style="border-right: 1px solid #0A0F1C;"><div style="height: 80px; background: #8B97AB;"></div><div class="mono" style="padding: 10px; font-size: 11px; line-height: 1.6;"><div style="font-weight: 600;">Muted</div><div style="color: #556274;">#8B97AB</div></div></div>
+        <div style="border-right: 1px solid #0A0F1C;"><div style="height: 80px; background: #7FA2FF;"></div><div class="mono" style="padding: 10px; font-size: 11px; line-height: 1.6;"><div style="font-weight: 600;">Signal</div><div style="color: #556274;">#7FA2FF</div></div></div>
+        <div style="border-right: 1px solid #0A0F1C;"><div style="height: 80px; background: #0B1120;"></div><div class="mono" style="padding: 10px; font-size: 11px; line-height: 1.6;"><div style="font-weight: 600;">Ground</div><div style="color: #556274;">#0B1120</div></div></div>
+        <div><div style="height: 80px; background: #111A2E;"></div><div class="mono" style="padding: 10px; font-size: 11px; line-height: 1.6;"><div style="font-weight: 600;">Surface</div><div style="color: #556274;">#111A2E</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Type + marks -->
+  <div style="display: flex; gap: 48px;">
+    <div style="flex: 1.5; display: flex; flex-direction: column; gap: 14px;">
+      <h2 class="mono" style="margin: 0; font-size: 12px; letter-spacing: 0.1em; color: #556274;">03 — TYPE · GEIST + GEIST MONO</h2>
+      <div style="display: flex; align-items: baseline; gap: 24px; border-bottom: 1px solid #DCE1E8; padding-bottom: 12px;"><span class="mono" style="width: 130px; flex-shrink: 0; font-size: 11px; color: #556274;">DISPLAY 104 / −4.5%</span><span style="font-size: 64px; font-weight: 600; letter-spacing: -0.045em; line-height: 0.95;">Shipped.</span></div>
+      <div style="display: flex; align-items: baseline; gap: 24px; border-bottom: 1px solid #DCE1E8; padding-bottom: 12px;"><span class="mono" style="width: 130px; flex-shrink: 0; font-size: 11px; color: #556274;">H2 40 / −2.5%</span><span style="font-size: 40px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.1;">What broke, and the fix</span></div>
+      <div style="display: flex; align-items: baseline; gap: 24px; border-bottom: 1px solid #DCE1E8; padding-bottom: 12px;"><span class="mono" style="width: 130px; flex-shrink: 0; font-size: 11px; color: #556274;">LEAD 32 / 500</span><span style="font-size: 28px; font-weight: 500; letter-spacing: -0.02em;">I build software, then automate it.</span></div>
+      <div style="display: flex; align-items: baseline; gap: 24px; border-bottom: 1px solid #DCE1E8; padding-bottom: 12px;"><span class="mono" style="width: 130px; flex-shrink: 0; font-size: 11px; color: #556274;">BODY 17 / 1.65</span><span style="font-size: 17px; line-height: 1.65; color: #2E3A4F;">Prose never below 15px, measure capped near 70 characters.</span></div>
+      <div style="display: flex; align-items: baseline; gap: 24px;"><span class="mono" style="width: 130px; flex-shrink: 0; font-size: 11px; color: #556274;">DATA 11–13</span><span class="mono" style="font-size: 13px; letter-spacing: 0.08em;">COMMIT · STAGE · STATUS · CODE</span></div>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 14px;">
+      <h2 class="mono" style="margin: 0; font-size: 12px; letter-spacing: 0.1em; color: #556274;">04 — STATUS &amp; COVERAGE</h2>
+      <div style="display: flex; align-items: center; gap: 14px;"><span class="mono" style="width: 150px; text-align: center; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: #166534; background: #DCFCE7; padding: 5px 0;">LIVE</span><span style="font-size: 14px; color: #2E3A4F;">Running, with a working link</span></div>
+      <div style="display: flex; align-items: center; gap: 14px;"><span class="mono" style="width: 150px; text-align: center; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: #1E40AF; background: #EAF0FE; padding: 5px 0;">IN DEVELOPMENT</span><span style="font-size: 14px; color: #2E3A4F;">Real code, still changing</span></div>
+      <div style="display: flex; align-items: center; gap: 14px;"><span class="mono" style="width: 150px; text-align: center; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: #7A4307; background: #FDF1D8; padding: 5px 0;">LEARNING LAB</span><span style="font-size: 14px; color: #2E3A4F;">Built to learn</span></div>
+      <div style="display: flex; align-items: center; gap: 14px;"><span class="mono" style="width: 150px; box-sizing: border-box; text-align: center; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: #2E3A4F; border: 1px dashed #6B778A; padding: 4px 0;">PLANNED</span><span style="font-size: 14px; color: #2E3A4F;">Roadmap only</span></div>
+      <div style="display: flex; gap: 20px; margin-top: 10px; padding-top: 16px; border-top: 1px solid #DCE1E8;">
+        <span style="display: flex; align-items: center; gap: 8px; font-size: 13px;"><span style="width: 18px; height: 18px; background: #1D4ED8;"></span>Implemented</span>
+        <span style="display: flex; align-items: center; gap: 8px; font-size: 13px;"><span style="width: 18px; height: 18px; border: 2px solid #1D4ED8; box-sizing: border-box;"></span>Lab</span>
+        <span style="display: flex; align-items: center; gap: 8px; font-size: 13px;"><span style="width: 18px; height: 18px; border: 1px dashed #6B778A; box-sizing: border-box;"></span>Planned</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Components -->
+  <div style="display: flex; flex-direction: column; gap: 14px;">
+    <h2 class="mono" style="margin: 0; font-size: 12px; letter-spacing: 0.1em; color: #556274;">05 — COMPONENTS</h2>
+    <div style="display: flex; gap: 24px; align-items: stretch;">
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 10px;">
+        <span class="mono" style="font-size: 10px; letter-spacing: 0.1em; color: #556274;">ACTIONS</span>
+        <a href="#" style="font-size: 15px; font-weight: 500; color: #FFFFFF; background: #1D4ED8; text-decoration: none; min-height: 52px; display: flex; align-items: center; justify-content: center;">Primary →</a>
+        <a href="#" style="font-size: 15px; font-weight: 500; color: #0A0F1C; text-decoration: none; min-height: 52px; display: flex; align-items: center; justify-content: center; border: 1px solid #0A0F1C;">Secondary</a>
+        <a href="#" style="font-size: 15px; font-weight: 500; color: #FFFFFF; background: #0A0F1C; text-decoration: none; min-height: 44px; display: flex; align-items: center; justify-content: center;">Résumé ↓</a>
+      </div>
+      <div style="flex: 1.3; display: flex; flex-direction: column; gap: 10px;">
+        <span class="mono" style="font-size: 10px; letter-spacing: 0.1em; color: #556274;">EVIDENCE LEDGER</span>
+        <div style="border: 1px solid #0A0F1C;">
+          <div style="display: flex; justify-content: space-between; align-items: center; min-height: 48px; padding: 0 16px; border-bottom: 1px solid #DCE1E8; font-size: 14px;">Source repository<span class="mono" style="font-size: 12px; color: #556274;">[URL] ↗</span></div>
+          <div style="display: flex; justify-content: space-between; align-items: center; min-height: 48px; padding: 0 16px; border-bottom: 1px solid #DCE1E8; font-size: 14px;">Terminal capture<span class="mono" style="font-size: 12px; color: #556274;">beside →</span></div>
+          <div style="display: flex; justify-content: space-between; align-items: center; min-height: 48px; padding: 0 16px; font-size: 14px;">Case study<span class="mono" style="font-size: 12px; color: #1D4ED8;">read →</span></div>
+        </div>
+        <span style="font-size: 12px; color: #556274;">A row with no evidence is hidden, never shown empty.</span>
+      </div>
+      <div style="flex: 1.3; display: flex; flex-direction: column; gap: 10px;">
+        <span class="mono" style="font-size: 10px; letter-spacing: 0.1em; color: #556274;">SECTION BAR · BUILD STAMP</span>
+        <div style="background: #0A0F1C; color: #FFFFFF; padding: 16px 18px; display: flex; justify-content: space-between;"><span class="mono" style="font-size: 12px; letter-spacing: 0.1em;">01 — WORK</span><span class="mono" style="font-size: 11px; color: #B9C8F6;">META</span></div>
+        <div class="mono" style="display: flex; border: 1px solid #0A0F1C; font-size: 11px;">
+          <div style="flex: 1; padding: 12px 14px; border-right: 1px solid #DCE1E8;"><div style="color: #556274;">COMMIT</div><div style="margin-top: 4px;">[sha]</div></div>
+          <div style="flex: 1; padding: 12px 14px; border-right: 1px solid #DCE1E8;"><div style="color: #556274;">BUILT</div><div style="margin-top: 4px;">[date]</div></div>
+          <div style="flex: 1; padding: 12px 14px;"><div style="color: #556274;">CHECKS</div><div style="margin-top: 4px;">[result]</div></div>
+        </div>
+        <span style="font-size: 12px; color: #556274;">Filled at build time from the real run.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Principles -->
+  <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid #0A0F1C; margin-top: auto;">
+    <div style="padding: 22px 22px 0 0; border-right: 1px solid #DCE1E8;"><p class="mono" style="margin: 0 0 8px; font-size: 11px; letter-spacing: 0.1em; color: #1D4ED8;">PROOF OVER CLAIMS</p><p style="margin: 0; font-size: 14px; line-height: 1.55; color: #2E3A4F;">Every claim links to evidence. Nothing simulated, no invented metrics.</p></div>
+    <div style="padding: 22px; border-right: 1px solid #DCE1E8;"><p class="mono" style="margin: 0 0 8px; font-size: 11px; letter-spacing: 0.1em; color: #1D4ED8;">TWO READING DEPTHS</p><p style="margin: 0; font-size: 14px; line-height: 1.55; color: #2E3A4F;">60-second layer for recruiters; case studies for engineers.</p></div>
+    <div style="padding: 22px; border-right: 1px solid #DCE1E8;"><p class="mono" style="margin: 0 0 8px; font-size: 11px; letter-spacing: 0.1em; color: #1D4ED8;">DIAGRAMS ARE DATA</p><p style="margin: 0; font-size: 14px; line-height: 1.55; color: #2E3A4F;">Real systems only, a text equivalent under each, vertical on phones.</p></div>
+    <div style="padding: 22px 0 0 22px;"><p class="mono" style="margin: 0 0 8px; font-size: 11px; letter-spacing: 0.1em; color: #1D4ED8;">ACCESS BY DEFAULT</p><p style="margin: 0; font-size: 14px; line-height: 1.55; color: #2E3A4F;">AA contrast or better, 44px targets, 2px focus ring, reduced motion.</p></div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1560}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

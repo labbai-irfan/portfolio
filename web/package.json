@@ -1,0 +1,35 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "contrast": "node scripts/check-contrast.mjs",
+    "audit": "node scripts/a11y-audit.mjs",
+    "test": "node --test \"src/**/*.test.ts\" \"scripts/*.test.mjs\"",
+    "typecheck": "next typegen && tsc --noEmit"
+  },
+  "dependencies": {
+    "@portabletext/react": "8.0.1",
+    "@sanity/image-url": "2.1.1",
+    "next": "16.4.3",
+    "next-sanity": "13.4.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@tailwindcss/turbopack": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.3",
+    "playwright-core": "1.64.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

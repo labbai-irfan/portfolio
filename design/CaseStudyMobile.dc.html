@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>C2 case study — mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#1D4ED8}
+.mono{font-family:'Geist Mono',ui-monospace,monospace}
+.h2{margin:0;font-size:24px;font-weight:600;letter-spacing:-0.015em;display:flex;gap:12px;align-items:baseline}
+.n{font-family:'Geist Mono',monospace;font-size:12px;color:#1D4ED8;font-weight:500}
+.ph{border:1px dashed #6B778A;background:#FFFFFF;padding:14px 16px;font-size:14px;line-height:1.55;color:#2E3A4F}
+.box{background:#FFFFFF;border:1px solid #0A0F1C;padding:12px;text-align:center;display:flex;flex-direction:column;gap:2px}
+</style>
+</helmet>
+<div style="width: 390px; height: 3300px; overflow: hidden; font-family: 'Geist', system-ui, sans-serif; color: #0A0F1C; background: #F5F6F8;">
+
+  <header style="height: 60px; box-sizing: border-box; padding: 0 12px 0 16px; display: flex; align-items: center; justify-content: space-between; background: #FFFFFF; border-bottom: 1px solid #0A0F1C;">
+    <a href="Work.dc.html" class="mono" style="font-size: 13px; color: #0A0F1C; text-decoration: none; min-height: 44px; display: flex; align-items: center;">← Work</a>
+    <a href="MobileMenu.dc.html" aria-label="Open menu" style="width: 44px; height: 44px; border: 1px solid #0A0F1C; display: flex; align-items: center; justify-content: center; color: #0A0F1C;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 5h14M2 9h14M2 13h14"></path></svg></a>
+  </header>
+
+  <section style="background: #FFFFFF; padding: 28px 16px 0; display: flex; flex-direction: column; gap: 14px;">
+    <div class="mono" style="display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #556274;"><span>P-01 · CASE STUDY</span><span style="font-weight: 600; color: #1E40AF; background: #EAF0FE; padding: 4px 8px;">IN DEVELOPMENT</span></div>
+    <h1 style="margin: 0; font-size: 44px; line-height: 0.96; font-weight: 600; letter-spacing: -0.04em;">C2 — Continuous Control</h1>
+    <p style="margin: 0; font-size: 17px; line-height: 1.45; color: #2E3A4F;">A Bash CLI that turns repetitive Git workflows into single, predictable commands.</p>
+    <ol class="mono" aria-label="Coverage" style="list-style: none; margin: 10px -16px 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border-top: 1px solid #0A0F1C; font-size: 10px; text-align: center;">
+      <li style="padding: 12px 0; background: #1D4ED8; color: #FFFFFF;">CMT</li>
+      <li style="padding: 12px 0; color: #556274; border-left: 1px solid #DCE1E8;">BLD</li>
+      <li style="padding: 12px 0; color: #556274; border-left: 1px solid #DCE1E8;">TST</li>
+      <li style="padding: 12px 0; color: #556274; border-left: 1px solid #DCE1E8;">SHP</li>
+      <li style="padding: 12px 0; color: #556274; border-left: 1px solid #DCE1E8;">RUN</li>
+      <li style="padding: 12px 0; color: #556274; border-left: 1px solid #DCE1E8;">OBS</li>
+    </ol>
+  </section>
+
+  <section aria-label="Summary" style="background: #0A0F1C; color: #FFFFFF; padding: 4px 16px;">
+    <div style="padding: 16px 0; border-bottom: 1px solid #2A3548;"><span class="mono" style="font-size: 10px; letter-spacing: 0.1em; color: #B9C8F6;">PROBLEM</span><p style="margin: 6px 0 0; font-size: 15px; line-height: 1.5;">[one sentence]</p></div>
+    <div style="padding: 16px 0; border-bottom: 1px solid #2A3548;"><span class="mono" style="font-size: 10px; letter-spacing: 0.1em; color: #B9C8F6;">WHAT I BUILT</span><p style="margin: 6px 0 0; font-size: 15px; line-height: 1.5;">[one sentence]</p></div>
+    <div style="padding: 16px 0;"><span class="mono" style="font-size: 10px; letter-spacing: 0.1em; color: #B9C8F6;">WHERE IT STANDS</span><p style="margin: 6px 0 0; font-size: 15px; line-height: 1.5;">[one sentence]</p></div>
+  </section>
+
+  <nav aria-label="Evidence" style="background: #FFFFFF; border-bottom: 1px solid #0A0F1C;">
+    <a href="#ms1" style="display: flex; justify-content: space-between; align-items: center; min-height: 52px; padding: 0 16px; border-bottom: 1px solid #DCE1E8; text-decoration: none; color: #0A0F1C; font-size: 15px;">Repository<span class="mono" style="font-size: 12px; color: #556274;">[URL] ↗</span></a>
+    <a href="#ms1" style="display: flex; justify-content: space-between; align-items: center; min-height: 52px; padding: 0 16px; text-decoration: none; color: #0A0F1C; font-size: 15px;">README / docs<span class="mono" style="font-size: 12px; color: #556274;">[URL] ↗</span></a>
+  </nav>
+
+  <article style="padding: 32px 16px 40px; display: flex; flex-direction: column; gap: 40px;">
+    <section id="ms1" style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 class="h2"><span class="n">01</span>Problem &amp; goals</h2>
+      <p class="ph" style="margin: 0;">Which Git steps were repetitive or error-prone, and 2–3 goals you can check later.</p>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 class="h2"><span class="n">02</span>Architecture</h2>
+      <figure style="margin: 0; background: #FFFFFF; border: 1px solid #0A0F1C;">
+        <div class="mono" style="padding: 10px 14px; border-bottom: 1px solid #0A0F1C; font-size: 10px; letter-spacing: 0.08em; display: flex; justify-content: space-between;"><span>FIG. 1 — COMMAND PATH</span><span style="color: #7A4307;">DRAFT</span></div>
+        <ol style="list-style: none; margin: 0; padding: 16px 14px; display: flex; flex-direction: column; align-items: stretch; gap: 0;">
+          <li class="box"><span style="font-size: 14px; font-weight: 600;">Terminal</span><span class="mono" style="font-size: 11px; color: #556274;">c2 &lt;cmd&gt;</span></li>
+          <li aria-hidden="true" style="text-align: center; color: #1D4ED8; padding: 4px 0;">↓</li>
+          <li class="box" style="background: #0A0F1C; color: #FFFFFF; border-color: #0A0F1C;"><span style="font-size: 14px; font-weight: 600;">c2 entry</span><span class="mono" style="font-size: 11px; color: #B9C8F6;">parse · route</span></li>
+          <li aria-hidden="true" style="text-align: center; color: #1D4ED8; padding: 4px 0;">↓</li>
+          <li class="box"><span style="font-size: 14px; font-weight: 600;">Command module</span><span class="mono" style="font-size: 11px; color: #556274;">git save · [module]</span></li>
+          <li aria-hidden="true" style="text-align: center; color: #1D4ED8; padding: 4px 0;">↓</li>
+          <li class="box"><span style="font-size: 14px; font-weight: 600;">Git → remote</span><span class="mono" style="font-size: 11px; color: #556274;">local · origin</span></li>
+        </ol>
+        <figcaption style="padding: 12px 14px; border-top: 1px solid #DCE1E8; font-size: 12px; line-height: 1.5; color: #556274;">Same figure as desktop, stacked top to bottom.</figcaption>
+      </figure>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 class="h2"><span class="n">03</span>Implementation</h2>
+      <div style="background: #0A0F1C;">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 4px 4px 4px 14px; border-bottom: 1px solid #1C2536;"><span class="mono" style="font-size: 11px; color: #9AA6B8;">c2/[file]</span><button type="button" class="mono" style="font-size: 12px; color: #E2E8F0; background: transparent; border: 1px solid #3A465C; padding: 0 14px; min-height: 44px;">Copy</button></div>
+        <pre class="mono" style="margin: 0; padding: 16px 14px; font-size: 13px; line-height: 1.65; color: #9AA6B8; white-space: pre; overflow-x: auto;"># [real excerpt — scrolls sideways
+#  rather than wrapping code]</pre>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 class="h2"><span class="n">04</span>Decisions</h2>
+      <dl style="margin: 0; background: #FFFFFF; border: 1px solid #0A0F1C;">
+        <div style="padding: 14px 16px; border-bottom: 1px solid #DCE1E8;"><dt style="font-size: 15px; font-weight: 600;">Language · Bash</dt><dd style="margin: 6px 0 0; font-size: 14px; color: #556274;">over [alternative] because [reason]</dd></div>
+        <div style="padding: 14px 16px;"><dt style="font-size: 15px; font-weight: 600;">[decision]</dt><dd style="margin: 6px 0 0; font-size: 14px; color: #556274;">over [alternative] because [reason]</dd></div>
+      </dl>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 class="h2"><span class="n">05</span>What broke</h2>
+      <ol style="list-style: none; margin: 0; padding: 0; background: #FFFFFF; border: 1px solid #0A0F1C;">
+        <li style="display: flex; gap: 14px; padding: 14px 16px; border-bottom: 1px solid #DCE1E8;"><span class="mono" style="flex: 0 0 72px; font-size: 11px; color: #556274; padding-top: 2px;">SYMPTOM</span><span style="font-size: 14px; color: #2E3A4F;">[what you saw]</span></li>
+        <li style="display: flex; gap: 14px; padding: 14px 16px; border-bottom: 1px solid #DCE1E8;"><span class="mono" style="flex: 0 0 72px; font-size: 11px; color: #556274; padding-top: 2px;">CAUSE</span><span style="font-size: 14px; color: #2E3A4F;">[root cause]</span></li>
+        <li style="display: flex; gap: 14px; padding: 14px 16px; background: #EAF0FE;"><span class="mono" style="flex: 0 0 72px; font-size: 11px; color: #1E40AF; padding-top: 2px;">FIX</span><span style="font-size: 14px;">[change made]</span></li>
+      </ol>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 class="h2"><span class="n">06</span>Results &amp; next</h2>
+      <div style="aspect-ratio: 16 / 10; border: 1px dashed #6B778A; background: #FFFFFF; display: flex; align-items: center; justify-content: center; text-align: center; padding: 16px;"><span class="mono" style="font-size: 12px; color: #556274;">[before / after recording]</span></div>
+      <p class="ph" style="margin: 0;">Lessons learned and the next planned step.</p>
+    </section>
+
+    <nav aria-label="More work" style="display: flex; flex-direction: column; border: 1px solid #0A0F1C; background: #FFFFFF;">
+      <a href="SiteProject.dc.html" style="padding: 16px; border-bottom: 1px solid #0A0F1C; text-decoration: none; color: #0A0F1C; display: flex; justify-content: space-between; align-items: center; min-height: 56px; box-sizing: border-box;"><span style="display: flex; flex-direction: column; gap: 2px;"><span class="mono" style="font-size: 11px; color: #556274;">NEXT · P-00</span><span style="font-size: 16px; font-weight: 600;">This portfolio</span></span><span style="color: #1D4ED8;">→</span></a>
+      <a href="Work.dc.html" style="padding: 16px; text-decoration: none; color: #0A0F1C; display: flex; justify-content: space-between; align-items: center; min-height: 56px; box-sizing: border-box;"><span style="font-size: 15px; font-weight: 500;">All work</span><span style="color: #1D4ED8;">→</span></a>
+    </nav>
+  </article>
+
+  <footer class="mono" style="background: #FFFFFF; border-top: 1px solid #0A0F1C; padding: 16px; font-size: 11px; color: #556274;">COMMIT [sha] · BUILT [date]</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":3300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>How I debug — engineering notes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F6F8}
+a{color:#1D4ED8}a:hover{color:#1E3A8A}
+.mono{font-family:'Geist Mono',ui-monospace,monospace}
+.nl{font-size:14px;color:#2E3A4F;text-decoration:none;padding:0 14px;min-height:68px;display:flex;align-items:center}
+.nl[aria-current=page]{color:#0A0F1C;font-weight:600;box-shadow:inset 0 -2px 0 #1D4ED8}
+a:focus-visible,button:focus-visible{outline:2px solid #1D4ED8;outline-offset:3px}
+</style>
+</helmet>
+<div style="font-family: 'Geist', system-ui, sans-serif; color: #0A0F1C; background: #F5F6F8; width: 100%;">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #0A0F1C;">
+  <nav aria-label="Primary" style="max-width: 1240px; margin: 0 auto; padding: 0 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 12px;">
+    <a href="Main.dc.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #0A0F1C; min-height: 68px;">
+      <span class="mono" style="position: relative; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; background: #0A0F1C; color: #FFFFFF; font-size: 13px; font-weight: 600;">IN<span aria-hidden="true" style="position: absolute; right: -4px; bottom: -4px; width: 10px; height: 10px; background: #1D4ED8;"></span></span>
+      <span style="font-size: 15px; font-weight: 600; letter-spacing: -0.01em;">Irfan Noor Mohammed</span>
+    </a>
+    <div style="display: flex; flex-wrap: wrap; align-items: center;">
+      <a href="Work.dc.html" class="nl">Work</a>
+      <a href="Notes.dc.html" class="nl" aria-current="page">How I debug</a>
+      <a href="Experience.dc.html" class="nl">Experience</a>
+      <a href="Skills.dc.html" class="nl">Skills</a>
+      <a href="Contact.dc.html" class="nl">Contact</a>
+      <a href="Resume.dc.html" style="margin-left: 10px; font-size: 14px; font-weight: 500; color: #FFFFFF; background: #0A0F1C; text-decoration: none; padding: 0 18px; min-height: 44px; display: flex; align-items: center;">Résumé</a>
+    </div>
+  </nav>
+</header>
+
+<section style="background: #FFFFFF; border-bottom: 1px solid #0A0F1C;">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 64px 40px 56px; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-end;">
+    <div style="flex: 1.4 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
+      <span class="mono" style="font-size: 12px; letter-spacing: 0.1em; color: #1D4ED8;">02 — HOW I DEBUG</span>
+      <h1 style="margin: 0; font-size: 72px; line-height: 0.98; font-weight: 600; letter-spacing: -0.04em;">Real problems, written up the same way every time.</h1>
+      <p style="margin: 0; font-size: 18px; line-height: 1.6; color: #2E3A4F; max-width: 620px;">No tutorials rewritten from docs. Each note is something that actually broke on my machine, and the path to the fix.</p>
+    </div>
+    <div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 10px;">
+      <a href="#feed" class="mono" style="font-size: 13px; color: #0A0F1C; text-decoration: none; border: 1px solid #0A0F1C; padding: 0 16px; min-height: 44px; display: flex; align-items: center; justify-content: space-between;">RSS feed<span style="color: #556274;">/notes.xml</span></a>
+      <p class="mono" style="margin: 0; font-size: 12px; color: #556274;">Generated at build time from the notes folder.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Format -->
+<section aria-labelledby="fmt-h" style="border-bottom: 1px solid #0A0F1C;">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 48px 40px; display: flex; flex-direction: column; gap: 20px;">
+    <h2 id="fmt-h" class="mono" style="margin: 0; font-size: 12px; letter-spacing: 0.1em; color: #556274;">EVERY NOTE FOLLOWS FOUR STEPS</h2>
+    <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; background: #FFFFFF; border: 1px solid #0A0F1C;">
+      <li style="flex: 1 1 220px; min-width: 0; padding: 24px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 8px;"><span class="mono" style="font-size: 28px; font-weight: 500; color: #1D4ED8;">1</span><span style="font-size: 17px; font-weight: 600;">Symptom</span><span style="font-size: 14px; line-height: 1.55; color: #2E3A4F;">The exact error, as logged — not a paraphrase.</span></li>
+      <li style="flex: 1 1 220px; min-width: 0; padding: 24px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 8px;"><span class="mono" style="font-size: 28px; font-weight: 500; color: #1D4ED8;">2</span><span style="font-size: 17px; font-weight: 600;">Checked</span><span style="font-size: 14px; line-height: 1.55; color: #2E3A4F;">What I ruled out, in order, with the commands.</span></li>
+      <li style="flex: 1 1 220px; min-width: 0; padding: 24px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 8px;"><span class="mono" style="font-size: 28px; font-weight: 500; color: #1D4ED8;">3</span><span style="font-size: 17px; font-weight: 600;">Root cause</span><span style="font-size: 14px; line-height: 1.55; color: #2E3A4F;">What was actually wrong, and why it looked otherwise.</span></li>
+      <li style="flex: 1 1 220px; min-width: 0; padding: 24px; display: flex; flex-direction: column; gap: 8px;"><span class="mono" style="font-size: 28px; font-weight: 500; color: #1D4ED8;">4</span><span style="font-size: 17px; font-weight: 600;">Fix &amp; prevention</span><span style="font-size: 14px; line-height: 1.55; color: #2E3A4F;">The change, and how I'd catch it sooner next time.</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- Notes list -->
+<section id="feed" aria-labelledby="list-h">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 56px 40px 96px; display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px;">
+      <h2 id="list-h" style="margin: 0; font-size: 32px; font-weight: 600; letter-spacing: -0.02em;">Notes</h2>
+      <span class="mono" style="font-size: 12px; color: #556274;">1 note · newest first</span>
+    </div>
+
+    <article style="background: #FFFFFF; border: 1px solid #0A0F1C; display: flex; flex-wrap: wrap;">
+      <div style="flex: 0 0 200px; padding: 32px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 10px;">
+        <span class="mono" style="font-size: 12px; color: #556274; letter-spacing: 0.08em;">N-01</span>
+        <span class="mono" style="font-size: 13px;">[publish date]</span>
+        <span class="mono" style="align-self: flex-start; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: #2E3A4F; border: 1px solid #6B778A; padding: 4px 8px;">DRAFT</span>
+      </div>
+      <div style="flex: 1 1 520px; min-width: 0; padding: 32px; display: flex; flex-direction: column; gap: 14px;">
+        <h3 style="margin: 0; font-size: 32px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em;"><a href="NoteDetail.dc.html" style="color: #0A0F1C; text-decoration: none;">When my app container couldn't reach MySQL</a></h3>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #2E3A4F; max-width: 680px;">[One-sentence summary of the symptom and what the cause turned out to be.]</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+          <span class="mono" style="font-size: 12px; border: 1px solid #DCE1E8; padding: 5px 10px;">docker</span>
+          <span class="mono" style="font-size: 12px; border: 1px solid #DCE1E8; padding: 5px 10px;">networking</span>
+          <span class="mono" style="font-size: 12px; border: 1px solid #DCE1E8; padding: 5px 10px;">mysql</span>
+          <span class="mono" style="font-size: 12px; color: #556274; margin-left: 8px;">from P-02</span>
+        </div>
+        <a href="NoteDetail.dc.html" style="align-self: flex-start; font-size: 15px; font-weight: 500; text-decoration: none; min-height: 44px; display: flex; align-items: center;">Read the note →</a>
+      </div>
+    </article>
+
+    <div style="border: 1px dashed #6B778A; padding: 32px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+      <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #2E3A4F; max-width: 640px;">The next note publishes when something real breaks. This list never gets padded with filler.</p>
+      <a href="Work.dc.html" style="font-size: 15px; font-weight: 500; text-decoration: none; min-height: 44px; display: flex; align-items: center;">Meanwhile, see the work →</a>
+    </div>
+  </div>
+</section>
+
+<footer style="background: #FFFFFF; border-top: 1px solid #0A0F1C;">
+  <div class="mono" style="max-width: 1240px; margin: 0 auto; padding: 0 40px; display: flex; flex-wrap: wrap; font-size: 12px;">
+    <div style="flex: 1 1 200px; padding: 22px 22px 22px 0; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 4px;"><span style="color: #556274; letter-spacing: 0.08em;">OWNER</span><span>Irfan Noor Mohammed</span></div>
+    <div style="flex: 1 1 140px; padding: 22px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 4px;"><span style="color: #556274; letter-spacing: 0.08em;">COMMIT</span><span>[sha]</span></div>
+    <div style="flex: 1 1 140px; padding: 22px; border-right: 1px solid #DCE1E8; display: flex; flex-direction: column; gap: 4px;"><span style="color: #556274; letter-spacing: 0.08em;">BUILT</span><span>[build date]</span></div>
+    <nav aria-label="Footer" style="flex: 1 1 200px; padding: 10px 0 10px 22px; display: flex; flex-wrap: wrap; align-items: center; gap: 0 18px;">
+      <a href="Main.dc.html" style="color: #0A0F1C; text-decoration: none; min-height: 44px; display: flex; align-items: center;">Home</a>
+      <a href="Contact.dc.html" style="color: #0A0F1C; text-decoration: none; min-height: 44px; display: flex; align-items: center;">Contact</a>
+    </nav>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2200}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>
