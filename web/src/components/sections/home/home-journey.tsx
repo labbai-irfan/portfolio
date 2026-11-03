@@ -1,5 +1,5 @@
-import { SectionBar } from '@/components/ui/section-bar';
-import { sectionNumber } from '@/lib/format';
+import Link from 'next/link';
+import { Tile } from '@/components/ui/tile';
 import { cx } from '@/lib/utils';
 
 type Recent = {
@@ -10,15 +10,16 @@ type Recent = {
 };
 
 type HomeJourneyProps = {
-  index: number;
   /** Newest first, as the query returns them. */
   recent: Recent[];
   next: { title: string | null } | null;
+  className?: string;
 };
 
-export function HomeJourney({ index, recent, next }: HomeJourneyProps) {
+/** The latest milestones, newest first, and what comes next. */
+export function HomeJourney({ recent, next, className }: HomeJourneyProps) {
   const items = [
-    ...[...recent].reverse().map((m) => ({
+    ...recent.map((m) => ({
       key: m._id,
       date: m.dateLabel,
       title: m.title,
@@ -32,39 +33,40 @@ export function HomeJourney({ index, recent, next }: HomeJourneyProps) {
   if (items.length === 0) return null;
 
   return (
-    <section aria-labelledby="home-journey" className="border-t border-rule-strong bg-surface">
-      <SectionBar
-        headingId="home-journey"
-        title={`${sectionNumber(index)} — Journey`}
-        meta={{ label: 'Full timeline →', href: '/journey' }}
-      />
-      <div className="mx-auto flex max-w-page flex-col gap-7 px-4 pt-14 pb-22 lg:px-10">
-        <h3 className="m-0 text-34 font-semibold tracking-heading lg:text-40">
-          The most recent milestones, oldest first.
-        </h3>
-        <ol className="m-0 flex list-none flex-wrap border-t-2 border-rule-strong p-0">
-          {items.map((item) => (
-            <li
-              key={item.key}
-              className="relative flex min-w-0 flex-[1_1_220px] flex-col gap-2 pt-5.5 pr-5.5"
-            >
-              <span
-                aria-hidden="true"
-                className={cx(
-                  'absolute -top-2 left-0 box-border size-3.25',
-                  item.planned
-                    ? 'border border-dashed border-rule-dashed bg-ground'
-                    : item.latest
-                      ? 'bg-signal'
-                      : 'border-2 border-ink bg-surface',
-                )}
-              />
+    <Tile
+      as="section"
+      labelledBy="home-journey"
+      className={cx('flex flex-col gap-6 p-7 md:p-9', className)}
+    >
+      <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+        <h2 id="home-journey" className="m-0 text-28 leading-[1.1] font-semibold tracking-title">
+          Journey
+        </h2>
+        <Link href="/journey" className="text-14 font-medium">
+          Full timeline
+        </Link>
+      </div>
+      <ol className="m-0 flex list-none flex-col p-0">
+        {items.map((item) => (
+          <li
+            key={item.key}
+            className="relative flex gap-4 pb-5 pl-7 before:absolute before:top-2 before:bottom-0 before:left-1.25 before:w-px before:bg-rule last:pb-0 last:before:hidden"
+          >
+            <span
+              aria-hidden="true"
+              className={cx(
+                'absolute top-1.5 left-0 box-border size-2.75 rounded-full',
+                item.planned
+                  ? 'border border-dashed border-rule-dashed bg-surface'
+                  : item.latest
+                    ? 'bg-signal'
+                    : 'border-2 border-ink bg-surface',
+              )}
+            />
+            <span className="flex min-w-0 flex-col gap-0.5">
               {item.date && (
                 <span
-                  className={cx(
-                    'font-mono text-12 uppercase',
-                    item.latest ? 'text-signal' : 'text-muted',
-                  )}
+                  className={cx('text-13 font-medium', item.latest ? 'text-signal' : 'text-muted')}
                 >
                   {item.date}
                   {item.latest && ' · Latest'}
@@ -75,10 +77,10 @@ export function HomeJourney({ index, recent, next }: HomeJourneyProps) {
               >
                 {item.title}
               </span>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
+            </span>
+          </li>
+        ))}
+      </ol>
+    </Tile>
   );
 }

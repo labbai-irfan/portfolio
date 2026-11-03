@@ -117,6 +117,13 @@
 
   --container-page: 1240px;
   --container-prose: 70ch;
+
+  /* Depth: tiles are surfaces resting on the ground colour. Two-layer shadows (contact + ambient). */
+  --radius-tile: 14px;
+  --radius-control: 10px;
+  --radius-chip: 6px;
+  --shadow-tile: 0 1px 2px rgb(10 15 28 / 0.06), 0 10px 28px -10px rgb(10 15 28 / 0.14);
+  --shadow-tile-raised: 0 2px 4px rgb(10 15 28 / 0.07), 0 22px 44px -14px rgb(10 15 28 / 0.24);
 }
 
 @layer base {
@@ -152,6 +159,13 @@
     --color-lab: #fcd9a0;
     --color-lab-bg: #3a2608;
     --color-planned: #b4bfd0;
+    /* On a dark ground a plain shadow vanishes: add a faint top highlight and deeper black. */
+    --shadow-tile:
+      inset 0 1px 0 rgb(255 255 255 / 0.05), 0 1px 2px rgb(0 0 0 / 0.5),
+      0 12px 30px -10px rgb(0 0 0 / 0.65);
+    --shadow-tile-raised:
+      inset 0 1px 0 rgb(255 255 255 / 0.07), 0 2px 4px rgb(0 0 0 / 0.5),
+      0 24px 48px -14px rgb(0 0 0 / 0.75);
   }
 
   /* No explicit choice (no [data-theme]) → follow the OS preference. Pure CSS, so this
@@ -186,6 +200,13 @@
       --color-lab: #fcd9a0;
       --color-lab-bg: #3a2608;
       --color-planned: #b4bfd0;
+      /* On a dark ground a plain shadow vanishes: add a faint top highlight and deeper black. */
+      --shadow-tile:
+        inset 0 1px 0 rgb(255 255 255 / 0.05), 0 1px 2px rgb(0 0 0 / 0.5),
+        0 12px 30px -10px rgb(0 0 0 / 0.65);
+      --shadow-tile-raised:
+        inset 0 1px 0 rgb(255 255 255 / 0.07), 0 2px 4px rgb(0 0 0 / 0.5),
+        0 24px 48px -14px rgb(0 0 0 / 0.75);
     }
   }
 
@@ -216,6 +237,31 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* A bento tile: a raised surface. Use `tile` for any card; add `tile-interactive` when the
+   whole tile (or something inside it) is clickable, so it lifts on hover and keyboard focus. */
+@utility tile {
+  border-radius: var(--radius-tile);
+  border: 1px solid var(--color-rule);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-tile);
+}
+
+@utility tile-interactive {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+  &:hover,
+  &:focus-within {
+    box-shadow: var(--shadow-tile-raised);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    &:hover,
+    &:focus-within {
+      transform: translateY(-2px);
     }
   }
 }
