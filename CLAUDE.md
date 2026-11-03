@@ -68,7 +68,7 @@ Dev-only pages (404 in production): `http://localhost:3000/_kit` (component shee
 ## Accessibility
 
 Semantic landmarks, skip link, visible 2px focus ring, 44px min touch targets, WCAG AA contrast (body text AAA), keyboard support for every control, respect `prefers-reduced-motion`, text equivalent for every diagram, terminal output is an `aria-live` log.
-Desktop nav / mobile nav cut over at `lg` (1024px, Tailwind default) — tested at 390/768 (mobile) and 1280/1440 (desktop).
+Desktop nav / mobile nav cut over at `xl` (1280px): at 1024 the full desktop nav does not fit on one row. Tested at 390/768/1024 (compact header) and 1280/1440 (desktop).
 
 ## Security
 

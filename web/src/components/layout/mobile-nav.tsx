@@ -37,7 +37,7 @@ export function MobileNav({ name, githubUrl, linkedinUrl }: MobileNavProps) {
 
   return (
     <>
-      <div className="flex items-center gap-1.5 lg:hidden">
+      <div className="flex items-center gap-1.5 xl:hidden">
         <button
           type="button"
           aria-label="Search"
