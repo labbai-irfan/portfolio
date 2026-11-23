@@ -81,6 +81,17 @@ export const siteSettings = defineType({
       description: 'Optional. A short paragraph under the hero line.',
     }),
     defineField({
+      name: 'heroTech',
+      title: 'Hero technologies',
+      type: 'array',
+      group: 'hero',
+      of: [defineArrayMember({ type: 'string' })],
+      options: { layout: 'tags' },
+      description:
+        'Optional. A few short technology labels shown under the hero text, in this order (e.g. Docker, AWS, Linux). Only list what you really use.',
+      validation: (rule) => rule.max(8),
+    }),
+    defineField({
       name: 'summaryCells',
       type: 'array',
       group: 'hero',

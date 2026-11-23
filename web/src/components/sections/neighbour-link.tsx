@@ -21,7 +21,7 @@ export function NeighbourLink({
         next && 'items-end text-right',
       )}
     >
-      <span className="font-mono text-11 tracking-label text-muted uppercase">
+      <span className="text-13 font-medium text-muted">
         {next ? 'Next project →' : '← Previous project'}
       </span>
       <span className="text-17 font-semibold text-ink">

@@ -129,7 +129,7 @@ export function JourneyBrowser({ milestones }: { milestones: Milestone[] }) {
                     <div className="flex flex-wrap items-center gap-2">
                       <span
                         className={cx(
-                          'px-2 py-0.75 font-mono text-11 font-semibold tracking-chip uppercase',
+                          'px-2 py-0.75 text-13 font-semibold',
                           item.planned
                             ? 'border border-dashed border-rule-dashed text-planned'
                             : (chipTone[categoryOf(item)] ?? 'border border-ink text-ink'),

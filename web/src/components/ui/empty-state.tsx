@@ -17,7 +17,7 @@ export function EmptyState({ label, title, detail, action, mono, className }: Em
     <div
       className={cx('flex flex-col gap-1 border border-dashed border-rule-dashed p-3.5', className)}
     >
-      <span className="font-mono text-10 tracking-data text-muted uppercase">{label}</span>
+      <span className="text-12 font-medium text-muted">{label}</span>
       <span className={mono ? 'font-mono text-13' : 'text-14'}>{title}</span>
       {detail && <span className="text-12 text-muted">{detail}</span>}
       {action && (

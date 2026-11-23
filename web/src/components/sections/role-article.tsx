@@ -14,7 +14,7 @@ export function RoleArticle({ role }: { role: Role }) {
   const hasAside = Boolean(role.stack?.length || role.infrastructureNote);
 
   return (
-    <article className="border border-rule-strong bg-surface">
+    <article className="overflow-hidden tile">
       <div
         className={cx(
           'flex flex-wrap items-start justify-between gap-4 px-6 py-8 lg:px-10 lg:py-9',
@@ -23,12 +23,7 @@ export function RoleArticle({ role }: { role: Role }) {
         )}
       >
         <div className="flex flex-col gap-2">
-          <span
-            className={cx(
-              'font-mono text-12 tracking-data uppercase',
-              current ? 'text-signal' : 'text-muted',
-            )}
-          >
+          <span className={cx('text-13 font-medium', current ? 'text-signal' : 'text-muted')}>
             {dateRange(role.startDate ?? '', role.endDate, { yearsOnly: role.yearsOnly })}
             {role.location && ` · ${role.location}`}
           </span>
@@ -47,12 +42,12 @@ export function RoleArticle({ role }: { role: Role }) {
           </p>
         </div>
         {current && (
-          <span className="bg-progress-bg px-3 py-1.5 font-mono text-11 font-semibold tracking-chip text-progress uppercase">
+          <span className="bg-progress-bg px-3 py-1.5 text-13 font-semibold text-progress">
             Current role
           </span>
         )}
         {kind === 'internship' && (
-          <span className="border border-rule-dashed px-3 py-1.25 font-mono text-11 font-semibold tracking-chip text-body uppercase">
+          <span className="border border-rule-dashed px-3 py-1.25 text-13 font-semibold text-body">
             Internship
           </span>
         )}
@@ -103,7 +98,7 @@ export function RoleArticle({ role }: { role: Role }) {
                     {role.stack.map((tool) => (
                       <li
                         key={tool}
-                        className="border border-rule-strong bg-surface px-2.5 py-1.75 font-mono text-12"
+                        className="rounded-chip border border-rule-strong bg-surface px-2.5 py-1.75 font-mono text-12"
                       >
                         {tool}
                       </li>
@@ -113,7 +108,7 @@ export function RoleArticle({ role }: { role: Role }) {
               )}
               {role.infrastructureNote && (
                 <div className="flex flex-col gap-2.5 border border-signal bg-surface p-5">
-                  <h3 className="m-0 font-mono text-11 tracking-label text-progress uppercase">
+                  <h3 className="m-0 text-13 font-medium text-progress">
                     Where this meets infrastructure
                   </h3>
                   <p className="m-0 text-15 leading-[1.6] text-ink">{role.infrastructureNote}</p>

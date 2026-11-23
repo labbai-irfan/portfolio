@@ -34,7 +34,7 @@ export async function SiteHeader({ perspective, stega }: DynamicFetchOptions) {
             </span>
           </Link>
           {settings?.openToRoles && (
-            <span className="hidden items-center gap-2 bg-progress-bg px-2.5 py-1.5 font-mono text-11 tracking-chip text-progress uppercase xl:flex">
+            <span className="hidden items-center gap-2 bg-progress-bg px-2.5 py-1.5 text-13 font-medium text-progress xl:flex">
               <span aria-hidden="true" className="size-1.75 bg-signal" />
               Open to roles
             </span>

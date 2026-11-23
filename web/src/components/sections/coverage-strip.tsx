@@ -13,9 +13,7 @@ export function CoverageStrip({ project }: { project: Pick<ProjectCardData, 'sta
           >
             <CoverageMark state={stage.state} />
             <span className="flex flex-col">
-              <span className="font-mono text-11 tracking-label text-muted uppercase">
-                {stage.abbr}
-              </span>
+              <span className="text-13 font-medium text-muted">{stage.abbr}</span>
               <span className="text-14 font-medium">{stage.label}</span>
             </span>
           </li>

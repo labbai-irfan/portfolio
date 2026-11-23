@@ -23,7 +23,7 @@ export default function ErrorPage({
   return (
     <main id="main" className="flex-1 bg-grid">
       <div className="mx-auto flex max-w-page flex-col items-start gap-6 px-4 py-16 lg:px-10 lg:py-24">
-        <span className="font-mono text-12 tracking-label text-signal uppercase">Error 500</span>
+        <span className="text-13 font-medium text-signal">Error 500</span>
         <h1 className="m-0 max-w-200 text-48 leading-none font-semibold tracking-title lg:text-72">
           This page hit a problem.
         </h1>

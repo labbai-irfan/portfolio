@@ -4,6 +4,7 @@ import { VisualEditing } from 'next-sanity/visual-editing';
 import { SiteFooter } from '@/components/layout/site-footer';
 import { SiteHeader } from '@/components/layout/site-header';
 import { Search } from '@/components/search/search';
+import { TerminalHost } from '@/components/terminal/terminal-host';
 import { siteMetadata } from '@/lib/metadata';
 import { getDynamicFetchOptions, SanityLive } from '@/sanity/live';
 import '@/styles/globals.css';
@@ -49,9 +50,12 @@ export default async function RootLayout({ children }: LayoutProps<'/'>) {
         >
           Skip to content
         </a>
-        <SiteHeader {...dynamic} />
-        {children}
-        <SiteFooter {...dynamic} />
+        {/* One terminal session for the whole site: the hero, the overlay and /terminal share it. */}
+        <TerminalHost perspective={dynamic.perspective}>
+          <SiteHeader {...dynamic} />
+          {children}
+          <SiteFooter {...dynamic} />
+        </TerminalHost>
         <Search {...dynamic} />
         <SanityLive includeDrafts={isDraftMode} />
         {isDraftMode && <VisualEditing />}

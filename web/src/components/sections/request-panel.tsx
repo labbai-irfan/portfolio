@@ -16,7 +16,7 @@ export function RequestPanel() {
   return (
     <div className="flex min-w-0 flex-[1_1_360px] flex-col border border-rule-strong bg-surface">
       <div className="flex items-center justify-between bg-bar px-5 py-3 font-mono text-12 text-on-bar">
-        <span className="tracking-data uppercase">request</span>
+        <span>request</span>
         <span>404</span>
       </div>
       <div className="flex flex-col gap-1 px-5 py-6 font-mono text-13 leading-[1.8]">

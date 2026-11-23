@@ -20,7 +20,7 @@ export function PageHero({ kicker, heading, intro, aside, className }: PageHeroP
       )}
     >
       <div className="flex min-w-70 flex-[1.4] flex-col gap-5">
-        <span className="font-mono text-12 tracking-label text-signal uppercase">{kicker}</span>
+        <span className="text-13 font-medium text-signal">{kicker}</span>
         <h1 className="m-0 max-w-245 text-48 font-semibold tracking-title lg:text-72">{heading}</h1>
         {intro && <p className="m-0 max-w-170 text-17 leading-[1.6] text-body">{intro}</p>}
       </div>

@@ -39,7 +39,7 @@ export function HomeInfra({ nodes, className }: { nodes: Node[]; className?: str
                 tone.box,
               )}
             >
-              <span className={cx('font-mono text-10 uppercase', tone.kicker)}>{node.kicker}</span>
+              <span className={cx('text-12 font-medium', tone.kicker)}>{node.kicker}</span>
               <span className="text-15 font-semibold">{node.name}</span>
             </li>
           );

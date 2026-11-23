@@ -28,7 +28,7 @@ type AsButton = Common & { href?: undefined } & Omit<
 /** Renders a Next.js Link when given an href, otherwise a button. */
 export function Button(props: AsLink | AsButton) {
   const classes = cx(
-    'inline-flex cursor-pointer items-center justify-center gap-2 px-6 text-15 font-medium no-underline',
+    'inline-flex cursor-pointer items-center justify-center gap-2 rounded-control px-6 text-15 font-medium no-underline',
     variants[props.variant ?? 'primary'],
     props.className,
   );

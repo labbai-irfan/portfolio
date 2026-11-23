@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react';
 import { OPEN_SEARCH_EVENT } from '@/lib/search-events';
+import { openTerminal } from '@/lib/terminal-events';
 import { filterIndex, GROUP_ORDER, type SearchItem } from '@/lib/search-index';
 import { cx } from '@/lib/utils';
 
@@ -49,7 +50,9 @@ export function SearchPalette({ items }: { items: SearchItem[] }) {
   function choose(item: SearchItem | undefined) {
     if (!item) return;
     dialog.current?.close();
-    if (item.action === 'theme') {
+    if (item.action === 'terminal') {
+      openTerminal();
+    } else if (item.action === 'theme') {
       document.querySelector<HTMLButtonElement>('button[aria-label^="Switch to"]')?.click();
     } else if (item.href) {
       router.push(item.href);
@@ -135,9 +138,7 @@ export function SearchPalette({ items }: { items: SearchItem[] }) {
       >
         {groups.map(({ group, items: groupItems }) => (
           <div key={group} role="group" aria-label={group}>
-            <p className="m-0 px-5 pt-3 pb-1.5 font-mono text-10 tracking-label text-muted uppercase">
-              {group}
-            </p>
+            <p className="m-0 px-5 pt-3 pb-1.5 text-12 font-medium text-muted">{group}</p>
             {groupItems.map((item) => {
               const index = results.indexOf(item);
               const on = index === active;
@@ -196,7 +197,7 @@ export function SearchPalette({ items }: { items: SearchItem[] }) {
               onClick={() => dialog.current?.close()}
               className="inline-flex min-h-11 items-center"
             >
-              Try the terminal instead →
+              Try the terminal instead
             </Link>
           </div>
         )}

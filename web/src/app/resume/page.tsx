@@ -18,7 +18,7 @@ const STATUS_WORDS: Record<string, string> = {
 
 function Heading({ children }: { children: ReactNode }) {
   return (
-    <h2 className="m-0 mb-3 border-b border-ink pb-2 font-mono text-11 font-medium tracking-[0.12em] text-signal uppercase">
+    <h2 className="m-0 mb-3 border-b border-ink pb-2 text-13 font-medium tracking-[0.12em] text-signal">
       {children}
     </h2>
   );
@@ -61,9 +61,7 @@ async function ResumeContent({ perspective, stega }: DynamicFetchOptions) {
     <main id="main" className="print:bg-white bg-ground">
       <div className="mx-auto flex max-w-220 flex-wrap items-center justify-between gap-4 px-6 pt-10 pb-5 print:hidden">
         <div className="flex flex-col gap-1">
-          <span className="font-mono text-12 tracking-label text-muted uppercase">
-            Résumé · one page
-          </span>
+          <span className="text-13 font-medium text-muted">Résumé · one page</span>
           <span className="text-14 text-body">Plain text, ATS-friendly.</span>
         </div>
         <div className="flex gap-2.5">

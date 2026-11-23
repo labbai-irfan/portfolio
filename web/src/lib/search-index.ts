@@ -11,7 +11,7 @@ export type SearchItem = {
   sub: string;
   /** Where Enter goes. Items with an `action` run it instead. */
   href?: string;
-  action?: 'theme';
+  action?: 'theme' | 'terminal';
   keywords: string;
 };
 
@@ -81,7 +81,7 @@ export function buildSearchIndex(projects: ProjectSource[], notes: NoteSource[])
       badge: '>_',
       title: 'Open the terminal',
       sub: 'Explore the site from a shell',
-      href: '/terminal',
+      action: 'terminal',
       keywords: 'shell cli command',
     },
     {

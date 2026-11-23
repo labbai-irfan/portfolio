@@ -1,5 +1,6 @@
 import { promptOf } from '@/components/terminal/commands';
 import { Button } from '@/components/ui/button';
+import { TerminalWindow } from '@/components/ui/terminal-window';
 import { Tile } from '@/components/ui/tile';
 import { STATUS_WORDS } from '@/lib/labels';
 import { type Fetched, stegaClean } from '@/lib/stega';
@@ -26,7 +27,7 @@ export function HomeTerminal({ settings, projects, className }: HomeTerminalProp
       as="section"
       tone="dark"
       labelledBy="home-terminal"
-      className={cx('flex flex-col gap-6 overflow-hidden p-7 md:p-9', className)}
+      className={cx('group flex flex-col gap-7 overflow-hidden p-7 md:p-9', className)}
     >
       <div className="flex flex-col gap-3">
         <h2 id="home-terminal" className="m-0 text-28 leading-[1.1] font-semibold tracking-title">
@@ -37,28 +38,32 @@ export function HomeTerminal({ settings, projects, className }: HomeTerminalProp
           completes, ↑ recalls.
         </p>
       </div>
-      <pre
-        aria-hidden="true"
-        className="m-0 overflow-hidden rounded-chip border border-term-border bg-term-deep px-5 py-4 font-mono text-12 leading-[1.75] whitespace-pre-wrap text-term-out lg:text-13"
-      >
-        <span className="text-term-prompt">{prompt}</span> projects{'\n'}
-        <span className="font-semibold text-term-head">
-          {'ID'.padEnd(7)}
-          {'STATUS'.padEnd(statusWidth + 2)}PROJECT
-        </span>
-        {'\n'}
-        {rows.map((p) => (
-          <span key={p._id}>
-            {(p.code ?? '').toLowerCase().padEnd(7)}
-            {(STATUS_WORDS[statusOf(p) ?? ''] ?? '').padEnd(statusWidth + 2)}
-            {p.title}
+      <div aria-hidden="true" className="[perspective:1000px]">
+        <TerminalWindow
+          title={`${prompt.replace('$', '').replace(':~', ': ~')} — zsh`}
+          className="[transform:rotateX(8deg)_rotateY(10deg)] shadow-window transition-transform duration-500 ease-out group-hover:[transform:rotateX(2deg)_rotateY(3deg)]"
+        >
+          <pre className="m-0 overflow-hidden font-mono text-12 leading-[1.8] whitespace-pre lg:text-13">
+            <span className="text-term-prompt">{prompt}</span> projects{'\n'}
+            <span className="font-semibold text-term-head">
+              {'ID'.padEnd(7)}
+              {'STATUS'.padEnd(statusWidth + 2)}PROJECT
+            </span>
             {'\n'}
-          </span>
-        ))}
-        <span className="text-term-prompt">{prompt}</span>{' '}
-        <span className="inline-block h-4 w-2 bg-term-prompt align-text-bottom" />
-      </pre>
-      <Button href="/terminal" variant="onBar" className="mt-auto self-start">
+            {rows.map((p) => (
+              <span key={p._id}>
+                {(p.code ?? '').toLowerCase().padEnd(7)}
+                {(STATUS_WORDS[statusOf(p) ?? ''] ?? '').padEnd(statusWidth + 2)}
+                {p.title}
+                {'\n'}
+              </span>
+            ))}
+            <span className="text-term-prompt">{prompt}</span>{' '}
+            <span className="inline-block h-4 w-2 bg-term-prompt align-text-bottom motion-safe:animate-[blink_1.1s_steps(1)_infinite]" />
+          </pre>
+        </TerminalWindow>
+      </div>
+      <Button href="/terminal" variant="onBar" className="mt-auto self-start rounded-control">
         Open the terminal
       </Button>
     </Tile>

@@ -39,10 +39,7 @@ export function DebugSteps({ steps }: { steps: DebugStepsData }) {
                   <code className="font-mono text-14 break-words text-ink">{check.command}</code>
                   <p className="m-0 text-15 leading-[1.55] text-body">{check.result}</p>
                   <span
-                    className={cx(
-                      'font-mono text-11 tracking-label uppercase',
-                      found ? 'text-progress' : 'text-muted',
-                    )}
+                    className={cx('text-13 font-medium', found ? 'text-progress' : 'text-muted')}
                   >
                     {found ? 'Found it' : 'Ruled out'}
                   </span>
@@ -69,17 +66,13 @@ export function DebugSteps({ steps }: { steps: DebugStepsData }) {
             <div className="flex flex-wrap gap-4">
               {fix.before && (
                 <div className="flex min-w-0 flex-[1_1_320px] flex-col gap-2">
-                  <span className="font-mono text-11 tracking-label text-muted uppercase">
-                    Before
-                  </span>
+                  <span className="text-13 font-medium text-muted">Before</span>
                   <CodeBlock code={fix.before} />
                 </div>
               )}
               {fix.after && (
                 <div className="flex min-w-0 flex-[1_1_320px] flex-col gap-2">
-                  <span className="font-mono text-11 tracking-label text-muted uppercase">
-                    After
-                  </span>
+                  <span className="text-13 font-medium text-muted">After</span>
                   <CodeBlock code={fix.after} />
                 </div>
               )}

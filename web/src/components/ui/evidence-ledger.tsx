@@ -16,8 +16,8 @@ export function EvidenceLedger({ title = 'Evidence', rows, className }: Evidence
   if (real.length === 0) return null;
 
   return (
-    <div className={cx('border border-rule-strong bg-surface', className)}>
-      <p className="m-0 border-b border-rule-strong px-5 py-3.5 font-mono text-11 tracking-label text-muted uppercase">
+    <div className={cx('overflow-hidden tile', className)}>
+      <p className="m-0 border-b border-rule-strong px-5 py-3.5 text-13 font-medium text-muted">
         {title}
       </p>
       <ul className="m-0 list-none p-0">

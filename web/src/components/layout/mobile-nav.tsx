@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useRef } from 'react';
 import { getBuildInfo } from '@/lib/build-info';
 import { openSearch } from '@/lib/search-events';
+import { openTerminal } from '@/lib/terminal-events';
 import { cx } from '@/lib/utils';
 
 const ITEMS = [
@@ -106,9 +107,7 @@ export function MobileNav({ name, githubUrl, linkedinUrl }: MobileNavProps) {
           </header>
 
           <nav aria-label="Primary" className="flex flex-1 flex-col overflow-y-auto px-4 pt-6">
-            <span className="mb-2 font-mono text-11 tracking-label text-on-bar-meta uppercase">
-              Menu
-            </span>
+            <span className="mb-2 text-13 font-medium text-on-bar-meta">Menu</span>
             {ITEMS.map((item, index) => {
               const current = pathname === item.href;
               return (
@@ -116,7 +115,14 @@ export function MobileNav({ name, githubUrl, linkedinUrl }: MobileNavProps) {
                   key={item.href}
                   href={item.href}
                   aria-current={current ? 'page' : undefined}
-                  onClick={() => dialogRef.current?.close()}
+                  onClick={(event) => {
+                    dialogRef.current?.close();
+                    // The terminal opens as an overlay; the link stays for no-JS and new tabs.
+                    if (item.href === '/terminal' && !event.metaKey && !event.ctrlKey) {
+                      event.preventDefault();
+                      openTerminal();
+                    }
+                  }}
                   className={cx(
                     'flex min-h-16 items-center justify-between border-b border-rule text-28 font-semibold tracking-tight text-on-bar no-underline',
                     index === 0 && 'border-t',

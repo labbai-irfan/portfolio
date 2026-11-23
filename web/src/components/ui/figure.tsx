@@ -13,9 +13,9 @@ type FigureProps = {
 
 export function Figure({ label, caption, badge, children, className }: FigureProps) {
   return (
-    <figure className={cx('m-0 border border-rule-strong bg-surface', className)}>
+    <figure className={cx('m-0 overflow-hidden tile', className)}>
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-rule-strong px-5 py-3">
-        <span className="font-mono text-12 tracking-data uppercase">{label}</span>
+        <span className="text-13 font-medium">{label}</span>
         {badge}
       </div>
       <div className="bg-grid px-6 py-10">{children}</div>

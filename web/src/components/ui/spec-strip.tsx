@@ -18,7 +18,7 @@ export function SpecStrip({ items, variant = 'facts', className }: SpecStripProp
   return (
     <dl
       className={cx(
-        'm-0 flex flex-wrap border border-rule-strong bg-surface',
+        'm-0 flex flex-wrap overflow-hidden tile',
         stamp && 'font-mono text-11',
         className,
       )}
@@ -31,9 +31,7 @@ export function SpecStrip({ items, variant = 'facts', className }: SpecStripProp
             stamp ? 'flex-1 px-3.5 py-3' : 'flex-[1_1_180px] gap-2 p-5',
           )}
         >
-          <dt className={cx('text-muted', !stamp && 'font-mono text-11 tracking-label uppercase')}>
-            {item.label}
-          </dt>
+          <dt className={cx('text-muted', !stamp && 'text-13 font-medium')}>{item.label}</dt>
           <dd className={cx('m-0', stamp ? 'mt-1' : 'text-15 leading-[1.55] text-body')}>
             {item.value}
           </dd>

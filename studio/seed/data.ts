@@ -873,10 +873,12 @@ export const singletons: SeedDoc[] = [
     resumeHeadline: 'Software Engineer — DevOps & Cloud',
     resumeSummary:
       'Software engineer building business platforms with React, TypeScript, Node.js and MySQL. Hands-on with Docker, CI/CD, AWS and Linux automation, including a Bash CLI for Git workflows.',
-    headlineLabel: 'DevOps · Cloud · Automation',
-    heroLine: 'I automate how software ships and runs.',
+    // Hero copy from the owner's redesign brief.
+    headlineLabel: 'DevOps Engineer / Software Engineer',
+    heroLine: 'I engineer the journey from development to deployment.',
     heroParagraph:
-      'Docker, CI/CD, AWS and Linux — built hands-on and documented, including what broke.',
+      'Building automated workflows, containerized applications, and reliable cloud infrastructure.',
+    heroTech: ['Docker', 'AWS', 'Linux', 'CI/CD', 'Git', 'Automation'],
     summaryCells: cells(
       ['Targeting', 'DevOps, Cloud, SRE, Platform and Infrastructure roles'],
       ['Now', 'Junior Software Engineer at WiseTech MEP · M.Sc. IT · building C2'],

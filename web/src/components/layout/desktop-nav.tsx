@@ -2,6 +2,7 @@
 
 import { AboutMenu } from './about-menu';
 import { NavLink } from './nav-link';
+import { TerminalNavLink } from './terminal-nav-link';
 
 export function DesktopNav() {
   return (
@@ -10,9 +11,7 @@ export function DesktopNav() {
       <AboutMenu />
       <NavLink href="/notes">Notes</NavLink>
       <NavLink href="/infrastructure">Infra</NavLink>
-      <NavLink href="/terminal">
-        <span className="font-mono text-12 text-signal">&gt;_</span>Terminal
-      </NavLink>
+      <TerminalNavLink />
       <NavLink href="/contact">Contact</NavLink>
     </>
   );

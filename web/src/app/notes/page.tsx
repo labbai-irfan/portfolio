@@ -43,10 +43,10 @@ async function NotesContent({ perspective, stega }: DynamicFetchOptions) {
 
       <section aria-labelledby="fmt-h" className="border-b border-rule-strong">
         <div className="mx-auto flex max-w-page flex-col gap-5 px-4 py-12 lg:px-10">
-          <h2 id="fmt-h" className="m-0 font-mono text-12 tracking-label text-muted uppercase">
+          <h2 id="fmt-h" className="m-0 text-13 font-medium text-muted">
             Troubleshooting notes follow four steps
           </h2>
-          <ol className="m-0 flex list-none flex-wrap border border-rule-strong bg-surface p-0">
+          <ol className="m-0 flex list-none flex-wrap overflow-hidden tile p-0">
             {FORMAT_STEPS.map((step, index) => (
               <li
                 key={step.title}
@@ -83,14 +83,14 @@ async function NotesContent({ perspective, stega }: DynamicFetchOptions) {
           </div>
 
           {notes.map((note) => (
-            <article key={note._id} className="flex flex-wrap border border-rule-strong bg-surface">
+            <article key={note._id} className="flex flex-wrap overflow-hidden tile">
               <div className="flex flex-[0_0_200px] flex-col gap-2.5 border-r border-rule p-8">
                 {note.code && (
                   <span className="font-mono text-12 tracking-data text-muted">{note.code}</span>
                 )}
                 {note.date && <span className="font-mono text-13">{fullDate(note.date)}</span>}
                 {note.category?.title && (
-                  <span className="self-start border border-rule-dashed px-2 py-1 font-mono text-11 font-semibold tracking-chip text-body uppercase">
+                  <span className="self-start border border-rule-dashed px-2 py-1 text-13 font-semibold text-body">
                     {note.category.title}
                   </span>
                 )}
@@ -121,7 +121,7 @@ async function NotesContent({ perspective, stega }: DynamicFetchOptions) {
                   href={`/notes/${note.slug}`}
                   className="flex min-h-11 items-center self-start text-15 font-medium no-underline"
                 >
-                  Read the note →
+                  Read the note
                 </Link>
               </div>
             </article>
@@ -136,7 +136,7 @@ async function NotesContent({ perspective, stega }: DynamicFetchOptions) {
               href="/work"
               className="flex min-h-11 items-center text-15 font-medium no-underline"
             >
-              Meanwhile, see the work →
+              Meanwhile, see the work
             </Link>
           </div>
         </div>

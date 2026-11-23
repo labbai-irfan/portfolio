@@ -68,9 +68,7 @@ async function InfrastructureContent({ perspective, stega }: DynamicFetchOptions
                     i === 0 ? 'bg-bar text-on-bar' : 'border-rule not-last:border-b',
                   )}
                 >
-                  <dt className={i === 0 ? 'text-12 tracking-data uppercase' : 'text-muted'}>
-                    {cell.label}
-                  </dt>
+                  <dt className={i === 0 ? 'text-12' : 'text-muted'}>{cell.label}</dt>
                   <dd className={cx('m-0', i === 0 && 'text-on-bar-meta')}>{cell.value}</dd>
                 </div>
               ))}
@@ -98,7 +96,7 @@ async function InfrastructureContent({ perspective, stega }: DynamicFetchOptions
         >
           <table className="w-full min-w-160 border-collapse text-left text-15">
             <thead>
-              <tr className="font-mono text-11 tracking-label text-muted uppercase">
+              <tr className="text-13 font-medium text-muted">
                 <th scope="col" className="border-b border-rule-strong px-5 py-3.5 font-normal">
                   Layer
                 </th>
@@ -129,7 +127,7 @@ async function InfrastructureContent({ perspective, stega }: DynamicFetchOptions
                   <td className="border-b border-rule px-5 py-4">
                     <span
                       className={cx(
-                        'font-mono text-11 tracking-chip uppercase',
+                        'text-13 font-medium',
                         node.state === 'planned' ? 'text-planned' : 'text-live',
                       )}
                     >
@@ -148,11 +146,9 @@ async function InfrastructureContent({ perspective, stega }: DynamicFetchOptions
           href="/terminal"
           className="flex min-h-11 min-w-70 flex-1 flex-col gap-1.5 border border-rule-strong bg-surface p-5 text-ink no-underline hover:bg-ground"
         >
-          <span className="font-mono text-11 tracking-label text-muted uppercase">
-            Prefer a shell?
-          </span>
+          <span className="text-13 font-medium text-muted">Prefer a shell?</span>
           <span className="text-17 font-semibold">
-            Run <span className="font-mono">infra</span> in the terminal →
+            Run <span className="font-mono">infra</span> in the terminal
           </span>
         </Link>
       </div>

@@ -18,7 +18,7 @@ export function StatusChip({ status, className }: { status: ProjectStatus; class
   return (
     <span
       className={cx(
-        'inline-block px-2.5 font-mono text-11 leading-none font-semibold tracking-chip uppercase',
+        'inline-block px-2.5 text-13 leading-none font-semibold',
         chip.className,
         className,
       )}

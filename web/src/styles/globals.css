@@ -14,11 +14,11 @@
   --shadow-*: initial;
 
   /* Core */
-  --color-ink: #0a0f1c;
+  --color-ink: #101828;
   --color-body: #2e3a4f;
-  --color-muted: #556274;
-  --color-signal: #1d4ed8;
-  --color-signal-hover: #1e3a8a;
+  --color-muted: #626c81;
+  --color-signal: #2457e6;
+  --color-signal-hover: #1a3fb8;
   --color-on-signal: #ffffff;
   --color-on-signal-muted: #dce6ff;
   --color-ground: #f5f6f8;
@@ -26,26 +26,26 @@
   --color-transparent: transparent;
 
   /* Rules: strong = 1px frame, soft = inner divider, control = input border */
-  --color-rule-strong: #0a0f1c;
-  --color-rule: #dce1e8;
+  --color-rule-strong: #101828;
+  --color-rule: #e1e5ec;
   --color-rule-control: #c9d1dc;
   --color-rule-dashed: #6b778a;
   --color-grid-line: #e3e7ed;
   --color-arrow: #8a96a8;
 
   /* Contrast button (Résumé) */
-  --color-contrast: #0a0f1c;
+  --color-contrast: #101828;
   --color-on-contrast: #ffffff;
 
   /* Dark bands: section bar, terminal teaser (dark in both themes) */
-  --color-bar: #0a0f1c;
+  --color-bar: #101828;
   --color-on-bar: #ffffff;
   --color-on-bar-body: #c9d2e0;
   --color-on-bar-meta: #b9c8f6;
 
   /* Terminal and code (dark in both themes) */
-  --color-term: #0a0f1c;
-  --color-term-deep: #070b15;
+  --color-term: #080e1b;
+  --color-term-deep: #050913;
   --color-term-border: #2a3548;
   --color-term-rule: #1c2536;
   --color-term-control: #3a465c;
@@ -82,6 +82,7 @@
   --text-18: 18px;
   --text-19: 19px;
   --text-20: 20px;
+  --text-21: 21px;
   --text-22: 22px;
   --text-24: 24px;
   --text-26: 26px;
@@ -90,21 +91,29 @@
   --text-32--line-height: 1.18;
   --text-34: 34px;
   --text-36: 36px;
+  --text-38: 38px;
+  --text-38--line-height: 1.12;
   --text-40: 40px;
   --text-40--line-height: 1.1;
   --text-44: 44px;
   --text-48: 48px;
+  --text-50: 50px;
+  --text-50--line-height: 1.04;
   --text-52: 52px;
   --text-56: 56px;
   --text-64: 64px;
+  --text-67: 67px;
+  --text-67--line-height: 1;
   --text-72: 72px;
   --text-72--line-height: 0.98;
+  --text-88: 88px;
+  --text-88--line-height: 0.95;
   --text-104: 104px;
   --text-104--line-height: 0.95;
   --text-112: 112px;
   --text-112--line-height: 0.92;
   /* Fluid display size for the home hero name: 52px on phones up to 108px on wide screens. */
-  --text-display: clamp(3.25rem, 1.6rem + 6.4vw, 6.75rem);
+  --text-display: clamp(3rem, 2rem + 4.5vw, 5.5rem);
   --text-display--line-height: 0.92;
 
   --tracking-display: -0.045em;
@@ -122,8 +131,24 @@
   --radius-tile: 14px;
   --radius-control: 10px;
   --radius-chip: 6px;
-  --shadow-tile: 0 1px 2px rgb(10 15 28 / 0.06), 0 10px 28px -10px rgb(10 15 28 / 0.14);
-  --shadow-tile-raised: 0 2px 4px rgb(10 15 28 / 0.07), 0 22px 44px -14px rgb(10 15 28 / 0.24);
+  --shadow-tile:
+    0 1px 2px rgb(10 15 28 / 0.06), 0 12px 28px -12px rgb(10 15 28 / 0.18),
+    0 32px 64px -32px rgb(10 15 28 / 0.22);
+  --shadow-tile-raised:
+    0 2px 4px rgb(10 15 28 / 0.08), 0 24px 48px -16px rgb(10 15 28 / 0.28),
+    0 56px 96px -40px rgb(10 15 28 / 0.32);
+  /* A floating window: long, soft shadow cast onto the tile below it. */
+  --shadow-window:
+    0 2px 4px rgb(10 15 28 / 0.2), 0 24px 40px -12px rgb(10 15 28 / 0.38),
+    0 60px 90px -30px rgb(10 15 28 / 0.45);
+
+  /* Pointer light on tilted tiles. */
+  --color-sheen: rgb(29 78 216 / 0.07);
+
+  /* Terminal window buttons (decorative, the platform's own colours). */
+  --color-window-close: #ff5f57;
+  --color-window-min: #febc2e;
+  --color-window-max: #28c840;
 }
 
 @layer base {
@@ -166,6 +191,10 @@
     --shadow-tile-raised:
       inset 0 1px 0 rgb(255 255 255 / 0.07), 0 2px 4px rgb(0 0 0 / 0.5),
       0 24px 48px -14px rgb(0 0 0 / 0.75);
+    --shadow-window:
+      inset 0 1px 0 rgb(255 255 255 / 0.06), 0 2px 4px rgb(0 0 0 / 0.6),
+      0 30px 60px -16px rgb(0 0 0 / 0.8);
+    --color-sheen: rgb(143 176 255 / 0.1);
   }
 
   /* No explicit choice (no [data-theme]) → follow the OS preference. Pure CSS, so this
@@ -207,6 +236,10 @@
       --shadow-tile-raised:
         inset 0 1px 0 rgb(255 255 255 / 0.07), 0 2px 4px rgb(0 0 0 / 0.5),
         0 24px 48px -14px rgb(0 0 0 / 0.75);
+      --shadow-window:
+        inset 0 1px 0 rgb(255 255 255 / 0.06), 0 2px 4px rgb(0 0 0 / 0.6),
+        0 30px 60px -16px rgb(0 0 0 / 0.8);
+      --color-sheen: rgb(143 176 255 / 0.1);
     }
   }
 
@@ -263,6 +296,68 @@
     &:focus-within {
       transform: translateY(-2px);
     }
+  }
+}
+
+/* Pointer tilt (components/ui/tilt.tsx sets --rx/--ry/--mx/--my). The wrapper tilts; the tile
+   inside casts a deeper shadow and catches a light sheen while the pointer is over it. */
+@utility tilt {
+  transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 450ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  &[data-tilting] {
+    transition-duration: 90ms;
+  }
+  &[data-tilting] > .tile {
+    box-shadow: var(--shadow-tile-raised);
+  }
+  &[data-tilting] > .tile::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(
+      420px circle at var(--mx) var(--my),
+      var(--color-sheen),
+      transparent 65%
+    );
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* A thin, terminal-toned scrollbar for the dark terminal log, in place of the OS default. */
+@utility term-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-term-control) transparent;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-term-control);
+    border-radius: 999px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-term-hint);
   }
 }
 

@@ -20,7 +20,7 @@ async function NotFoundContent({ perspective, stega }: DynamicFetchOptions) {
     <main id="main" className="flex-1 bg-grid">
       <div className="mx-auto flex max-w-page flex-wrap items-center gap-12 px-4 py-16 lg:px-10 lg:py-24">
         <div className="flex min-w-0 flex-[1.2_1_420px] flex-col gap-6">
-          <span className="font-mono text-12 tracking-label text-signal uppercase">Error 404</span>
+          <span className="text-13 font-medium text-signal">Error 404</span>
           <h1 className="m-0 text-48 leading-none font-semibold tracking-title lg:text-72">
             {copy?.notFound?.heading}
           </h1>

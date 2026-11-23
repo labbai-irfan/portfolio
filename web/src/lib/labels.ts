@@ -36,9 +36,9 @@ export const MILESTONE_CATEGORIES: Record<string, string> = {
 
 /** Detail-link wording per project page layout. */
 export const PROJECT_LINK_LABEL: Record<string, string> = {
-  caseStudy: 'Read the case study →',
-  pipeline: 'See the pipeline →',
-  lab: 'Read the lab write-up →',
+  caseStudy: 'Read the case study',
+  pipeline: 'See the pipeline',
+  lab: 'Read the lab write-up',
 };
 
 /** Project status as lower-case words (terminal output, search results). */

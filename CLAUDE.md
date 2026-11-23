@@ -34,8 +34,8 @@ Dev-only pages (404 in production): `http://localhost:3000/_kit` (component shee
 
 ## Positioning
 
-- DevOps-first. Hero label "DevOps · Cloud · Automation". Hero line "I automate how software ships and runs."
-- Software-development experience appears only as facts on Experience and Résumé. No copy about career change, a development background, or AI.
+- DevOps Engineer / Software Engineer (owner's redesign brief, superseding the earlier DevOps-only rule). The hero's role label, hero line, paragraph and technology line all come from Site settings (`headlineLabel`, `heroLine`, `heroParagraph`, `heroTech`); never hard-code them.
+- No copy about a career change, or AI. Skills and technologies are listed only when the owner confirms they were used.
 
 ## Code
 
@@ -92,4 +92,18 @@ Read token only in server env vars (`SANITY_API_READ_TOKEN`, Viewer role). No wr
 - Fixed interface text kept in code on purpose (MASTER_PROMPT §2A "stays in code"): the hero pipeline strip and its labels, section headings such as "Topology", the four-step note format, nav labels, button labels, error-page wording.
 - Presentation tool: configured in `studio/sanity.config.ts`; its target site is `SANITY_STUDIO_PREVIEW_URL`. `STUDIO_GUIDE.md` is the owner's editing guide.
 - Cache-refresh safety: a cache refresh (publish webhook or Live Content) rebuilds each route's static shell, and a route with a dynamic segment may not read `params` or call `usePathname()` outside `<Suspense>` while that happens, or its pages error after the first publish. So detail pages read `params` inside a `<Suspense>` child, and the header's nav (`usePathname`) is wrapped in `<Suspense>`. Any new client component that reads the path or search params must be inside `<Suspense>`. Test after a change: build, start with `SANITY_REVALIDATE_SECRET` set, send a signed `POST /api/revalidate`, then fetch every route.
+- Terminal (site-wide): one session for the whole visit.
+  - `components/terminal/commands.ts` is the pure, unit-tested engine; add commands and tests there.
+  - `use-terminal.ts` holds session state; `terminal-view.tsx` draws a session.
+  - `terminal-context.tsx` (`TerminalProvider`, `useTerminalSession`) shares the session and owns the overlay. `terminal-host.tsx`, in the root layout, loads its data with `stega: false`.
+  - The hero (`hero-terminal.tsx`), the overlay (`terminal-overlay.tsx`, a native `<dialog>`) and `/terminal` all draw the same session.
+  - Open the overlay with `openTerminal(fromElement)` from `lib/terminal-events.ts`; Ctrl+` opens it anywhere, and the nav Terminal entry and the search action use it.
+  - The hero boot sequence (`boot.ts`) plays once per visit (sessionStorage) and never with reduced motion. Its lines are a playful start-up, not claims; keep them that way.
+- Hero: `components/home/hero.tsx` (an editorial intro, not a card) plus `HeroTerminal`. New home sections go in `components/home/`; the bento tiles below the hero are being replaced section by section (redesign phases R4–R7).
+- Depth and the home bento:
+  - Cards use the `tile` utility (radius, soft border, two-layer `--shadow-tile`). Add `tile-interactive` when something in the card is clickable; it lifts on hover and keyboard focus. Inner-page cards (project cards, evidence ledger, spec strip, figure, role, notes, topology) already use it.
+  - Home is a bento grid (`app/page.tsx`). Tiles come from the Studio's section order and visibility. `packRows()` in `lib/bento.ts` (unit-tested) gives each tile a column span so every row is exactly full at 12 and 6 columns; keep a tile's preferred widths in the page, not in CSS.
+  - Every home tile sits in `<Tilt>` (`components/ui/tilt.tsx`, client). It tilts toward the pointer with a light sheen, only with a fine pointer and no reduced-motion preference.
+  - The two terminal tiles use `TerminalWindow` (`components/ui/terminal-window.tsx`) at a static 3D angle that turns to face the viewer on hover.
+  - Shadows, the sheen and window-button colours are tokens in `globals.css`, light and dark.
 - One component per file: small helpers get their own file (for example `footer-link.tsx`, `neighbour-link.tsx`). Do not add a second component to an existing file.

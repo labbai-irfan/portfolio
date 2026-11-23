@@ -79,7 +79,7 @@ async function ExperienceContent({ perspective, stega }: DynamicFetchOptions) {
 
         {education.length > 0 && (
           <section aria-labelledby="edu-h" className="flex flex-col gap-5">
-            <h2 id="edu-h" className="m-0 font-mono text-12 tracking-label text-muted uppercase">
+            <h2 id="edu-h" className="m-0 text-13 font-medium text-muted">
               Education
             </h2>
             <div className="flex flex-wrap gap-6">
@@ -90,7 +90,7 @@ async function ExperienceContent({ perspective, stega }: DynamicFetchOptions) {
                 >
                   <span
                     className={cx(
-                      'font-mono text-12 uppercase',
+                      'text-13 font-medium',
                       role.endDate ? 'text-muted' : 'text-signal',
                     )}
                   >
@@ -111,7 +111,7 @@ async function ExperienceContent({ perspective, stega }: DynamicFetchOptions) {
 
         <CalloutBanner
           text="The one-page version, for your ATS."
-          action={{ label: 'View résumé →', href: '/resume' }}
+          action={{ label: 'View résumé', href: '/resume' }}
         />
       </div>
     </main>

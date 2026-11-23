@@ -16,7 +16,7 @@ export type ProjectDetailData = Fetched<NonNullable<PROJECT_QUERY_RESULT>>;
 /** Evidence row hint: the host for external links, "read →" for pages on this site. */
 function evidenceMeta(url: string): string {
   const clean = stegaClean(url);
-  if (!isExternal(clean)) return 'read →';
+  if (!isExternal(clean)) return 'read';
   try {
     return new URL(clean).hostname;
   } catch {
@@ -71,9 +71,7 @@ export function ProjectDetail({ project }: { project: ProjectDetailData }) {
           className="border-b border-rule-strong bg-ground"
         >
           <div className="mx-auto flex max-w-page flex-wrap gap-x-10 gap-y-3 px-4 py-8 lg:px-10">
-            <span className="min-w-40 font-mono text-11 tracking-label text-signal uppercase">
-              In short
-            </span>
+            <span className="min-w-40 text-13 font-medium text-signal">In short</span>
             <p className="m-0 min-w-0 flex-[1_1_480px] text-18 leading-[1.6] font-medium text-ink">
               {project.recruiterSummary}
             </p>
@@ -114,7 +112,7 @@ export function ProjectDetail({ project }: { project: ProjectDetailData }) {
         <aside className="flex min-w-0 flex-[0_1_340px] flex-col gap-6">
           {sections.length > 0 && (
             <nav aria-label="On this page" className="border border-rule-strong bg-surface">
-              <p className="m-0 border-b border-rule-strong px-5 py-3.5 font-mono text-11 tracking-label text-muted uppercase">
+              <p className="m-0 border-b border-rule-strong px-5 py-3.5 text-13 font-medium text-muted">
                 On this page
               </p>
               <ol className="m-0 list-none p-0">

@@ -57,7 +57,22 @@ export function buildTerminalData({
       slug: p.slug,
       status: p.status,
       statusLabel: STATUS_WORDS[p.status] ?? p.status,
+      tools: p.tools ?? [],
     })),
+    summary: (settings?.summaryCells ?? []).map((cell) => ({
+      label: cell.label,
+      value: cell.value,
+    })),
+    // Container skills: the containers group, or any skill named after a container tool.
+    containers: skills
+      .filter((s) => s.group === 'containers' || /docker|compose|container/i.test(s.name))
+      .map((s) => ({
+        name: s.name,
+        tierLabel: SKILL_TIERS[s.tier] ?? s.tier,
+        usedIn: (s.usedIn ?? [])
+          .map((ref) => ref.title ?? ref.code)
+          .filter((title): title is string => Boolean(title)),
+      })),
     skillTiers,
     roles: roles
       .filter((r) => r.kind !== 'education' && r.startDate)

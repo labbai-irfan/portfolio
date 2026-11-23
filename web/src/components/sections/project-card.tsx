@@ -34,9 +34,7 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
     <article
       className={cx(
         'flex min-w-0 flex-[1_1_320px] flex-col gap-4 p-6 lg:flex-[1_1_520px] lg:p-8',
-        planned
-          ? 'border border-dashed border-rule-dashed'
-          : 'border border-rule-strong bg-surface',
+        planned ? 'rounded-tile border border-dashed border-rule-dashed' : 'tile-interactive tile',
       )}
     >
       <div className="flex items-center justify-between gap-2">
@@ -49,9 +47,7 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
         <p className="m-0 font-mono text-12 text-body">{project.tools.join(' · ')}</p>
       )}
       <div className="flex flex-col gap-2 border-t border-rule pt-4">
-        <span className="font-mono text-10 tracking-label text-muted uppercase">
-          Stage coverage
-        </span>
+        <span className="text-12 font-medium text-muted">Stage coverage</span>
         <ul className="m-0 flex list-none gap-1.5 p-0">
           {coverageOf(project).map((stage) => (
             <li key={stage.key} className="flex flex-1 flex-col items-start gap-1.5">

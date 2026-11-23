@@ -482,6 +482,7 @@ export type SiteSettings = {
   headlineLabel: string;
   heroLine: string;
   heroParagraph?: string;
+  heroTech?: Array<string>;
   summaryCells?: Array<
     {
       _key: string;
@@ -654,7 +655,7 @@ export type AllSanitySchemaTypes =
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: SETTINGS_QUERY
-// Query: *[_id == "siteSettings"][0]{  name, resumeName, location, footerTagline, resumeHeadline, resumeSummary,  headlineLabel, heroLine, heroParagraph,  summaryCells[]{ _key, label, value },  openToRoles, rolesWanted, workPreference, availability,  email, linkedinUrl, githubUrl,  socials[]{ _key, label, url },  "resumeUrl": resumeFile.asset->url,  seo { title, description, shareImage {   asset->{ _id, url, metadata { lqip, dimensions { width, height } } },  alt, hotspot, crop } }}
+// Query: *[_id == "siteSettings"][0]{  name, resumeName, location, footerTagline, resumeHeadline, resumeSummary,  headlineLabel, heroLine, heroParagraph, heroTech,  summaryCells[]{ _key, label, value },  openToRoles, rolesWanted, workPreference, availability,  email, linkedinUrl, githubUrl,  socials[]{ _key, label, url },  "resumeUrl": resumeFile.asset->url,  seo { title, description, shareImage {   asset->{ _id, url, metadata { lqip, dimensions { width, height } } },  alt, hotspot, crop } }}
 export type SETTINGS_QUERY_RESULT =
   | {
       name: null;
@@ -666,6 +667,7 @@ export type SETTINGS_QUERY_RESULT =
       headlineLabel: null;
       heroLine: null;
       heroParagraph: null;
+      heroTech: null;
       summaryCells: null;
       openToRoles: null;
       rolesWanted: null;
@@ -688,6 +690,7 @@ export type SETTINGS_QUERY_RESULT =
       headlineLabel: null;
       heroLine: null;
       heroParagraph: null;
+      heroTech: null;
       summaryCells: null;
       openToRoles: null;
       rolesWanted: null;
@@ -729,6 +732,7 @@ export type SETTINGS_QUERY_RESULT =
       headlineLabel: null;
       heroLine: null;
       heroParagraph: null;
+      heroTech: null;
       summaryCells: null;
       openToRoles: null;
       rolesWanted: null;
@@ -751,6 +755,7 @@ export type SETTINGS_QUERY_RESULT =
       headlineLabel: null;
       heroLine: null;
       heroParagraph: null;
+      heroTech: null;
       summaryCells: null;
       openToRoles: null;
       rolesWanted: null;
@@ -773,6 +778,7 @@ export type SETTINGS_QUERY_RESULT =
       headlineLabel: string;
       heroLine: string;
       heroParagraph: string | null;
+      heroTech: Array<string> | null;
       summaryCells: Array<{
         _key: string;
         label: string;
@@ -1666,7 +1672,7 @@ export type FEED_QUERY_RESULT = Array<{
 // Query TypeMap
 declare global {
   interface SanityQueries {
-    '*[_id == "siteSettings"][0]{\n  name, resumeName, location, footerTagline, resumeHeadline, resumeSummary,\n  headlineLabel, heroLine, heroParagraph,\n  summaryCells[]{ _key, label, value },\n  openToRoles, rolesWanted, workPreference, availability,\n  email, linkedinUrl, githubUrl,\n  socials[]{ _key, label, url },\n  "resumeUrl": resumeFile.asset->url,\n  seo { title, description, shareImage { \n  asset->{ _id, url, metadata { lqip, dimensions { width, height } } },\n  alt, hotspot, crop\n } }\n}': SETTINGS_QUERY_RESULT;
+    '*[_id == "siteSettings"][0]{\n  name, resumeName, location, footerTagline, resumeHeadline, resumeSummary,\n  headlineLabel, heroLine, heroParagraph, heroTech,\n  summaryCells[]{ _key, label, value },\n  openToRoles, rolesWanted, workPreference, availability,\n  email, linkedinUrl, githubUrl,\n  socials[]{ _key, label, url },\n  "resumeUrl": resumeFile.asset->url,\n  seo { title, description, shareImage { \n  asset->{ _id, url, metadata { lqip, dimensions { width, height } } },\n  alt, hotspot, crop\n } }\n}': SETTINGS_QUERY_RESULT;
     '*[_id == "pageCopy"][0]{\n  work, notes, journey, experience, skills, infrastructure, contact, terminal, resume, notFound\n}': PAGE_COPY_QUERY_RESULT;
     '{\n  "home": *[_id == "homePage"][0]{\n    featuredProject->{ \n  _id, code, title, "slug": slug.current, status, layout, featured, summary, tools,\n  stageCoverage { commit, build, test, ship, run, observe },\n  coverImage { \n  asset->{ _id, url, metadata { lqip, dimensions { width, height } } },\n  alt, hotspot, crop\n }\n, recruiterSummary },\n    sections[]{ _key, section, visible }\n  },\n  "otherFeatured": *[_type == "project" && defined(slug.current) && featured == true\n    && _id != *[_id == "homePage"][0].featuredProject._ref] | order(orderRank) { \n  _id, code, title, "slug": slug.current, status, layout, featured, summary, tools,\n  stageCoverage { commit, build, test, ship, run, observe },\n  coverImage { \n  asset->{ _id, url, metadata { lqip, dimensions { width, height } } },\n  alt, hotspot, crop\n }\n },\n  "infraTeaser": *[_type == "infraNode" && state == "live"] | order(orderRank) { _id, kicker, name, category },\n  "siteStatus": *[_id == "siteStatus"][0] { status, checkedAt, uptime },\n  "recentMilestones": *[_type == "milestone" && planned != true] | order(sortDate desc)[0...4] {\n    _id, title, dateLabel, latest\n  },\n  "nextMilestone": *[_type == "milestone" && planned == true] | order(orderRank asc)[0] { title },\n  "latestNote": *[_type == "note" && defined(slug.current)] | order(date desc)[0] { \n  _id, code, title, "slug": slug.current, date, summary, tags,\n  category->{ title, "slug": slug.current },\n  project->{ code, title, "slug": slug.current },\n  coverImage { \n  asset->{ _id, url, metadata { lqip, dimensions { width, height } } },\n  alt, hotspot, crop\n },\n  "hasDebugSteps": defined(debugSteps)\n }\n}': HOME_QUERY_RESULT;
     '*[_id == "siteStatus"][0]{ status, checkedAt, uptime }': SITE_STATUS_QUERY_RESULT;

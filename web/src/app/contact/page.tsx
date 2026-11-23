@@ -38,7 +38,7 @@ async function ContactContent({ perspective, stega }: DynamicFetchOptions) {
     // to the subtree, so the theme toggle does not change it.
     <main id="main" data-theme="dark" className="bg-ground text-ink">
       <section className="mx-auto flex max-w-page flex-col gap-6 px-4 pt-24 pb-16 lg:px-10">
-        <span className="font-mono text-12 tracking-label text-muted uppercase">Contact</span>
+        <span className="text-13 font-medium text-muted">Contact</span>
         {copy?.contact?.heading && (
           <h1 className="m-0 max-w-275 text-48 font-semibold tracking-title lg:text-112">
             {copy.contact.heading}
@@ -60,7 +60,7 @@ async function ContactContent({ perspective, stega }: DynamicFetchOptions) {
             href={`mailto:${email}`}
             className="flex min-h-60 min-w-0 flex-[1.4_1_320px] flex-col justify-between gap-12 bg-signal p-8 text-on-signal no-underline hover:text-on-signal lg:flex-[1.4_1_480px] lg:p-10"
           >
-            <span className="font-mono text-12 tracking-label uppercase">Preferred · Email</span>
+            <span className="text-13 font-medium">Preferred · Email</span>
             <span className="flex items-end justify-between gap-4">
               <span className="text-26 font-semibold tracking-lead break-all lg:text-36">
                 {email}
@@ -90,7 +90,7 @@ async function ContactContent({ perspective, stega }: DynamicFetchOptions) {
           ))}
           <Link href="/resume" className={channelClass}>
             Résumé
-            <span className="font-mono text-13 font-normal text-muted">view or download →</span>
+            <span className="font-mono text-13 font-normal text-muted">view or download</span>
           </Link>
         </div>
       </section>
@@ -107,9 +107,7 @@ async function ContactContent({ perspective, stega }: DynamicFetchOptions) {
                   key={cell.label}
                   className="flex min-w-0 flex-[1_1_260px] flex-col gap-2.5 border-rule-strong p-7 not-last:border-r"
                 >
-                  <dt className="font-mono text-11 tracking-label text-muted uppercase">
-                    {cell.label}
-                  </dt>
+                  <dt className="text-13 font-medium text-muted">{cell.label}</dt>
                   <dd className="m-0 text-17 leading-[1.55]">{cell.value}</dd>
                 </div>
               ))}

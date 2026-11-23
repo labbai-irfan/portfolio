@@ -5,7 +5,9 @@ type CodeBlockProps = { code: string; filename?: string | null; className?: stri
 
 export function CodeBlock({ code, filename, className }: CodeBlockProps) {
   return (
-    <div className={cx('border border-term-border bg-term', className)}>
+    <div
+      className={cx('overflow-hidden rounded-control border border-term-border bg-term', className)}
+    >
       <div className="flex items-center justify-between gap-4 border-b border-term-rule py-1.5 pr-1.5 pl-5">
         <span className="truncate font-mono text-12 text-term-hint">{filename}</span>
         <CopyButton text={code} />

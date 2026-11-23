@@ -1,16 +1,16 @@
 import type { ReactNode } from 'react';
+import { Hero } from '@/components/home/hero';
 import { PersonJsonLd } from '@/components/seo/person-json-ld';
+import { EngineeringOverview } from '@/components/sections/home/engineering-overview';
+import { EngineeringPipeline } from '@/components/sections/home/engineering-pipeline';
 import { FlagshipTile } from '@/components/sections/home/flagship-tile';
-import { HeroPipeline } from '@/components/sections/home/hero-pipeline';
 import { HomeContact } from '@/components/sections/home/home-contact';
-import { HomeHero } from '@/components/sections/home/home-hero';
 import { HomeInfra } from '@/components/sections/home/home-infra';
 import { HomeJourney } from '@/components/sections/home/home-journey';
 import { HomeNotes } from '@/components/sections/home/home-notes';
 import { HomeTerminal } from '@/components/sections/home/home-terminal';
 import { ProjectTile } from '@/components/sections/home/project-tile';
-import { StatusTile } from '@/components/sections/home/status-tile';
-import { SummaryTile } from '@/components/sections/home/summary-tile';
+import { Tilt } from '@/components/ui/tilt';
 import { packRows } from '@/lib/bento';
 import { stegaClean } from '@/lib/stega';
 import { cachedSanity, getDynamicFetchOptions, type DynamicFetchOptions } from '@/sanity/live';
@@ -58,37 +58,9 @@ async function HomeContent({ perspective, stega }: DynamicFetchOptions) {
 
   const flagship = home.home?.featuredProject ?? null;
   const featured = [...(flagship ? [flagship] : []), ...home.otherFeatured];
-  const pipeline = featured.find((project) => stegaClean(project.layout) === 'pipeline');
 
-  // Fixed opening tiles: who, how this page shipped, live status, the 60-second facts.
-  const tiles: BentoTile[] = [
-    { key: 'intro', lg: 7, md: 6, render: (c) => <HomeHero settings={settings} className={c} /> },
-    {
-      key: 'pipeline',
-      lg: 5,
-      md: 6,
-      render: (c) => (
-        <HeroPipeline
-          pipelineHref={pipeline?.slug ? `/work/${pipeline.slug}` : null}
-          className={c}
-        />
-      ),
-    },
-    {
-      key: 'status',
-      lg: 3,
-      md: 3,
-      render: (c) => <StatusTile status={home.siteStatus} className={c} />,
-    },
-    ...(settings?.summaryCells ?? []).map((cell) => ({
-      key: cell._key,
-      lg: 3,
-      md: 3,
-      render: (c: string) => <SummaryTile cell={cell} className={c} />,
-    })),
-  ];
-
-  // Then the Studio's sections, in the Studio's order; hidden or empty sections add no tile.
+  // Below the hero: the Studio's sections, in the Studio's order; hidden or empty ones add no tile.
+  const tiles: BentoTile[] = [];
   const visible = (home.home?.sections ?? []).filter((s) => s.visible !== false);
   for (const section of visible) {
     switch (stegaClean(section.section)) {
@@ -181,12 +153,20 @@ async function HomeContent({ perspective, stega }: DynamicFetchOptions) {
   return (
     <main id="main">
       <PersonJsonLd />
-      <div className="mx-auto max-w-page px-4 py-6 md:py-8 lg:px-10 lg:py-12">
+      <Hero settings={settings} />
+      <EngineeringPipeline />
+      <EngineeringOverview
+        status={home.siteStatus}
+        summaryCells={settings?.summaryCells ?? []}
+        className="mx-auto max-w-page px-4 py-8 lg:px-10"
+      />
+      <div className="mx-auto max-w-page px-4 pb-6 md:pb-8 lg:px-10 lg:pb-12">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-6 lg:grid-cols-12 lg:gap-5">
           {lg.map(({ item, span }, i) => (
-            <div key={item.key} className={`grid ${MD_SPAN[md[i]?.span ?? 6]} ${LG_SPAN[span]}`}>
+            // Each cell tilts toward the pointer; the tile inside fills the cell's full row height.
+            <Tilt key={item.key} className={`grid ${MD_SPAN[md[i]?.span ?? 6]} ${LG_SPAN[span]}`}>
               {item.render('')}
-            </div>
+            </Tilt>
           ))}
         </div>
       </div>

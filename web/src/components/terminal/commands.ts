@@ -22,7 +22,13 @@ export type TerminalData = {
     slug: string | null;
     status: string;
     statusLabel: string;
+    /** Tools used, as listed on the project. */
+    tools: string[];
   }[];
+  /** Site settings → Summary cells: the 60-second read. */
+  summary: { label: string; value: string }[];
+  /** Container skills (Docker and friends), with what they were used in. */
+  containers: { name: string; tierLabel: string; usedIn: string[] }[];
   /** Skills by tier, in display order. */
   skillTiers: { label: string; names: string[] }[];
   roles: { title: string; organisation: string; dates: string }[];
@@ -34,10 +40,16 @@ export type TerminalData = {
 };
 
 export type RunContext = { data: TerminalData; history: string[]; now: Date };
-export type RunResult = { lines: TermLine[]; clear?: boolean };
+export type RunResult = {
+  lines: TermLine[];
+  clear?: boolean;
+  /** Close the terminal: the overlay closes; the full page goes home. */
+  exit?: boolean;
+};
 
 export const COMMAND_NAMES = [
   'help',
+  'about',
   'whoami',
   'ls',
   'pwd',
@@ -47,6 +59,7 @@ export const COMMAND_NAMES = [
   'experience',
   'journey',
   'pipeline',
+  'docker',
   'infra',
   'contact',
   'resume',
@@ -55,6 +68,7 @@ export const COMMAND_NAMES = [
   'date',
   'echo',
   'sudo',
+  'exit',
 ] as const;
 
 /** The first word of the owner's name, lower-cased: the user in `irfan@portfolio`. */
@@ -74,6 +88,7 @@ const link = (text: string, href: string): TermLine => ({ kind: 'link', text, hr
 
 const HELP: TermLine[] = [
   head('Available commands'),
+  out('  about         who I am, and the 60-second summary'),
   out('  whoami        who I am, in one line'),
   out('  projects      everything I have built, with status'),
   out('  open <id>     open a project, e.g. open p-01'),
@@ -81,10 +96,11 @@ const HELP: TermLine[] = [
   out('  experience    where I have worked'),
   out('  journey       milestones, newest first'),
   out('  pipeline      how this page was shipped'),
+  out('  docker        container skills, and the projects that use them'),
   out('  infra         what this site runs on'),
   out('  contact       how to reach me'),
   out('  resume        the one-page version'),
-  out('  ls · pwd · date · echo · history · clear'),
+  out('  ls · pwd · date · echo · history · clear · exit'),
   dim('Tab autocompletes. ↑ ↓ walk through history.'),
 ];
 
@@ -124,6 +140,37 @@ function contact(data: TerminalData): TermLine[] {
   ];
 }
 
+/** Who-am-I summary: one line of identity, one of status. Also the hero's post-boot overview. */
+export function whoami(data: TerminalData): TermLine[] {
+  return [
+    out([data.name, data.headlineLabel].filter(Boolean).join(' — ') || userOf(data)),
+    dim([data.location, data.openToRoles && 'open to roles'].filter(Boolean).join(' · ')),
+  ];
+}
+
+function docker(data: TerminalData): TermLine[] {
+  const using = data.projects.filter((p) =>
+    p.tools.some((tool) => /docker|compose|container/i.test(tool)),
+  );
+  if (data.containers.length === 0 && using.length === 0) {
+    return [dim('No container work is published yet.')];
+  }
+  const width = Math.max(8, ...data.containers.map((s) => s.name.length));
+  return [
+    ...(data.containers.length > 0 ? [head('Skills')] : []),
+    ...data.containers.map((s) => {
+      const used = s.usedIn.length > 0 ? ` · ${s.usedIn.join(', ')}` : '';
+      return out(`  ${s.name.padEnd(width + 2)}${s.tierLabel.toLowerCase()}${used}`);
+    }),
+    ...(using.length > 0 ? [head('Projects')] : []),
+    ...using.map((p) =>
+      p.slug && p.status !== 'planned'
+        ? link(`${p.code.toLowerCase()}  ${p.title} →`, `/work/${p.slug}`)
+        : dim(`${p.code.toLowerCase()}  ${p.title} — ${p.statusLabel}`),
+    ),
+  ];
+}
+
 function pipeline(data: TerminalData): TermLine[] {
   const stamp = [
     data.commit && `commit ${data.commit}`,
@@ -151,12 +198,17 @@ export function runCommand(input: string, { data, history, now }: RunContext): R
     case 'help':
       return { lines: HELP };
     case 'whoami':
+      return { lines: whoami(data) };
+    case 'about':
       return {
         lines: [
-          out([data.name, data.headlineLabel].filter(Boolean).join(' — ') || userOf(data)),
-          dim([data.location, data.openToRoles && 'open to roles'].filter(Boolean).join(' · ')),
+          ...whoami(data),
+          ...data.summary.map((cell) => out(`${cell.label.toLowerCase().padEnd(18)}${cell.value}`)),
+          link('Experience →', '/experience'),
         ],
       };
+    case 'docker':
+      return { lines: docker(data) };
     case 'pwd':
       return { lines: [out(`/home/${userOf(data)}/portfolio`)] };
     case 'ls':
@@ -228,7 +280,7 @@ export function runCommand(input: string, { data, history, now }: RunContext): R
         ],
       };
     case 'exit':
-      return { lines: [dim('No exit here — but `contact` reaches a human.')] };
+      return { lines: [dim('Closing the terminal.')], exit: true };
     default:
       return { lines: [err(`command not found: ${cmd} — type \`help\``)] };
   }

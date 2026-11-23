@@ -91,7 +91,7 @@ export function AboutMenu() {
             className="flex min-h-11 items-center justify-between px-4 py-2.5 text-ink no-underline hover:bg-ground hover:text-ink"
           >
             <span className="text-14 font-medium">Résumé</span>
-            <span className="font-mono text-12 text-signal">one page →</span>
+            <span className="font-mono text-12 text-signal">one page</span>
           </Link>
         </div>
       )}

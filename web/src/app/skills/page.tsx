@@ -84,12 +84,7 @@ async function SkillsContent({ perspective, stega }: DynamicFetchOptions) {
                       className="flex items-center gap-3.5 border-rule px-4.5 py-3.5 not-last:border-b"
                     >
                       <dt>
-                        <span
-                          className={cx(
-                            'px-2 py-1 font-mono text-11 font-semibold tracking-chip uppercase',
-                            TIER_CHIP[tier],
-                          )}
-                        >
+                        <span className={cx('px-2 py-1 text-13 font-semibold', TIER_CHIP[tier])}>
                           {SKILL_TIERS[tier]}
                         </span>
                       </dt>
@@ -112,7 +107,7 @@ async function SkillsContent({ perspective, stega }: DynamicFetchOptions) {
                   <th
                     key={heading}
                     scope="col"
-                    className="border-0 px-5.5 py-3.5 text-left font-mono text-11 font-medium tracking-label uppercase"
+                    className="border-0 px-5.5 py-3.5 text-left text-13 font-medium"
                   >
                     {heading}
                   </th>
@@ -126,7 +121,7 @@ async function SkillsContent({ perspective, stega }: DynamicFetchOptions) {
                     <th
                       colSpan={3}
                       scope="colgroup"
-                      className="bg-ground px-5.5 pt-4.5 pb-2.5 text-left font-mono text-11 font-medium tracking-label text-signal uppercase"
+                      className="bg-ground px-5.5 pt-4.5 pb-2.5 text-left text-13 font-medium text-signal"
                     >
                       {SKILL_GROUPS[group.key]}
                     </th>
@@ -144,7 +139,7 @@ async function SkillsContent({ perspective, stega }: DynamicFetchOptions) {
                           {skill.tier && (
                             <span
                               className={cx(
-                                'px-2 py-1 font-mono text-11 font-semibold tracking-chip uppercase',
+                                'px-2 py-1 text-13 font-semibold',
                                 TIER_CHIP[stegaClean(skill.tier) ?? ''],
                               )}
                             >
@@ -192,10 +187,7 @@ async function SkillsContent({ perspective, stega }: DynamicFetchOptions) {
                 className="flex min-w-0 flex-[1_1_260px] flex-col gap-2 border-rule p-6 not-last:border-r"
               >
                 <span
-                  className={cx(
-                    'font-mono text-12 uppercase',
-                    index === 0 ? 'text-signal' : 'text-muted',
-                  )}
+                  className={cx('text-13 font-medium', index === 0 ? 'text-signal' : 'text-muted')}
                 >
                   {item.dateLabel}
                 </span>

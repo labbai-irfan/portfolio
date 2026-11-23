@@ -33,7 +33,7 @@ const noteCard = /* groq */ `
 // ── Singletons ───────────────────────────────────────────────────────────────
 export const SETTINGS_QUERY = defineQuery(`*[_id == "siteSettings"][0]{
   name, resumeName, location, footerTagline, resumeHeadline, resumeSummary,
-  headlineLabel, heroLine, heroParagraph,
+  headlineLabel, heroLine, heroParagraph, heroTech,
   summaryCells[]{ _key, label, value },
   openToRoles, rolesWanted, workPreference, availability,
   email, linkedinUrl, githubUrl,

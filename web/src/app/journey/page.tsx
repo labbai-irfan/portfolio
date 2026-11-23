@@ -54,7 +54,7 @@ async function JourneyContent({ perspective, stega }: DynamicFetchOptions) {
                     key={stat.label}
                     className="flex-1 border-rule px-4.5 py-4 not-last:border-r"
                   >
-                    <dt className="text-11 tracking-label text-muted uppercase">{stat.label}</dt>
+                    <dt className="text-11 text-muted">{stat.label}</dt>
                     <dd className="m-0 mt-1.5 text-24 font-medium whitespace-nowrap">
                       {stat.value}
                     </dd>
@@ -71,9 +71,7 @@ async function JourneyContent({ perspective, stega }: DynamicFetchOptions) {
         <div className="mx-auto flex max-w-page flex-col gap-6 px-4 pt-16 pb-22 lg:px-10">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div className="flex flex-col gap-2.5">
-              <span className="font-mono text-12 tracking-label text-signal uppercase">
-                Credentials
-              </span>
+              <span className="text-13 font-medium text-signal">Credentials</span>
               <h2 id="cred-h" className="m-0 text-34 font-semibold tracking-heading lg:text-40">
                 Certifications — verifiable only.
               </h2>

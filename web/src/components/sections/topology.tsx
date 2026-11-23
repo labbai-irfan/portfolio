@@ -60,9 +60,7 @@ export function Topology({ nodes }: { nodes: TopologyNode[] }) {
           dimmed && 'opacity-35',
         )}
       >
-        <span className={cx('font-mono text-10 tracking-label uppercase', tone.kicker)}>
-          {node.kicker}
-        </span>
+        <span className={cx('text-12 font-medium', tone.kicker)}>{node.kicker}</span>
         <span className="text-15 font-semibold">{node.name}</span>
         {node.sub && <span className={cx('font-mono text-11', tone.sub)}>{node.sub}</span>}
       </button>
@@ -73,7 +71,7 @@ export function Topology({ nodes }: { nodes: TopologyNode[] }) {
     <div className="flex flex-wrap items-start gap-6">
       <figure
         aria-labelledby="topo-cap"
-        className="m-0 min-w-0 flex-[1_1_100%] border border-rule-strong bg-surface bg-grid"
+        className="m-0 min-w-0 flex-[1_1_100%] overflow-hidden tile bg-grid"
       >
         <div className="flex flex-col items-stretch gap-2 p-6 lg:flex-row lg:flex-wrap lg:items-center lg:p-8">
           {chain.map(({ node, via }) => (
@@ -96,9 +94,7 @@ export function Topology({ nodes }: { nodes: TopologyNode[] }) {
         </div>
         {others.length > 0 && (
           <div className="flex flex-wrap items-center gap-3 border-t border-rule px-6 py-5 lg:px-8">
-            <span className="w-full font-mono text-10 tracking-label text-muted uppercase">
-              Supporting
-            </span>
+            <span className="w-full text-12 font-medium text-muted">Supporting</span>
             {others.map(renderNode)}
           </div>
         )}
@@ -114,18 +110,14 @@ export function Topology({ nodes }: { nodes: TopologyNode[] }) {
         <aside
           id="topo-detail"
           aria-live="polite"
-          className="flex min-w-0 flex-[1_1_100%] flex-col gap-3 border border-rule-strong bg-surface p-6"
+          className="flex min-w-0 flex-[1_1_100%] flex-col gap-3 tile p-6"
         >
-          <span className="font-mono text-11 tracking-label text-signal uppercase">
-            {shown.kicker}
-          </span>
+          <span className="text-13 font-medium text-signal">{shown.kicker}</span>
           <h3 className="m-0 text-24 font-semibold tracking-lead">{shown.name}</h3>
           <p className="m-0 text-15 leading-[1.6] text-body">{shown.role}</p>
           {shownEdges.length > 0 && (
             <div className="flex flex-col border-t border-rule pt-3">
-              <span className="font-mono text-10 tracking-label text-muted uppercase">
-                Connections
-              </span>
+              <span className="text-12 font-medium text-muted">Connections</span>
               {shownEdges.map((edge) => (
                 <div
                   key={edge.text}

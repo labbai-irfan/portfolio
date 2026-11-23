@@ -103,12 +103,7 @@ const components: PortableTextComponents = {
           )}
         >
           {callout.label && (
-            <span
-              className={cx(
-                'font-mono text-11 tracking-label uppercase',
-                warning ? 'text-lab' : 'text-progress',
-              )}
-            >
+            <span className={cx('text-13 font-medium', warning ? 'text-lab' : 'text-progress')}>
               {callout.label}
             </span>
           )}

@@ -35,7 +35,7 @@ async function WorkContent({ perspective, stega }: DynamicFetchOptions) {
       <div className="mx-auto max-w-page px-4 pb-22 lg:px-10">
         <CalloutBanner
           text="Want to see how I work through a real problem?"
-          action={{ label: 'Read the debugging notes →', href: '/notes' }}
+          action={{ label: 'Read the debugging notes', href: '/notes' }}
         />
       </div>
     </main>

@@ -24,7 +24,7 @@ export function NoteDetail({ note }: { note: NoteDetailData }) {
               ← All notes
             </Link>
           </nav>
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-12 tracking-data text-muted uppercase">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-13 font-medium text-muted">
             {note.code && <span>{note.code}</span>}
             <span>{note.category.title}</span>
             <time dateTime={note.date}>{fullDate(note.date)}</time>
@@ -48,9 +48,7 @@ export function NoteDetail({ note }: { note: NoteDetailData }) {
                   key={line.label}
                   className="flex flex-wrap gap-x-6 gap-y-1 border-rule px-5 py-3.5 not-last:border-b"
                 >
-                  <dt className="w-20 font-mono text-11 tracking-label text-muted uppercase">
-                    {line.label}
-                  </dt>
+                  <dt className="w-20 text-13 font-medium text-muted">{line.label}</dt>
                   <dd className="m-0 min-w-0 flex-[1_1_300px] text-15 leading-[1.55] text-ink">
                     {line.value}
                   </dd>

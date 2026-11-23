@@ -17,10 +17,27 @@ const data: TerminalData = {
       slug: 'this-site',
       status: 'shipsWithSite',
       statusLabel: 'ships with site',
+      tools: ['Next.js'],
     },
-    { code: 'P-01', title: 'Lab', slug: 'lab', status: 'learningLab', statusLabel: 'learning lab' },
-    { code: 'P-02', title: 'Future', slug: null, status: 'planned', statusLabel: 'planned' },
+    {
+      code: 'P-01',
+      title: 'Lab',
+      slug: 'lab',
+      status: 'learningLab',
+      statusLabel: 'learning lab',
+      tools: ['Docker', 'MySQL'],
+    },
+    {
+      code: 'P-02',
+      title: 'Future',
+      slug: null,
+      status: 'planned',
+      statusLabel: 'planned',
+      tools: ['Docker Compose'],
+    },
   ],
+  summary: [{ label: 'Targeting', value: 'DevOps roles' }],
+  containers: [{ name: 'Docker', tierLabel: 'In projects', usedIn: ['Lab'] }],
   skillTiers: [{ label: 'At work', names: ['Git'] }],
   roles: [{ title: 'Engineer', organisation: 'Acme', dates: 'Apr 2026 — Present' }],
   years: [{ year: '2026', titles: ['Started'] }],
@@ -99,4 +116,33 @@ test('tab completion: names, ambiguity, and project ids', () => {
   assert.deepEqual(complete('open p-0', data).options, ['p-00', 'p-01', 'p-02']);
   assert.deepEqual(complete('open p-01', data), { value: 'open p-01' });
   assert.deepEqual(complete('zzz', data), {});
+});
+
+test('about adds the summary cells to whoami', () => {
+  const lines = text('about');
+  assert.match(lines, /Ada Lovelace — DevOps · Cloud/);
+  assert.match(lines, /targeting\s+DevOps roles/);
+});
+
+test('docker lists container skills and the projects that use Docker, honestly', () => {
+  const result = runCommand('docker', ctx());
+  const all = result.lines.map((l) => l.text).join('\n');
+  assert.match(all, /Docker\s+in projects · Lab/);
+  // A real project links to its page; a planned one is shown, but not as a link.
+  assert.ok(result.lines.some((l) => l.kind === 'link' && l.href === '/work/lab'));
+  assert.ok(result.lines.some((l) => l.kind === 'dim' && /p-02\s+Future — planned/.test(l.text)));
+  assert.ok(!all.includes('This site'));
+});
+
+test('docker says so when there is no container work', () => {
+  const empty = { ...data, containers: [], projects: [] };
+  assert.match(
+    runCommand('docker', { data: empty, history: [], now: new Date(0) }).lines[0]!.text,
+    /No container work/,
+  );
+});
+
+test('exit asks the terminal to close', () => {
+  assert.equal(runCommand('exit', ctx()).exit, true);
+  assert.equal(runCommand('help', ctx()).exit, undefined);
 });
