@@ -10,6 +10,8 @@ export type TerminalSession = {
   setValue: (value: string) => void;
   /** How many commands the visitor has run. */
   count: number;
+  /** Bumped each time a command asks the window to shake. */
+  shake: number;
   /** Run one line of input, as if typed and Enter pressed. */
   run: (raw: string) => void;
   /** Append lines without running anything (boot sequence, welcome message). */
@@ -25,7 +27,14 @@ export type TerminalSession = {
  */
 export function useTerminal(
   data: TerminalData,
-  { onExit }: { onExit?: () => void } = {},
+  {
+    onExit,
+    onScrollTo,
+  }: {
+    onExit?: () => void;
+    /** A command asked to scroll the page to the element with this id. */
+    onScrollTo?: (target: string) => void;
+  } = {},
 ): TerminalSession {
   const prompt = promptOf(data);
   const [lines, setLines] = useState<TermLine[]>([]);
@@ -33,10 +42,13 @@ export function useTerminal(
   const [history, setHistory] = useState<string[]>([]);
   const [cursor, setCursor] = useState(-1);
   const [count, setCount] = useState(0);
-  // Read at call time, so a new onExit from the provider never re-creates the session.
+  const [shake, setShake] = useState(0);
+  // Read at call time, so new callbacks from the provider never re-create the session.
   const exitRef = useRef(onExit);
+  const scrollRef = useRef(onScrollTo);
   useEffect(() => {
     exitRef.current = onExit;
+    scrollRef.current = onScrollTo;
   });
 
   const print = useCallback((more: TermLine[]) => setLines((prev) => [...prev, ...more]), []);
@@ -50,12 +62,29 @@ export function useTerminal(
       setCursor(-1);
       setValue('');
       if (command) setCount((n) => n + 1);
-      setLines((prev) =>
-        result.clear
-          ? []
-          : [...prev, { kind: 'out', text: `${prompt} ${command}` } as TermLine, ...result.lines],
-      );
+      const failed = result.lines.some((l) => l.kind === 'err');
+      const echo: TermLine = {
+        kind: 'out',
+        text: `${prompt} ${command}`,
+        status: command ? (failed ? 'fail' : 'ok') : undefined,
+      };
+      setLines((prev) => (result.clear ? [] : [...prev, echo, ...result.lines]));
       if (result.exit) exitRef.current?.();
+      const action = result.action;
+      if (action) {
+        switch (action.kind) {
+          case 'scroll':
+            scrollRef.current?.(action.target);
+            break;
+          case 'shake':
+            setShake((n) => n + 1);
+            break;
+          default: {
+            const unhandled: never = action;
+            throw new Error(`Unhandled terminal action: ${JSON.stringify(unhandled)}`);
+          }
+        }
+      }
     },
     [data, history, prompt],
   );
@@ -88,5 +117,5 @@ export function useTerminal(
     }
   }
 
-  return { prompt, lines, value, setValue, count, run, print, onKeyDown };
+  return { prompt, lines, value, setValue, count, shake, run, print, onKeyDown };
 }

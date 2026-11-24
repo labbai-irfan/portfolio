@@ -9,7 +9,7 @@ export const BRAND = {
   body: '#2e3a4f',
   muted: '#556274',
   grid: '#e3e7ed',
-  darkInk: '#0b1120',
-  darkText: '#f3f6fb',
+  darkInk: '#0a0d13',
+  darkText: '#f1f4f8',
   darkSignal: '#7fa2ff',
 } as const;

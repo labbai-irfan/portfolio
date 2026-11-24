@@ -6,7 +6,15 @@ export type TermLine = {
   kind: 'out' | 'dim' | 'head' | 'err' | 'link';
   text: string;
   href?: string;
+  /** On an echoed command line: whether the command succeeded (no error lines) or failed. */
+  status?: 'ok' | 'fail';
 };
+
+/** Something a command asks the page to do, beyond printing. */
+export type TermAction = { kind: 'scroll'; target: string } | { kind: 'shake' };
+
+/** Where `deploy` takes the visitor: an element id on the home page. */
+export const DEPLOY_TARGET = 'yard';
 
 export type TerminalData = {
   name: string | null;
@@ -45,6 +53,7 @@ export type RunResult = {
   clear?: boolean;
   /** Close the terminal: the overlay closes; the full page goes home. */
   exit?: boolean;
+  action?: TermAction;
 };
 
 export const COMMAND_NAMES = [
@@ -59,8 +68,10 @@ export const COMMAND_NAMES = [
   'experience',
   'journey',
   'pipeline',
+  'deploy',
   'docker',
   'infra',
+  'neofetch',
   'contact',
   'resume',
   'history',
@@ -69,6 +80,18 @@ export const COMMAND_NAMES = [
   'echo',
   'sudo',
   'exit',
+] as const;
+
+/** The site's own pages, as `docker ps` lists them. Fixed routes, not content. */
+const PAGES = [
+  'work',
+  'notes',
+  'journey',
+  'experience',
+  'skills',
+  'infrastructure',
+  'contact',
+  'resume',
 ] as const;
 
 /** The first word of the owner's name, lower-cased: the user in `irfan@portfolio`. */
@@ -96,12 +119,36 @@ const HELP: TermLine[] = [
   out('  experience    where I have worked'),
   out('  journey       milestones, newest first'),
   out('  pipeline      how this page was shipped'),
+  out('  deploy        ship down to the container yard'),
   out('  docker        container skills, and the projects that use them'),
   out('  infra         what this site runs on'),
+  out('  neofetch      the system summary'),
   out('  contact       how to reach me'),
   out('  resume        the one-page version'),
   out('  ls · pwd · date · echo · history · clear · exit'),
-  dim('Tab autocompletes. ↑ ↓ walk through history.'),
+  dim('Tab autocompletes. ↑ ↓ walk through history. A few commands are not on this list.'),
+];
+
+const TEAPOT: TermLine[] = [
+  err("HTTP/1.1 418 I'm a teapot"),
+  out('      ( (     '),
+  out('       ) )    '),
+  out('    ........  '),
+  out('    |      |] '),
+  out('    \\      /  '),
+  out("     `----'   "),
+  dim('RFC 2324: this server only brews tea. `contact` works for coffee.'),
+];
+
+const NEOFETCH_SKILLS = 4;
+
+const NEOFETCH_ART = [
+  '┌──────────────┐',
+  '│ >_           │',
+  '│              │',
+  '│              │',
+  '└──────┬───────┘',
+  '    ───┴───     ',
 ];
 
 function projectsTable(data: TerminalData): TermLine[] {
@@ -171,17 +218,110 @@ function docker(data: TerminalData): TermLine[] {
   ];
 }
 
-function pipeline(data: TerminalData): TermLine[] {
+/** The build stamp (commit, build time) as one dim line, or nothing when neither is known. */
+function buildStamp(data: TerminalData): TermLine[] {
   const stamp = [
     data.commit && `commit ${data.commit}`,
     data.built && `built ${data.built}`,
   ].filter(Boolean);
+  return stamp.length > 0 ? [dim(stamp.join(' · '))] : [];
+}
+
+function pipeline(data: TerminalData): TermLine[] {
   const siteProject = data.projects.find((p) => p.status === 'shipsWithSite' && p.slug);
   return [
     out('push → check → build → audit → deploy'),
-    ...(stamp.length > 0 ? [dim(stamp.join(' · '))] : []),
+    ...buildStamp(data),
     link('How the pipeline works →', siteProject ? `/work/${siteProject.slug}` : '/infrastructure'),
   ];
+}
+
+function deploy(data: TerminalData): RunResult {
+  return {
+    lines: [
+      dim('deploy: production ships from CI, not from a browser tab.'),
+      out('push → check → build → audit → deploy'),
+      ...buildStamp(data),
+      out('↓ heading down to the container yard…'),
+    ],
+    action: { kind: 'scroll', target: DEPLOY_TARGET },
+  };
+}
+
+/** Pages and projects as a `docker ps` (or `kubectl get pods`) table. Rows with a page link to it. */
+function containerTable(data: TerminalData, kind: 'CONTAINER' | 'POD'): TermLine[] {
+  const rows = [
+    ...PAGES.map((page) => ({ id: page, status: 'page', name: `/${page}`, href: `/${page}` })),
+    ...data.projects.map((p) => ({
+      id: p.code.toLowerCase(),
+      status: p.statusLabel,
+      name: p.title,
+      href: p.slug && p.status !== 'planned' ? `/work/${p.slug}` : null,
+    })),
+  ];
+  const idWidth = Math.max(kind.length, ...rows.map((r) => r.id.length)) + 3;
+  const statusWidth = Math.max(6, ...rows.map((r) => r.status.length)) + 3;
+  const row = (r: { id: string; status: string; name: string }) =>
+    `${r.id.padEnd(idWidth)}${r.status.padEnd(statusWidth)}${r.name}`;
+  return [
+    head(row({ id: kind, status: 'STATUS', name: 'NAME' })),
+    ...rows.map((r) => (r.href ? link(`${row(r)} →`, r.href) : dim(row(r)))),
+  ];
+}
+
+/** An ASCII mark beside a system summary, every value from the site's data. */
+function neofetch(data: TerminalData): TermLine[] {
+  const user = `${userOf(data)}@portfolio`;
+  const facts: [string, string | null][] = [
+    ['Name', data.name],
+    ['Role', data.headlineLabel],
+    ['Location', data.location],
+    ...data.infra
+      .filter((n) => !n.planned && !/people/i.test(n.kicker))
+      .map((n): [string, string] => {
+        const key = n.kicker.split(' · ')[0] ?? n.kicker;
+        // Acronyms (CI, CDN) stay upper-case; words become Title case.
+        const label =
+          key.length <= 3
+            ? key.toUpperCase()
+            : key.charAt(0).toUpperCase() + key.slice(1).toLowerCase();
+        return [label, n.name];
+      }),
+    // A summary, not the table: a few names per tier keeps each line beside the art.
+    ...data.skillTiers.map((t): [string, string] => {
+      const more = t.names.length - NEOFETCH_SKILLS;
+      return [
+        t.label,
+        t.names.slice(0, NEOFETCH_SKILLS).join(', ') + (more > 0 ? ` +${more} more` : ''),
+      ];
+    }),
+    ['Commit', data.commit],
+  ];
+  const info = [
+    user,
+    '─'.repeat(user.length),
+    ...facts.filter((f): f is [string, string] => Boolean(f[1])).map(([k, v]) => `${k}: ${v}`),
+  ];
+  const artWidth = (NEOFETCH_ART[0]?.length ?? 0) + 3;
+  return Array.from({ length: Math.max(NEOFETCH_ART.length, info.length) }, (_, i) =>
+    out(`${(NEOFETCH_ART[i] ?? '').padEnd(artWidth)}${info[i] ?? ''}`.trimEnd()),
+  );
+}
+
+function sudo(parts: string[], data: TerminalData): RunResult {
+  const denied = err(`${userOf(data)} is not in the sudoers file. This incident will be reported.`);
+  if ((parts[1] ?? '').toLowerCase() !== 'rm') {
+    return { lines: [denied, dim('Nice try — `contact` works without root.')] };
+  }
+  const target = parts.slice(2).find((p) => !p.startsWith('-')) ?? '/';
+  return {
+    lines: [
+      denied,
+      err(`rm: cannot remove '${target}': Permission denied`),
+      dim('(Nothing was reported, and nothing was removed. `contact` works without root.)'),
+    ],
+    action: { kind: 'shake' },
+  };
 }
 
 /** Run one line of input. Unknown commands are an error line, never a throw. */
@@ -208,7 +348,24 @@ export function runCommand(input: string, { data, history, now }: RunContext): R
         ],
       };
     case 'docker':
-      return { lines: docker(data) };
+      return { lines: arg === 'ps' ? containerTable(data, 'CONTAINER') : docker(data) };
+    case 'kubectl':
+      if (arg === 'get' && /^(pods?|po)$/.test((parts[2] ?? '').toLowerCase())) {
+        return {
+          lines: [
+            dim('No cluster here: Kubernetes is on my exploring list, not in production.'),
+            dim('The same parts, as pods:'),
+            ...containerTable(data, 'POD'),
+          ],
+        };
+      }
+      return { lines: [err('kubectl: try `kubectl get pods`')] };
+    case 'deploy':
+      return deploy(data);
+    case 'neofetch':
+      return { lines: neofetch(data) };
+    case 'coffee':
+      return { lines: TEAPOT };
     case 'pwd':
       return { lines: [out(`/home/${userOf(data)}/portfolio`)] };
     case 'ls':
@@ -273,12 +430,7 @@ export function runCommand(input: string, { data, history, now }: RunContext): R
             : [dim('no history yet')],
       };
     case 'sudo':
-      return {
-        lines: [
-          err(`${userOf(data)} is not in the sudoers file.`),
-          dim('Nice try — `contact` works without root.'),
-        ],
-      };
+      return sudo(parts, data);
     case 'exit':
       return { lines: [dim('Closing the terminal.')], exit: true };
     default:

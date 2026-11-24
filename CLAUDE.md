@@ -3,6 +3,7 @@
 DevOps portfolio. `web/` = Next.js (App Router, TS strict, Tailwind v4). `studio/` = standalone Sanity Studio.
 Sanity is the only data store. Hosting: Vercel Hobby (site), `sanity deploy` (Studio). CI: GitHub Actions.
 `design/*.dc.html` is the visual spec and read-only. Newer wins: HomeV2 > Main, HomeV2Mobile > Mobile, NavV2 everywhere, ComponentsV2 + System for tokens.
+Visual overhaul (owner's brief, Nov 2026) supersedes the home design files. `PORTFOLIO_PLAN.md` is the step-by-step plan (Steps 1–6: motion foundation, hero terminal and easter eggs, container yard, CI/CD spine with the Jenkins butler on the P-03 lab branch only, projects as deployments, X-ray mode and audit) — read it before working on any step. Kubernetes appears only on the "Exploring" dock; no PostgreSQL, proficiency percentages, build durations or health indicators that the data does not hold.
 `MASTER_PROMPT.md` holds the full brief and phase plan.
 
 ## Commands (run from repo root)
@@ -45,7 +46,8 @@ Dev-only pages (404 in production): `http://localhost:3000/_kit` (component shee
 - `SanityLive` and `VisualEditing` render once, in the root layout only — never add a second instance.
 - `web/src/lib/build-info.ts` reads the commit SHA / build time / run URL that `next.config.ts` bakes in from CI/Vercel env vars (`BUILD_COMMIT_SHA`, `BUILD_TIME`, `BUILD_RUN_URL`). Missing values are `null`; don't render a `null` field.
 - Colours, fonts, spacing, focus styles only from tokens in `web/src/styles/globals.css`. No hex values in components. Tailwind's default colours, font sizes and radii are reset, so only tokens exist.
-- Dark theme = `[data-theme='dark']` overriding `--color-*` (works on `<html>` or any subtree). Don't use CSS `light-dark()` for tokens: Tailwind's Lightning CSS polyfill resolves it on `:root`, so subtrees never switch. After changing a colour, run the contrast check.
+- Motion and depth utilities (all in `globals.css`, all off with reduced motion): `reveal` (scroll-driven fade/lift via a CSS view timeline; animates `translate` so it composes with `tilt`; unsupported browsers show the element in place), `scroll-progress` (the header's reading-progress line), `seam` (faded hairline with a signal joint on a section's top edge, uses `::after`), `grid-backdrop` (blueprint grid fading at the edges, uses `::before`), `ambient` (soft `--color-glow` light; position with `--ambient-x/--ambient-y`). Prefer these CSS-only tools over animation libraries; none are installed.
+- Dark theme = `[data-theme='dark']` overriding `--color-*` (works on `<html>` or any subtree). The dark values are written twice (that block and the `prefers-color-scheme` block) — change both; the contrast script reads the first. Don't use CSS `light-dark()` for tokens: Tailwind's Lightning CSS polyfill resolves it on `:root`, so subtrees never switch. After changing a colour, run the contrast check.
 - UI primitives live in `web/src/components/ui/`; reuse them before writing new markup.
 - No copy hard-coded in components except fixed UI labels.
 - kebab-case file names; one component per file; named exports.
@@ -99,6 +101,8 @@ Read token only in server env vars (`SANITY_API_READ_TOKEN`, Viewer role). No wr
   - The hero (`hero-terminal.tsx`), the overlay (`terminal-overlay.tsx`, a native `<dialog>`) and `/terminal` all draw the same session.
   - Open the overlay with `openTerminal(fromElement)` from `lib/terminal-events.ts`; Ctrl+` opens it anywhere, and the nav Terminal entry and the search action use it.
   - The hero boot sequence (`boot.ts`) plays once per visit (sessionStorage) and never with reduced motion. Its lines are a playful start-up, not claims; keep them that way.
+- A command may return an `action` (`TermAction`: `scroll` to an element id, or `shake`); `use-terminal.ts` handles it with an exhaustive switch, and `terminal-context.tsx` does the scroll (closes the overlay, glides, focuses the target; off the home page it navigates to `/#id`). `deploy` targets `DEPLOY_TARGET`. Echoed command lines carry `status` (✓ / ✗).
+- Easter eggs (`sudo rm …`, `docker ps`, `kubectl get pods`, `neofetch`, `coffee`) are jokes built from `TerminalData`; their wording must never read as a claim (see `PORTFOLIO_PLAN.md`). `console-greeting.tsx` logs one DevTools hello per page load.
 - Hero: `components/home/hero.tsx` (an editorial intro, not a card) plus `HeroTerminal`. New home sections go in `components/home/`; the bento tiles below the hero are being replaced section by section (redesign phases R4–R7).
 - Depth and the home bento:
   - Cards use the `tile` utility (radius, soft border, two-layer `--shadow-tile`). Add `tile-interactive` when something in the card is clickable; it lifts on hover and keyboard focus. Inner-page cards (project cards, evidence ledger, spec strip, figure, role, notes, topology) already use it.

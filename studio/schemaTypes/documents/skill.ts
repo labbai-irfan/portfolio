@@ -29,7 +29,7 @@ export const skill = defineType({
       name: 'tier',
       type: 'string',
       description:
-        'At work = used in production at a job. In projects = built something real. Learning = lab level.',
+        'At work = used in production at a job. In projects = built something real. Learning = lab level. Exploring = on the roadmap, not used yet (shown in the home page "Exploring" dock).',
       options: { list: SKILL_TIERS, layout: 'radio' },
       validation: (rule) => rule.required(),
     }),

@@ -42,11 +42,31 @@ export function TerminalView({
   const inputId = useId();
   const input = useRef<HTMLInputElement>(null);
   const log = useRef<HTMLDivElement>(null);
+  const root = useRef<HTMLDivElement>(null);
+  // The shake count when this view mounted: a view opened later must not replay an old shake.
+  const seenShake = useRef(session.shake);
 
   useEffect(() => {
     const el = log.current;
     if (el) el.scrollTop = el.scrollHeight;
   }, [session.lines]);
+
+  useEffect(() => {
+    if (session.shake === seenShake.current) return;
+    seenShake.current = session.shake;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    root.current?.animate(
+      [
+        { translate: '0' },
+        { translate: '-7px 0' },
+        { translate: '6px 0' },
+        { translate: '-4px 0' },
+        { translate: '3px 0' },
+        { translate: '0' },
+      ],
+      { duration: 420, easing: 'ease-out' },
+    );
+  }, [session.shake]);
 
   useEffect(() => {
     if (autoFocus) input.current?.focus();
@@ -58,7 +78,7 @@ export function TerminalView({
   }
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col">
+    <div ref={root} className="flex min-h-0 flex-1 flex-col">
       <div
         ref={log}
         role="log"
@@ -92,6 +112,18 @@ export function TerminalView({
               )}
             >
               {line.text}
+              {line.status && (
+                <span
+                  aria-hidden="true"
+                  className={cx(
+                    'ml-2 text-12',
+                    line.status === 'ok' ? 'text-term-ok' : 'text-term-error',
+                  )}
+                >
+                  {line.status === 'ok' ? '✓' : '✗'}
+                </span>
+              )}
+              {line.status === 'fail' && <span className="sr-only"> (failed)</span>}
             </div>
           ),
         )}

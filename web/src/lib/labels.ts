@@ -23,8 +23,9 @@ export const SKILL_TIERS: Record<string, string> = {
   work: 'At work',
   projects: 'In projects',
   learning: 'Learning',
+  exploring: 'Exploring',
 };
-export const SKILL_TIER_ORDER = ['work', 'projects', 'learning'];
+export const SKILL_TIER_ORDER = ['work', 'projects', 'learning', 'exploring'];
 
 export const MILESTONE_CATEGORIES: Record<string, string> = {
   career: 'Career',

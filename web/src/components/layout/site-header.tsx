@@ -14,7 +14,11 @@ export async function SiteHeader({ perspective, stega }: DynamicFetchOptions) {
   const { data: settings } = await cachedSanity({ query: SETTINGS_QUERY, perspective, stega });
 
   return (
-    <header className="sticky top-0 z-20 border-b border-rule-strong bg-surface print:hidden">
+    <header className="sticky top-0 z-20 border-b border-rule-strong bg-surface/85 backdrop-blur-md print:hidden">
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 -bottom-px scroll-progress h-0.5 bg-signal"
+      />
       <nav
         aria-label="Primary"
         className="mx-auto flex max-w-page flex-wrap items-center justify-between gap-x-3 gap-y-0 px-4 lg:px-10"

@@ -251,7 +251,7 @@ export type Skill = {
   orderRank?: string;
   name: string;
   group: 'application' | 'data' | 'systems' | 'containers' | 'delivery';
-  tier: 'work' | 'projects' | 'learning';
+  tier: 'work' | 'projects' | 'learning' | 'exploring';
   usedIn?: ArrayOf<ProjectReference | NoteReference | RoleReference>;
   usageNote?: string;
 };
@@ -1569,7 +1569,7 @@ export type SKILLS_QUERY_RESULT = Array<{
   _id: string;
   name: string;
   group: 'application' | 'containers' | 'data' | 'delivery' | 'systems';
-  tier: 'learning' | 'projects' | 'work';
+  tier: 'exploring' | 'learning' | 'projects' | 'work';
   usageNote: string | null;
   usedIn: Array<
     | {

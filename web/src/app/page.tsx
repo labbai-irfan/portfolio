@@ -11,10 +11,11 @@ import { HomeNotes } from '@/components/sections/home/home-notes';
 import { HomeTerminal } from '@/components/sections/home/home-terminal';
 import { ProjectTile } from '@/components/sections/home/project-tile';
 import { Tilt } from '@/components/ui/tilt';
+import { ContainerYard } from '@/components/yard/container-yard';
 import { packRows } from '@/lib/bento';
 import { stegaClean } from '@/lib/stega';
 import { cachedSanity, getDynamicFetchOptions, type DynamicFetchOptions } from '@/sanity/live';
-import { HOME_QUERY, PAGE_COPY_QUERY, SETTINGS_QUERY } from '@/sanity/queries';
+import { HOME_QUERY, PAGE_COPY_QUERY, SETTINGS_QUERY, SKILLS_QUERY } from '@/sanity/queries';
 
 // Tailwind only ships classes it can see written out, so every span is listed.
 const LG_SPAN: Record<number, string> = {
@@ -50,10 +51,11 @@ export default async function HomePage() {
 
 async function HomeContent({ perspective, stega }: DynamicFetchOptions) {
   'use cache';
-  const [{ data: settings }, { data: copy }, { data: home }] = await Promise.all([
+  const [{ data: settings }, { data: copy }, { data: home }, { data: skills }] = await Promise.all([
     cachedSanity({ query: SETTINGS_QUERY, perspective, stega }),
     cachedSanity({ query: PAGE_COPY_QUERY, perspective, stega }),
     cachedSanity({ query: HOME_QUERY, perspective, stega }),
+    cachedSanity({ query: SKILLS_QUERY, perspective, stega }),
   ]);
 
   const flagship = home.home?.featuredProject ?? null;
@@ -153,18 +155,25 @@ async function HomeContent({ perspective, stega }: DynamicFetchOptions) {
   return (
     <main id="main">
       <PersonJsonLd />
-      <Hero settings={settings} />
+      <div className="ambient">
+        <Hero settings={settings} />
+      </div>
+      <ContainerYard skills={skills} />
       <EngineeringPipeline />
       <EngineeringOverview
         status={home.siteStatus}
         summaryCells={settings?.summaryCells ?? []}
-        className="mx-auto max-w-page px-4 py-8 lg:px-10"
+        className="mx-auto max-w-page px-4 py-8 reveal lg:px-10"
       />
       <div className="mx-auto max-w-page px-4 pb-6 md:pb-8 lg:px-10 lg:pb-12">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-6 lg:grid-cols-12 lg:gap-5">
           {lg.map(({ item, span }, i) => (
-            // Each cell tilts toward the pointer; the tile inside fills the cell's full row height.
-            <Tilt key={item.key} className={`grid ${MD_SPAN[md[i]?.span ?? 6]} ${LG_SPAN[span]}`}>
+            // Each cell tilts toward the pointer and reveals on scroll; the tile inside fills the
+            // cell's full row height.
+            <Tilt
+              key={item.key}
+              className={`grid reveal ${MD_SPAN[md[i]?.span ?? 6]} ${LG_SPAN[span]}`}
+            >
               {item.render('')}
             </Tilt>
           ))}

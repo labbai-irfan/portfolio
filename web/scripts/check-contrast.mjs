@@ -42,6 +42,7 @@ const pairs = [
   ['term-out', 'term', 4.5],
   ['term-hint', 'term', 4.5],
   ['term-error', 'term', 4.5],
+  ['term-ok', 'term', 4.5],
   ['term-label', 'term', 4.5],
   ['term-out', 'term-deep', 4.5],
   ['live', 'live-bg', 4.5],

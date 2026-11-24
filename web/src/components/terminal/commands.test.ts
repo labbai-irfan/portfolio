@@ -1,6 +1,13 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { complete, promptOf, runCommand, type RunContext, type TerminalData } from './commands.ts';
+import {
+  complete,
+  DEPLOY_TARGET,
+  promptOf,
+  runCommand,
+  type RunContext,
+  type TerminalData,
+} from './commands.ts';
 
 const data: TerminalData = {
   name: 'Ada Lovelace',
@@ -140,6 +147,67 @@ test('docker says so when there is no container work', () => {
     runCommand('docker', { data: empty, history: [], now: new Date(0) }).lines[0]!.text,
     /No container work/,
   );
+});
+
+test('deploy explains CI, shows the real stamp, and asks the page to scroll', () => {
+  const result = runCommand('deploy', ctx());
+  const all = result.lines.map((l) => l.text).join('\n');
+  assert.match(all, /ships from CI/);
+  assert.match(all, /commit abc1234/);
+  assert.doesNotMatch(all, /built/);
+  assert.deepEqual(result.action, { kind: 'scroll', target: DEPLOY_TARGET });
+});
+
+test('sudo rm -rf / is denied, says nothing was logged, and shakes', () => {
+  const result = runCommand('sudo rm -rf /', ctx());
+  const all = result.lines.map((l) => l.text).join('\n');
+  assert.match(all, /cannot remove '\/': Permission denied/);
+  assert.match(all, /Nothing was reported/);
+  assert.deepEqual(result.action, { kind: 'shake' });
+  assert.equal(runCommand('sudo ls', ctx()).action, undefined);
+});
+
+test('docker ps lists pages and projects; only real pages are links', () => {
+  const lines = runCommand('docker ps', ctx()).lines;
+  assert.match(lines[0]!.text, /^CONTAINER\s+STATUS\s+NAME$/);
+  assert.ok(lines.some((l) => l.kind === 'link' && l.href === '/work'));
+  assert.ok(lines.some((l) => l.kind === 'link' && l.href === '/work/lab'));
+  const planned = lines.find((l) => l.text.startsWith('p-02'));
+  assert.equal(planned?.kind, 'dim');
+  assert.match(planned!.text, /planned\s+Future/);
+});
+
+test('kubectl get pods is honest that there is no cluster', () => {
+  const lines = runCommand('kubectl get pods', ctx()).lines;
+  assert.match(lines[0]!.text, /not in production/);
+  assert.ok(lines.some((l) => /^POD\s+STATUS\s+NAME$/.test(l.text)));
+  assert.equal(runCommand('kubectl apply', ctx()).lines[0]?.kind, 'err');
+});
+
+test('neofetch prints only facts from the data', () => {
+  const all = text('neofetch');
+  assert.match(all, /ada@portfolio/);
+  assert.match(all, /Role: DevOps · Cloud/);
+  assert.match(all, /CI: Actions/);
+  assert.match(all, /At work: Git/);
+  assert.match(all, /Commit: abc1234/);
+  // Planned infrastructure and missing values are left out.
+  assert.doesNotMatch(all, /Uptime|Email/);
+});
+
+test('neofetch summarises long skill tiers', () => {
+  const many = {
+    ...data,
+    skillTiers: [{ label: 'Learning', names: ['A', 'B', 'C', 'D', 'E', 'F'] }],
+  };
+  const all = runCommand('neofetch', { data: many, history: [], now: new Date(0) })
+    .lines.map((l) => l.text)
+    .join('\n');
+  assert.match(all, /Learning: A, B, C, D \+2 more/);
+});
+
+test('coffee is a teapot', () => {
+  assert.match(text('coffee'), /418 I'm a teapot/);
 });
 
 test('exit asks the terminal to close', () => {

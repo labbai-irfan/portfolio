@@ -12,6 +12,7 @@ import {
 } from 'react';
 import { OPEN_TERMINAL_EVENT, type TerminalOrigin } from '@/lib/terminal-events';
 import type { TerminalData } from './commands';
+import { ConsoleGreeting } from './console-greeting';
 import { TerminalOverlay } from './terminal-overlay';
 import { useTerminal, type TerminalSession } from './use-terminal';
 
@@ -41,7 +42,26 @@ export function TerminalProvider({ data, children }: { data: TerminalData; child
   const close = useCallback(() => setOpen(false), []);
   // `exit` closes the overlay; typed on the /terminal page (no overlay), it goes home.
   const onExit = useCallback(() => (open ? setOpen(false) : router.push('/')), [open, router]);
-  const session = useTerminal(data, { onExit });
+  // `deploy`: close the overlay, let the output be read for a beat, then glide to the target and
+  // move focus there. Off the home page the target does not exist, so go to it on the home page.
+  const onScrollTo = useCallback(
+    (target: string) => {
+      setOpen(false);
+      window.setTimeout(() => {
+        const el = document.getElementById(target);
+        if (!el) {
+          router.push(`/#${target}`);
+          return;
+        }
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+        if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+        el.focus({ preventScroll: true });
+      }, 650);
+    },
+    [router],
+  );
+  const session = useTerminal(data, { onExit, onScrollTo });
 
   useEffect(() => {
     function onOpen(event: Event) {
@@ -67,6 +87,7 @@ export function TerminalProvider({ data, children }: { data: TerminalData; child
 
   return (
     <TerminalContext.Provider value={value}>
+      <ConsoleGreeting name={data.name} />
       {children}
       <TerminalOverlay
         open={open}

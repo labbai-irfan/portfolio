@@ -50,6 +50,7 @@ export const SKILL_TIERS = [
   { title: 'At work', value: 'work' },
   { title: 'In projects', value: 'projects' },
   { title: 'Learning', value: 'learning' },
+  { title: 'Exploring', value: 'exploring' },
 ];
 
 export const INFRA_CATEGORIES = [

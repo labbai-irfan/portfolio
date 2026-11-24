@@ -6,6 +6,11 @@ type TerminalWindowProps = {
   title: string;
   /** Window controls on the right of the title bar (expand, close…). */
   actions?: ReactNode;
+  /**
+   * Frosted glass: lets light behind the window show through and lights its top edge. Stays 90%
+   * opaque so terminal text keeps its contrast on the light theme.
+   */
+  glass?: boolean;
   className?: string;
   /** Classes for the content area. Defaults to padded monospace text. */
   bodyClassName?: string;
@@ -16,6 +21,7 @@ type TerminalWindowProps = {
 export function TerminalWindow({
   title,
   actions,
+  glass,
   className,
   bodyClassName = 'px-5 py-4 font-mono text-13 leading-[1.8]',
   children,
@@ -23,11 +29,23 @@ export function TerminalWindow({
   return (
     <div
       className={cx(
-        'flex flex-col overflow-hidden rounded-control border border-term-border bg-term text-term-out',
+        'relative flex flex-col overflow-hidden rounded-control border border-term-border text-term-out',
+        glass ? 'bg-term/90 backdrop-blur-xl backdrop-saturate-150' : 'bg-term',
         className,
       )}
     >
-      <div className="relative flex min-h-11 items-center gap-2 border-b border-term-rule bg-term-deep px-4">
+      {glass && (
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-8 top-0 h-px bg-linear-to-r from-transparent via-term-prompt/60 to-transparent"
+        />
+      )}
+      <div
+        className={cx(
+          'relative flex min-h-11 items-center gap-2 border-b border-term-rule px-4',
+          glass ? 'bg-term-deep/60' : 'bg-term-deep',
+        )}
+      >
         <span aria-hidden="true" className="flex gap-1.75 opacity-80">
           <span className="size-2.75 rounded-full bg-window-close" />
           <span className="size-2.75 rounded-full bg-window-min" />

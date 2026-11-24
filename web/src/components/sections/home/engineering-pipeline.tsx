@@ -97,11 +97,8 @@ export function EngineeringPipeline({ className }: { className?: string }) {
   const baseId = useId();
 
   return (
-    <section
-      aria-labelledby={`${baseId}-heading`}
-      className={cx('bg-grid border-y border-rule', className)}
-    >
-      <div className="mx-auto max-w-page px-4 py-12 lg:px-10 lg:py-16">
+    <section aria-labelledby={`${baseId}-heading`} className={cx('grid-backdrop seam', className)}>
+      <div className="mx-auto max-w-page px-4 py-12 reveal lg:px-10 lg:py-16">
         <div className="mb-10 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
           <h2
             id={`${baseId}-heading`}
@@ -112,7 +109,7 @@ export function EngineeringPipeline({ className }: { className?: string }) {
           <p className="m-0 text-14 text-muted">Tap a stage for detail</p>
         </div>
 
-        <ol className="relative m-0 flex list-none snap-x snap-mandatory gap-1 overflow-x-auto p-0 pb-2 md:gap-0 md:overflow-visible md:snap-none">
+        <ol className="relative m-0 flex snap-x snap-mandatory list-none gap-1 overflow-x-auto p-0 pb-2 md:snap-none md:gap-0 md:overflow-visible">
           <span
             aria-hidden="true"
             className="absolute top-5.5 right-6 left-6 hidden h-px bg-rule-dashed md:block"
@@ -130,7 +127,10 @@ export function EngineeringPipeline({ className }: { className?: string }) {
                   aria-controls={`${baseId}-panel-${index}`}
                   onClick={() => setOpen(expanded ? null : index)}
                   className="group flex w-full cursor-pointer flex-col items-start gap-3 text-left"
-                  style={{ animation: 'fade-up 500ms ease both', animationDelay: `${index * 70}ms` }}
+                  style={{
+                    animation: 'fade-up 500ms ease both',
+                    animationDelay: `${index * 70}ms`,
+                  }}
                 >
                   <span
                     className={cx(

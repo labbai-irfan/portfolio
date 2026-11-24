@@ -3,19 +3,17 @@ import Link from 'next/link';
 import { Fragment } from 'react';
 import { PageHero } from '@/components/ui/page-hero';
 import { SKILL_GROUP_ORDER, SKILL_GROUPS, SKILL_TIERS } from '@/lib/labels';
-import { type Fetched, stegaClean } from '@/lib/stega';
+import { stegaClean } from '@/lib/stega';
+import { usedInLink } from '@/lib/used-in';
 import { cx } from '@/lib/utils';
 import { cachedSanity, getDynamicFetchOptions, type DynamicFetchOptions } from '@/sanity/live';
 import { MILESTONES_QUERY, PAGE_COPY_QUERY, SKILLS_QUERY } from '@/sanity/queries';
-import type { SKILLS_QUERY_RESULT } from '@/sanity/types';
-
-type Skill = Fetched<SKILLS_QUERY_RESULT[number]>;
-type UsedIn = NonNullable<Skill['usedIn']>[number];
 
 const TIER_CHIP: Record<string, string> = {
   work: 'bg-contrast text-on-contrast',
   projects: 'border border-signal text-progress',
   learning: 'border border-dashed border-rule-dashed text-planned',
+  exploring: 'border border-dotted border-rule-dashed text-muted',
 };
 
 // What each tier means, for the legend beside the heading.
@@ -23,19 +21,8 @@ const TIER_MEANING: Record<string, string> = {
   work: 'Used in production at my job',
   projects: 'Built something real with it',
   learning: 'Actively studying, lab-level',
+  exploring: 'On the roadmap, not used yet',
 };
-
-/** Where a skill is used: a link to the project, note or experience it comes from. */
-function usedInLink(item: UsedIn | null) {
-  if (!item) return null;
-  const type = stegaClean(item._type);
-  if (type === 'role') return { href: '/experience', label: 'Experience' };
-  if (type === 'project' && item.slug)
-    return { href: `/work/${item.slug}`, label: item.title ?? item.code ?? 'Project' };
-  if (type === 'note' && item.slug)
-    return { href: `/notes/${item.slug}`, label: item.title ?? 'Note' };
-  return null;
-}
 
 export const generateMetadata = () => pageMetadata('skills', '/skills');
 

@@ -70,8 +70,13 @@ export function HeroTerminal({ className }: { className?: string }) {
 
   return (
     <div className={cx('flex flex-col gap-3', className)}>
-      <div id={PANEL_ID}>
+      <div id={PANEL_ID} className="relative isolate">
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute -inset-x-4 -inset-y-10 -z-10 spotlight lg:-inset-10"
+        />
         <TerminalWindow
+          glass
           title={`${prompt.replace('$', '').replace(':~', ': ~')}`}
           className="h-80 shadow-window md:h-100 lg:h-110"
           bodyClassName="flex min-h-0 flex-1 flex-col"

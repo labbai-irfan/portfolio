@@ -754,6 +754,7 @@ export const skills: SeedDoc[] = [
   sk('Jenkins', 'delivery', 'learning', [ref('project', 'P-03')], 'CI/CD lab'),
   sk('AWS', 'delivery', 'learning', [ref('project', 'P-04')], 'Planned — P-04'),
   sk('Monitoring · logging', 'delivery', 'learning', [ref('project', 'P-04')], 'Planned — P-04'),
+  sk('Kubernetes', 'containers', 'exploring', [], 'On the roadmap — not used yet'),
 ];
 
 // ── Infrastructure parts (diagram order; connections added after all exist) ──

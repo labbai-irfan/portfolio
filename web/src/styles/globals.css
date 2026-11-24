@@ -54,6 +54,7 @@
   --color-term-out: #e2e8f0;
   --color-term-hint: #9aa6b8;
   --color-term-error: #fca5a5;
+  --color-term-ok: #86efac;
   --color-term-label: #8b97ab;
 
   /* Status chips */
@@ -144,6 +145,10 @@
 
   /* Pointer light on tilted tiles. */
   --color-sheen: rgb(29 78 216 / 0.07);
+  /* Ambient light: the soft signal-tinted glow the `ambient` utility casts behind a section. */
+  --color-glow: rgb(36 87 230 / 0.09);
+  /* The stronger pool of light behind the hero terminal (`spotlight`). */
+  --color-spotlight: rgb(36 87 230 / 0.2);
 
   /* Terminal window buttons (decorative, the platform's own colours). */
   --color-window-close: #ff5f57;
@@ -158,25 +163,28 @@
   }
   [data-theme='dark'] {
     color-scheme: dark;
-    --color-ink: #f3f6fb;
-    --color-body: #b4bfd0;
-    --color-muted: #8b97ab;
+    --color-ink: #f1f4f8;
+    --color-body: #b6bdc9;
+    --color-muted: #8f98a8;
     --color-signal: #7fa2ff;
     --color-signal-hover: #b3c7ff;
-    --color-on-signal: #0b1120;
+    --color-on-signal: #0a0d13;
     --color-on-signal-muted: #1a2a52;
-    --color-ground: #0b1120;
-    --color-surface: #111a2e;
-    --color-rule-strong: #2a3756;
-    --color-rule: #1c2740;
-    --color-rule-control: #2a3756;
-    --color-rule-dashed: #8b97ab;
-    --color-grid-line: #18223a;
-    --color-arrow: #8b97ab;
-    --color-contrast: #e6ebf3;
-    --color-on-contrast: #0b1120;
-    --color-bar: #18223a;
-    --color-term: #070b15;
+    --color-ground: #0a0d13;
+    --color-surface: #11151d;
+    --color-rule-strong: #2a313d;
+    --color-rule: #1c222c;
+    --color-rule-control: #2d3441;
+    --color-rule-dashed: #8f98a8;
+    --color-grid-line: #151a23;
+    --color-arrow: #8f98a8;
+    --color-contrast: #e6eaf0;
+    --color-on-contrast: #0a0d13;
+    --color-bar: #151a23;
+    --color-term: #06080c;
+    --color-term-deep: #040508;
+    --color-glow: rgb(127 162 255 / 0.13);
+    --color-spotlight: rgb(127 162 255 / 0.2);
     --color-live: #86efac;
     --color-live-bg: #0f2e1d;
     --color-progress: #b3c7ff;
@@ -203,25 +211,28 @@
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme='light']) {
       color-scheme: dark;
-      --color-ink: #f3f6fb;
-      --color-body: #b4bfd0;
-      --color-muted: #8b97ab;
+      --color-ink: #f1f4f8;
+      --color-body: #b6bdc9;
+      --color-muted: #8f98a8;
       --color-signal: #7fa2ff;
       --color-signal-hover: #b3c7ff;
-      --color-on-signal: #0b1120;
+      --color-on-signal: #0a0d13;
       --color-on-signal-muted: #1a2a52;
-      --color-ground: #0b1120;
-      --color-surface: #111a2e;
-      --color-rule-strong: #2a3756;
-      --color-rule: #1c2740;
-      --color-rule-control: #2a3756;
-      --color-rule-dashed: #8b97ab;
-      --color-grid-line: #18223a;
-      --color-arrow: #8b97ab;
-      --color-contrast: #e6ebf3;
-      --color-on-contrast: #0b1120;
-      --color-bar: #18223a;
-      --color-term: #070b15;
+      --color-ground: #0a0d13;
+      --color-surface: #11151d;
+      --color-rule-strong: #2a313d;
+      --color-rule: #1c222c;
+      --color-rule-control: #2d3441;
+      --color-rule-dashed: #8f98a8;
+      --color-grid-line: #151a23;
+      --color-arrow: #8f98a8;
+      --color-contrast: #e6eaf0;
+      --color-on-contrast: #0a0d13;
+      --color-bar: #151a23;
+      --color-term: #06080c;
+      --color-term-deep: #040508;
+      --color-glow: rgb(127 162 255 / 0.13);
+      --color-spotlight: rgb(127 162 255 / 0.2);
       --color-live: #86efac;
       --color-live-bg: #0f2e1d;
       --color-progress: #b3c7ff;
@@ -260,6 +271,11 @@
   :focus-visible {
     outline: 2px solid var(--color-signal);
     outline-offset: 3px;
+  }
+  /* A section that receives focus programmatically (terminal `deploy`) is a landing point, not a
+     control: no ring around the whole band. */
+  section[tabindex='-1']:focus {
+    outline: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -367,4 +383,260 @@
     linear-gradient(var(--color-grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px);
   background-size: 24px 24px;
+}
+
+/* The blueprint grid as a backdrop that fades out toward the edges, so a band has no hard grid
+   border. Drawn on ::before (behind the content, never masking it); `seam` uses ::after. */
+@utility grid-backdrop {
+  position: relative;
+  isolation: isolate;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(var(--color-grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px);
+    background-size: 24px 24px;
+    mask-image: radial-gradient(ellipse 70% 75% at 50% 50%, black 25%, transparent 100%);
+  }
+}
+
+/* Ambient light: a soft glow from above. Position with --ambient-x / --ambient-y. The ellipse
+   fades out inside the element, so it never shows a hard edge whatever the element's width. */
+@utility ambient {
+  background-image: radial-gradient(
+    ellipse 55% 60% at var(--ambient-x, 70%) var(--ambient-y, 10%),
+    var(--color-glow),
+    transparent 70%
+  );
+}
+
+/* A seam between two sections: a hairline that fades at both ends, with a small signal-coloured
+   joint at its centre, like a node on the pipeline. Sits on the element's top edge. */
+@utility seam {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    top: -3.5px;
+    left: 0;
+    right: 0;
+    height: 7px;
+    pointer-events: none;
+    background:
+      linear-gradient(var(--color-signal), var(--color-signal)) center / 7px 7px no-repeat,
+      linear-gradient(
+          90deg,
+          transparent,
+          var(--color-rule-control) 18%,
+          var(--color-rule-control) 82%,
+          transparent
+        )
+        center / 100% 1px no-repeat;
+  }
+}
+
+/* A pool of light behind something (the hero terminal). Put it on an aria-hidden element inside
+   an `isolate` parent, with -z-10. It breathes slowly unless reduced motion is requested. */
+@keyframes breathe {
+  from {
+    opacity: 0.7;
+    scale: 0.97;
+  }
+  to {
+    opacity: 1;
+    scale: 1.02;
+  }
+}
+
+@utility spotlight {
+  background: radial-gradient(closest-side, var(--color-spotlight), transparent);
+  @media (prefers-reduced-motion: no-preference) {
+    animation: breathe 9s ease-in-out infinite alternate;
+  }
+}
+
+/* Scroll reveal: the element fades and lifts in as it enters the viewport. Pure CSS (a view
+   timeline), so it works in Server Components. Browsers without scroll-driven animations, and
+   reduced motion, show it in place. Animates `translate`, not `transform`, so it composes with
+   `tilt`. */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    translate: 0 28px;
+  }
+}
+
+@utility reveal {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation-name: reveal;
+      animation-duration: auto;
+      animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 80%;
+    }
+  }
+}
+
+/* Reading progress: a hairline that fills left to right as the page scrolls (scroll timeline).
+   Hidden where scroll-driven animations are unsupported or reduced motion is requested. */
+@keyframes grow-x {
+  from {
+    scale: 0 1;
+  }
+}
+
+@utility scroll-progress {
+  display: none;
+  @supports (animation-timeline: scroll()) {
+    @media (prefers-reduced-motion: no-preference) {
+      display: block;
+      transform-origin: 0 50%;
+      animation-name: grow-x;
+      animation-duration: auto;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+
+/* Container yard: a skill drawn as a shipping container. Put `cargo` on the button and set
+   --cargo-bg / --cargo-ink (a tier chip pair, so the label keeps its checked contrast). Children
+   are found by data-cargo: box (the corrugated front), top, side, cable, shadow. From md the box
+   is a CSS 3D block that a crane lifts on hover and keyboard focus; on phones it is a flat face,
+   and with reduced motion it does not move. */
+@utility cargo {
+  position: relative;
+  display: block;
+  width: 100%;
+  color: var(--cargo-ink);
+  text-align: start;
+  cursor: pointer;
+
+  & [data-cargo='box'] {
+    position: relative;
+    display: flex;
+    min-height: 3.5rem;
+    border: 1px solid color-mix(in oklab, var(--cargo-ink) 35%, transparent);
+    border-radius: 2px;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0 7px,
+        color-mix(in oklab, var(--cargo-ink) 8%, transparent) 7px 9px
+      ),
+      var(--cargo-bg);
+  }
+  & [data-cargo='top'],
+  & [data-cargo='side'],
+  & [data-cargo='cable'],
+  & [data-cargo='shadow'] {
+    display: none;
+  }
+
+  @media (width >= 48rem) {
+    & [data-cargo='box'] {
+      transform: perspective(900px) rotateX(-12deg) rotateY(-20deg);
+      transform-style: preserve-3d;
+    }
+    & [data-cargo='top'],
+    & [data-cargo='side'] {
+      display: block;
+      position: absolute;
+      border: 1px solid color-mix(in oklab, var(--cargo-ink) 35%, transparent);
+    }
+    & [data-cargo='top'] {
+      bottom: 100%;
+      left: -1px;
+      right: -1px;
+      height: 14px;
+      transform-origin: bottom;
+      transform: rotateX(90deg);
+      background: color-mix(in oklab, var(--cargo-bg) 70%, var(--color-surface));
+    }
+    & [data-cargo='side'] {
+      left: 100%;
+      top: -1px;
+      bottom: -1px;
+      width: 14px;
+      transform-origin: left;
+      transform: rotateY(90deg);
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent 0 6px,
+          color-mix(in oklab, var(--cargo-ink) 10%, transparent) 6px 8px
+        ),
+        color-mix(in oklab, var(--cargo-bg) 78%, var(--cargo-ink));
+    }
+    & [data-cargo='shadow'] {
+      display: block;
+      position: absolute;
+      left: 8%;
+      right: 2%;
+      bottom: -10px;
+      height: 8px;
+      border-radius: 50%;
+      background: radial-gradient(
+        closest-side,
+        color-mix(in oklab, var(--color-term-deep) 28%, transparent),
+        transparent
+      );
+    }
+  }
+
+  @media (width >= 48rem) and (prefers-reduced-motion: no-preference) {
+    & [data-cargo='box'] {
+      transition: translate 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    & [data-cargo='shadow'] {
+      transition:
+        scale 360ms cubic-bezier(0.2, 0.8, 0.2, 1),
+        opacity 360ms ease;
+    }
+    & [data-cargo='cable'] {
+      display: block;
+      position: absolute;
+      bottom: calc(100% + 14px);
+      left: 50%;
+      width: 1px;
+      height: 28px;
+      background: var(--color-rule-dashed);
+      transform-origin: top;
+      scale: 1 0;
+      transition: scale 260ms ease;
+    }
+    &:hover [data-cargo='box'],
+    &:focus-visible [data-cargo='box'] {
+      translate: 0 -12px;
+    }
+    &:hover [data-cargo='shadow'],
+    &:focus-visible [data-cargo='shadow'] {
+      scale: 0.8;
+      opacity: 0.6;
+    }
+    &:hover [data-cargo='cable'],
+    &:focus-visible [data-cargo='cable'] {
+      scale: 1 1;
+    }
+  }
+}
+
+/* The Exploring dock's helm wheel turns once a minute; it stays still under reduced motion. */
+@keyframes helm-turn {
+  to {
+    rotate: 1turn;
+  }
+}
+
+@utility helm-turn {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: helm-turn 60s linear infinite;
+  }
 }
